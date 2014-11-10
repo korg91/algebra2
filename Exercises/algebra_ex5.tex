@@ -137,6 +137,8 @@ Consider the inclusion $i : f[M] \to M$. Since $f$ is idempotent, we have that $
 Now we want to show that $f \neq 0,1 \imp f[M] \neq \{0\} \wedge \ker f \neq \{0\}$. If $f[M]=\{0\}$, of course $f=0$. If $\ker f = \{0\}$, then $f$ is injective. But since $f(f(m))=f(m)$ for all $m \in M$, this means that $f(m)=m$ for all $m \in M$, thus $f=1$.
 \end{proof}
 
+\paragraph{Exercise 28.} Straightforward by the hint.
+
 \paragraph{Exercise 29.} Consider the series of the exercise. If we prove that the composition factors are $(\Z/p_1\Z, ..., \Z/p_r\Z)$, then the series is a composition series, since every $\Z/p_1\Z$ is simple because every submodule is also a subgroup, and the only subgroups of $\Z/p\Z$ with $p$ prime are trivial (since the order of any subgroup must divide $p$).\\
 \\
 \noindent\textbf{Claim.} For all $i$, $p_1...p_i \Z/n\Z \simeq (p_1...p_i\Z)/n\Z$, and there exists an isomorphism $\phi$ such that $\phi[p_1...p_i p_{i+1} \Z/n\Z] = (p_1...p_i p_{i+1} \Z)/n\Z$.\\
@@ -153,5 +155,22 @@ where the first ``equality'' of the second line holds thanks to the third isomor
 \phi: p_1...p_i \Z / p_1...p_i p_{i+1} \Z \to \Z/p_{i+1}\Z, \ [p_1...p_i k] \mapsto [p_1...p_i k].
 \]
 $\phi$ is well-defined, since $[p_1...p_i k] = [p_1...p_i l]$ implies $p_1...p_i k - p_1...p_i l = p_1...p_i p_{i+1} m$ for some $m \in \Z$, which means $k-l=p_{i+1} m$, i.e. $[k]_{\Z/p_{i+1}\Z} = [l]_{\Z/p_{i+1}\Z}$. The surjectivity is totally trivial by the way $\phi$ is defined, and for the injectivity just observe that $p_1...p_i k + p_{i+1}\Z = 0 \imp p_{i+1}|k \imp p_1...p_i p_{i+1} | p_1...p_i k$.
+
+\paragraph{Exercise 30.} Consider the following series:
+
+\begin{multline*}
+\Z_{20} \oplus \Z_{27} \supset 2\Z_{20} \oplus \Z_{27} \supset 2 \cdot 2\Z_{20} \oplus \Z_{27} \supset 2 \cdot 2 \cdot 5 \Z_{20} \oplus \Z_{27} \supset 2 \cdot 2 \cdot 5 \Z_{20} \oplus 3 \Z_{27} \\
+\supset 2 \cdot 2 \cdot 5 \Z_{20} \oplus 3 \cdot 3 \Z_{27} \supset 2 \cdot 2 \cdot 5 \Z_{20} \oplus 3 \cdot 3 \cdot 3 \Z_{27} = \{0\}.
+\end{multline*}
+We want to prove that this is a composition series. To this aim, we just prove that the first factor is $\Z/2\Z$, i.e. simple, since the argument can be repeated in the very same way for the other factors as well (observe that switching from a sum to the following one, one component always stays the same). Observe that, by (a very trivial application of) the second isomorphism theorem, we have:
+\[
+(\Z_{20} \oplus \Z_{27}) / \Z_{27} \simeq \Z_{20} \ \text{ and } \ (2\Z_{20} \oplus \Z_{27}) / \Z_{27} \simeq 2\Z_{20}.
+\]
+This implies
+\[
+\frac{\Z_{20} \oplus \Z_{27}}{2\Z_{20} \oplus \Z_{27}} \simeq \frac{(\Z_{20} \oplus \Z_{27}) / \Z_{27}}{(2\Z_{20} \oplus \Z_{27}) / \Z_{27}} \simeq \frac{\Z_{20}}{2\Z_{20}} \simeq \Z/2\Z,
+\]
+where the first equality holds thanks to the third isomorphism theorem, and the last one holds because it's precisely what we proved in the second part of the previous exercise (which covers also the other cases).
+
 
 \end{document}
