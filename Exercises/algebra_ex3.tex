@@ -1,0 +1,222 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage[utf8]{inputenc}
+\usepackage{longtable}
+\usepackage{amsthm}
+\usepackage{amscd}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage[hyphens]{url}
+\usepackage[scale=3]{ccicons}  % per le icone creative commons
+\usepackage{hyperref}  % per i link nel pdf
+\usepackage[rmargin=3.0cm,lmargin=3.0cm]{geometry}
+%\usepackage{frontesp}  % prima pagina; il pacchetto frontesp.sty si trova nella stessa cartella del file .tex (deve essere adattato a mano)
+\usepackage{setspace}  % per l'interlinea
+\usepackage[english]{babel}  % per sillabazione
+\usepackage[all]{xy} %diagrammi di funzioni
+\usepackage{xspace} %per assicurare la corretta gestione degli spazi finali quando uso e.g. \AC. NB: sarebbe meglio trovare un'altra soluzione...cfr. http://tex.stackexchange.com/questions/15220/no-space-present-after-ensuremath
+
+
+
+\theoremstyle{definition}
+\newtheorem{teo}{Teorema}[section]  % resetta la numerazione dei teoremi per ogni capitolo
+\newtheorem{defn}[teo]{Definizione}  % la numerazione delle definizioni dipende da quella dei teoremi
+\newtheorem{es}[teo]{Esempio}  % idem
+\newtheorem{oss}[teo]{Osservazione}  % idem
+\newtheorem{prop}[teo]{Proposizione}  % idem
+\newtheorem{lemma}[teo]{Lemma}  % idem
+\newtheorem{corollario}[teo]{Corollario}  % idem
+
+%%% inizio comandi per stile per teoremi: "numero. Titolo" %%%
+\newtheoremstyle{num.custom-title}
+  {\topsep}   % ABOVESPACE
+  {\topsep}   % BELOWSPACE
+  {\normalfont}  % BODYFONT
+  {0pt}       % INDENT (empty value is the same as 0pt)
+  {\bfseries} % HEADFONT
+  {}         % HEADPUNCT
+  {5pt plus 1pt minus 1pt} % HEADSPACE
+  {\thmnumber{#2.}\thmnote{ #3}}
+  
+\theoremstyle{num.custom-title}  
+\newtheorem{teo_custom-title}[teo]{} % per usarlo basta \begin{teo_custom-title}[<Titolo teorema>] (usa automaticamente la numerazione di [teo])
+%%% fine comandi per stile per teoremi: "numero. Titolo" %%%
+
+
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\orb}{orb}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\Zdv}{Zdv}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\A}{\mathcal{A}}
+\DeclareMathOperator{\B}{\mathcal{B}}
+\DeclareMathOperator{\PP}{\mathcal{P}}
+\DeclareMathOperator{\LL}{\mathcal{L}}
+\DeclareMathOperator{\Hrtg}{\text{Hrtg}}
+\DeclareMathOperator{\Ord}{\text{Ord}}
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\M}{\mathfrak{M}}
+\DeclareMathOperator{\U}{\mathfrak{U}}
+\DeclareMathOperator{\PPP}{\mathbb{P}}
+\DeclareMathOperator{\a01}{\{0,1\}^{\star}}
+\DeclareMathOperator{\imp}{\Rightarrow}
+\DeclareMathOperator{\sm}{\setminus}
+\DeclareMathOperator{\sse}{\subseteq}
+
+
+\newcommand{\AC}{\ensuremath{\mathsf{AC}}\xspace}
+\newcommand{\CC}{\ensuremath{\mathsf{CC}}\xspace}
+\newcommand{\DC}{\ensuremath{\mathsf{DC}}\xspace}
+\newcommand{\ZF}{\ensuremath{\mathsf{ZF}}\xspace}
+\newcommand{\ZFC}{\ensuremath{\mathsf{ZFC}}\xspace}
+\newcommand{\LS}{\ensuremath{\mathsf{LS}}\xspace}
+\newcommand{\AMC}{\ensuremath{\mathsf{AMC}}\xspace}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} %per la prima pagina
+
+\renewcommand{\phi}{\varphi}
+\renewcommand{\S}{\mathcal{S}}
+
+
+%%%% INIZIO COMANDI PER EQUIVALENZE %%%%
+\newcommand{\Implies}[2]{$\text{\ref{statement#1}}\!\implies\!\text{\ref{statement#2}}$}% X => Y
+\newcommand{\punto}[1]{\item \label{statement#1}}
+
+
+\newenvironment{equivalence}
+    {\begin{enumerate}[label=(\arabic*),ref=(\arabic*)]
+    }
+    { 
+	\end{enumerate}
+    }
+%%%% FINE COMANDI PER EQUIVALENZE %%%
+
+
+
+% Interlinea 1.5
+%\onehalfspacing  
+
+
+%per le citazioni
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+  \hbox{}\nobreak\hfil(#1)%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+
+\newsavebox\mybox
+\newenvironment{aquote}[1]
+  {\savebox\mybox{#1}\begin{quote}}
+  {\signed{\usebox\mybox}\end{quote}}
+
+%disabilita colore link
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
+
+\begin{document}
+
+
+\paragraph{Exercise 16.} \ 
+\begin{enumerate}
+\item Let $(\mathcal{M}_{\mathbf{u},\mathbf{v}}(\phi))_{i,j}=\lambda_{i,j}$ where $\lambda_{i,j}$ is the unique element of $R$ such that 
+\[
+\phi(u_j)=\lambda_{1,j} v_1 + ... + \lambda_{i,j} v_i + ... + \lambda_{m,j} v_m.
+\]
+It is immediate to check that $(\phi(u_1),...,\phi(u_n))=(v_1,...,v_m) \mathcal{M}_{\mathbf{u},\mathbf{v}}(\phi)$.\\
+Suppose now that $\mathcal{M}' \ne \mathcal{M}_{\mathbf{u},\mathbf{v}}(\phi)$ and let $a_{i,j}=(\mathcal{M}')_{i,j} \ne (\mathcal{M}_{\mathbf{u},\mathbf{v}}(\phi))_{i,j}$ for some $i \in \{1,...,m\}$ and $j \in \{1,...n\}$. It follows that the $j$-th entry of $(v_1,...,v_m) \mathcal{M}'$ is
+\[
+z = ... + a_{i,j} v_i + ...  
+\]
+which can't be equal to $\phi(u_j)$, since the $i$-th coordinate of $\phi(u_j)$ w.r.t. the base $\mathbf{v}$ is $(\mathcal{M}_{\mathbf{u},\mathbf{v}}(\phi))_{i,j}$ and the coordinates are unique.
+\item Follows immediately from the distributivity and scalar multiplication compatibility of the matrix multiplication (together with the trivial observation that $\theta_A(\mathbf 0)=A \mathbf 0=\mathbf 0$).
+\item The proof that $\kappa_\mathbf{u}$ is a morphism is immediate. The sujectivity follows trivially by the fact that $\bf u$ is a basis and by definition of basis every element can be written as a sum of elements of the basis. The injectivity follows immediately from the fact that by definition of basis the elements of the basis are linearly independent.
+\item Surjectivity: it's sufficient to define $\phi$ properly (immediate).\\
+Injectivity: immediate.\\
+Morphism: for the addition it's immediate, for the composition it's boring (works thanks to definition of multiplication of matrices).
+\end{enumerate}
+
+\paragraph{Exercise 17.} 
+\begin{proof}\ 
+\begin{itemize}
+\item ($\Longrightarrow$) Suppose that $M$ is free. Suppose towards a contradiction that $\rk(M)>1$. Then let $x_1,x_2$ be two elements of a basis. Since by hypothesis $M$ is a subset of the quotient field, $x_1=ab^{-1}$ and $x_2=cd^{-1}$ for some $a,b,c,d \in R$. Then $(bc)ab^{-1}+(-da)cd^{-1}=0$, contradiction.
+\item ($\Longleftarrow$) If $M=\langle x \rangle$ then $\{x\}$ is a base for $M$. In fact, obviously $x$ generates all $M$. It is also linearly independent since $\lambda x = 0 \imp \lambda=0$ for all $\lambda \in R$, because $K$ is a field, and hence a domain (and the scalar operation is defined as the internal multiplication of $K$, restricted to the elements of $R$).
+\end{itemize}
+\end{proof}
+
+\paragraph{Exercise 18.} 
+\begin{proof}\ 
+\begin{enumerate}
+\item Thanks to Exercise 17, it is sufficient to show that $M= \langle 2, 1+\sqrt{-5} \rangle$ is not cyclic. Observe that $M$ is also an ideal over $R$. It's trivial to see that if $M$ is a cyclic $R$-module, then it must be a principal ideal of $R$ as well. Our aim is therefore to show that $M$ is not a principal ideal. Suppose towards a contradiction that $M=(g)$, i.e. $M$ is the principal ideal generated by some $g \in M$. Of course $2, 1+\sqrt{-5} \in M$, therefore $2=\lambda g$ and $1+\sqrt{-5}=\mu g$ for some $\lambda, \mu \in \Z[\sqrt{-5}]$. Consider now the standard norm $N: \Z[\sqrt{-5}] \to \N$. We have that $g|2$ and $g|1+\sqrt{-5}$, thus $N(g)|4$ and $N(g)|6$, and so $N(g)|6-4=2$. Write now $g$ as $a+b \sqrt{-5}$ with $a, b \in \Z$. This means that $a^2+5b^2 | 2$, thus $b=0$ and $a^2 | 2$, so $a=\pm 1$. Thus, $g= \pm 1$, and this means that $M$ is the full $\Z\sqrt{-5}$ ring.\\
+Therefore we can write $1$ as a combination of $2$ and $1+\sqrt{-5}$, i.e.
+\[
+1=2(c+d\sqrt{-5})+(1+\sqrt{-5})(e+f\sqrt{-5})
+\]
+which by computations means $2c+e-5f=1$ and $2d+e+f=0$, with $c,d,e,f \in \Z$. Taking classes modulo 2 we obtain $[e]+[f]=1$ and $[e]+[f]=0$, which is impossible.
+\item Let $M' = \langle(2,1+\sqrt{-5}),(1-\sqrt{-5},2)\rangle$.
+Suppose towards a contradiction that $(2,1+\sqrt{-5})=k(1-\sqrt{-5},2)$ for some $k \in \Z\sqrt{-5}$. Then
+\[
+\begin{cases}
+2=k-k\sqrt{-5}\\
+1+\sqrt{-5}=2k\\
+\end{cases}
+\]
+which means that $2=[1+\sqrt{-5}-(1+\sqrt{-5})(\sqrt{-5})]/2$, i.e. $2=6/2=3$, contradiction (note that we did the calculation in $\Q(\sqrt{-5})$, but if the vectors are independent in $\Q(\sqrt{-5})$, then they have to be independent in $\Z\sqrt{-5}$ as well).
+
+First observe that, since $2,1+\sqrt{-5},1-\sqrt{-5} \in M$, it follows immediately that $M' \sse M \times M$.
+
+For the other inclusion, observe that $(1-\sqrt{-5})(2,1+\sqrt{-5})-2(1-\sqrt{-5},2)=(0,2)$. So $(0,2) \in M'$. By the same argument we obtain that $(2,0) \in M'$. 
+
+Then it's immediate to see that $(0,1+\sqrt{-5})$ and $(1-\sqrt{-5},0)$ are also in $I$. 
+
+So we proved that $(2,0), (1-\sqrt{-5},0), (0,2), (0,1+\sqrt{-5}) \in M'$, which trivially implies $M \times M \sse M'$.
+
+Hence $M \times M=M'$, i.e. it is the free $R$-module of rank $2$ generated by $(2,1+\sqrt{-5})$ and $(1-\sqrt{-5},2)$.
+\end{enumerate}
+\end{proof}
+
+\paragraph{Exercise 19.}
+\begin{proof}\ 
+\begin{enumerate}
+\item Observe that $0 \to \ker \pi \to M \stackrel{\pi}{\to} F \to 0$ is an exact short sequence. Then $g: F \to M$, 
+\[
+\lambda_{i_1} \pi(x_{i_1}) + ... + \lambda_{i_n} \pi(x_{i_n}) \mapsto \lambda_{i_1} x_{i_1} + ... + \lambda_{i_n} x_{i_n}
+\]
+is a morphism s.t. $\pi \circ g = \id_F$. Therefore, the sequence is a split short exact sequence, and thus $M \simeq \ker \pi \oplus F \simeq \ker \pi \oplus (\oplus_{i \in I} R x_i)$.\\
+If $\pi: M \to F$ is an $R$-module epimorphism onto a free module $F$, we can always find a family $(x_i)_{i \in I}$ in $M$ whose image $\pi(x_i)_{i \in I}$ is a basis of $F$. In fact, if $(b_i)_{i \in I}$ is a basis of $F$ (and the Axiom of Choice holds), it is sufficient to choose $(y_i)_{i \in I}$ s.t. $y_i=\pi^{-1}(b_i)$.
+\item Let $(x_i)_{i \in I}$ be a basis of $M/N$. Let $\pi : M \to M/N$ the canonical projection. Then, thanks to the first point, we have 
+\[
+M= \ker \pi \oplus (\oplus_{i \in I} R x_i).
+\]
+Since $\ker \pi=N$, the $(x_i)_{i \in I}$ let us extend every basis of $N$ to a basis of $M$.
+\end{enumerate}
+\end{proof}
+
+\paragraph{Exercise 20.} 
+\begin{proof}\ 
+\begin{enumerate}
+\item A module over a field is a vector space. So $M$ is a finite-dimension vector space and $N$ is a vector subspace of $M$. Thus $N$ has a basis (and we don't need the Axiom of Choice).
+\item If $(b_i)_{i \in I}$ is a basis of $M$, then the vector subspaces of $M$ are precisely the ones generated by any subset of $\{b_i : i \in I\}$. So the conclusion follows immediately.
+\item Every module morphism over a field is a linear map. Therefore the statement becomes the well-known linear algebra result (since the dimension of $M$ is finite).
+\item Same of above.
+\end{enumerate}
+Suppose now that $R$ is not a field.
+\begin{enumerate}
+\item Doesn't necessarily hold. In fact, let $I \lhd R$ be an ideal. Since $\forall a,b \; [b a  + (-a) b =0]$, in order to be free (as a module), $I$ must (at least) be generated by just one element, i.e. $I$ must be principal. So if $R$ is not a PID, then the statement doesn't hold for sure.
+\item Doesn't necessarily hold. Let $R$ be a domain and let $p\in R$ be a prime element. Then the ideal $I=pR$ cannot be a direct summand of $R$. Indeed, if there was an $R$-module isomorphism $R\cong I\oplus M$ for some $R$-module $M$, then we would have an injection $R/I\cong M\hookrightarrow R$, which is impossible as the source is a non-zero torsion $R$-module, while $R$ is not, since it is a domain by hypothesis.
+\item Doesn't necessarily hold. Consider $\phi: \Z \to \Z$, $n \mapsto 2n$.
+\item Doesn't necessarily hold. Consider the ring $M=R=\Z_4$ and the morphism $f: x \mapsto 2x$. Then $M$ is free and finitely generated, because $\{1\}$ is a basis, and $\ker f =\ran f = \{0,2\}$ is not even free, since $2 \cdot 2 = 0$, thus it has no basis.
+\end{enumerate}
+\end{proof}
+
+
+\end{document}

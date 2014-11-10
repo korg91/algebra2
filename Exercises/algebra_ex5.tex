@@ -1,0 +1,157 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage[utf8]{inputenc}
+\usepackage{longtable}
+\usepackage{amsthm}
+\usepackage{amscd}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage[hyphens]{url}
+\usepackage[scale=3]{ccicons}  % per le icone creative commons
+\usepackage{hyperref}  % per i link nel pdf
+\usepackage[rmargin=3.0cm,lmargin=3.0cm]{geometry}
+%\usepackage{frontesp}  % prima pagina; il pacchetto frontesp.sty si trova nella stessa cartella del file .tex (deve essere adattato a mano)
+\usepackage{setspace}  % per l'interlinea
+\usepackage[english]{babel}  % per sillabazione
+\usepackage[all]{xy} %diagrammi di funzioni
+\usepackage{xspace} %per assicurare la corretta gestione degli spazi finali quando uso e.g. \AC. NB: sarebbe meglio trovare un'altra soluzione...cfr. http://tex.stackexchange.com/questions/15220/no-space-present-after-ensuremath
+
+
+
+\theoremstyle{definition}
+\newtheorem{teo}{Teorema}[section]  % resetta la numerazione dei teoremi per ogni capitolo
+\newtheorem{defn}[teo]{Definizione}  % la numerazione delle definizioni dipende da quella dei teoremi
+\newtheorem{es}[teo]{Esempio}  % idem
+\newtheorem{oss}[teo]{Osservazione}  % idem
+\newtheorem{prop}[teo]{Proposizione}  % idem
+\newtheorem{lemma}[teo]{Lemma}  % idem
+\newtheorem{corollario}[teo]{Corollario}  % idem
+
+%%% inizio comandi per stile per teoremi: "numero. Titolo" %%%
+\newtheoremstyle{num.custom-title}
+  {\topsep}   % ABOVESPACE
+  {\topsep}   % BELOWSPACE
+  {\normalfont}  % BODYFONT
+  {0pt}       % INDENT (empty value is the same as 0pt)
+  {\bfseries} % HEADFONT
+  {}         % HEADPUNCT
+  {5pt plus 1pt minus 1pt} % HEADSPACE
+  {\thmnumber{#2.}\thmnote{ #3}}
+  
+\theoremstyle{num.custom-title}  
+\newtheorem{teo_custom-title}[teo]{} % per usarlo basta \begin{teo_custom-title}[<Titolo teorema>] (usa automaticamente la numerazione di [teo])
+%%% fine comandi per stile per teoremi: "numero. Titolo" %%%
+
+
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\orb}{orb}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\tor}{tor}
+\DeclareMathOperator{\Zdv}{Zdv}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\A}{\mathcal{A}}
+\DeclareMathOperator{\B}{\mathcal{B}}
+\DeclareMathOperator{\PP}{\mathcal{P}}
+\DeclareMathOperator{\LL}{\mathcal{L}}
+\DeclareMathOperator{\Hrtg}{\text{Hrtg}}
+\DeclareMathOperator{\Ord}{\text{Ord}}
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\M}{\mathfrak{M}}
+\DeclareMathOperator{\U}{\mathfrak{U}}
+\DeclareMathOperator{\PPP}{\mathbb{P}}
+\DeclareMathOperator{\a01}{\{0,1\}^{\star}}
+\DeclareMathOperator{\imp}{\Rightarrow}
+\DeclareMathOperator{\sm}{\setminus}
+\DeclareMathOperator{\sse}{\subseteq}
+
+
+\newcommand{\AC}{\ensuremath{\mathsf{AC}}\xspace}
+\newcommand{\CC}{\ensuremath{\mathsf{CC}}\xspace}
+\newcommand{\DC}{\ensuremath{\mathsf{DC}}\xspace}
+\newcommand{\ZF}{\ensuremath{\mathsf{ZF}}\xspace}
+\newcommand{\ZFC}{\ensuremath{\mathsf{ZFC}}\xspace}
+\newcommand{\LS}{\ensuremath{\mathsf{LS}}\xspace}
+\newcommand{\AMC}{\ensuremath{\mathsf{AMC}}\xspace}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} %per la prima pagina
+
+\renewcommand{\phi}{\varphi}
+\renewcommand{\S}{\mathcal{S}}
+
+
+%%%% INIZIO COMANDI PER EQUIVALENZE %%%%
+\newcommand{\Implies}[2]{$\text{\ref{statement#1}}\!\implies\!\text{\ref{statement#2}}$}% X => Y
+\newcommand{\punto}[1]{\item \label{statement#1}}
+
+
+\newenvironment{equivalence}
+    {\begin{enumerate}[label=(\arabic*),ref=(\arabic*)]
+    }
+    { 
+	\end{enumerate}
+    }
+%%%% FINE COMANDI PER EQUIVALENZE %%%
+
+
+
+% Interlinea 1.5
+%\onehalfspacing  
+
+
+%per le citazioni
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+  \hbox{}\nobreak\hfil(#1)%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+
+\newsavebox\mybox
+\newenvironment{aquote}[1]
+  {\savebox\mybox{#1}\begin{quote}}
+  {\signed{\usebox\mybox}\end{quote}}
+
+%disabilita colore link
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
+
+\begin{document}
+
+\paragraph{Exercise 27.} 
+\begin{proof}\ \\
+(b)$\imp$(a) Suppose $M=M_1 \oplus M_2$. Then $e_1 \in \End_R(M)$ given by $e_1(x_1,x_2)=(x_1,0)$ is a non trivial idempotent endomorphism.\\
+(a)$\imp$(b) Let $f \in \End_R(M)$ be a non-trivial idempotent endomorphism of $M$. Consider the exact sequence
+\[
+0 \to \ker f \hookrightarrow M \stackrel{f}{\to} f[M] \to 0.
+\]
+Consider the inclusion $i : f[M] \to M$. Since $f$ is idempotent, we have that $f \circ i (f(m)) = f(f(m)) = f(m)$, that is $f \circ i = \id_{f[M]}$. By splitting lemma, we obtain $M \simeq f[M] \oplus \ker f$.\\
+Now we want to show that $f \neq 0,1 \imp f[M] \neq \{0\} \wedge \ker f \neq \{0\}$. If $f[M]=\{0\}$, of course $f=0$. If $\ker f = \{0\}$, then $f$ is injective. But since $f(f(m))=f(m)$ for all $m \in M$, this means that $f(m)=m$ for all $m \in M$, thus $f=1$.
+\end{proof}
+
+\paragraph{Exercise 29.} Consider the series of the exercise. If we prove that the composition factors are $(\Z/p_1\Z, ..., \Z/p_r\Z)$, then the series is a composition series, since every $\Z/p_1\Z$ is simple because every submodule is also a subgroup, and the only subgroups of $\Z/p\Z$ with $p$ prime are trivial (since the order of any subgroup must divide $p$).\\
+\\
+\noindent\textbf{Claim.} For all $i$, $p_1...p_i \Z/n\Z \simeq (p_1...p_i\Z)/n\Z$, and there exists an isomorphism $\phi$ such that $\phi[p_1...p_i p_{i+1} \Z/n\Z] = (p_1...p_i p_{i+1} \Z)/n\Z$.\\
+\emph{Proof of the claim.} Consider the function $\phi: p_1...p_i \Z/n\Z \to (p_1...p_i\Z)/n\Z$ given by $p_1...p_i [x] \mapsto [p_1...p_i x]$. This is trivially a well-defined isomorphism, since it's precisely the definition of scalar multiplication in the $\Z$-module $\Z/n\Z$. \qed
+\\
+\\
+So now we have that, for all $i=\{1,...,r\}$, 
+\begin{multline*}
+p_1...p_i \Z/n\Z / p_1...p_i p_{i+1} \Z/n\Z \simeq (p_1...p_i \Z)/n\Z / (p_1...p_i p_{i+1} \Z)/n\Z \\
+\simeq p_1...p_i \Z / p_1...p_i p_{i+1} \Z \simeq \Z/p_{i+1}\Z,
+\end{multline*}
+where the first ``equality'' of the second line holds thanks to the third isomorphism theorem, and the last ``equality'' holds thanks to the following isomorphism:
+\[
+\phi: p_1...p_i \Z / p_1...p_i p_{i+1} \Z \to \Z/p_{i+1}\Z, \ [p_1...p_i k] \mapsto [p_1...p_i k].
+\]
+$\phi$ is well-defined, since $[p_1...p_i k] = [p_1...p_i l]$ implies $p_1...p_i k - p_1...p_i l = p_1...p_i p_{i+1} m$ for some $m \in \Z$, which means $k-l=p_{i+1} m$, i.e. $[k]_{\Z/p_{i+1}\Z} = [l]_{\Z/p_{i+1}\Z}$. The surjectivity is totally trivial by the way $\phi$ is defined, and for the injectivity just observe that $p_1...p_i k + p_{i+1}\Z = 0 \imp p_{i+1}|k \imp p_1...p_i p_{i+1} | p_1...p_i k$.
+
+\end{document}

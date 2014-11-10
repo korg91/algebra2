@@ -1,0 +1,204 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{longtable}
+\usepackage{amsthm}
+\usepackage{amscd}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage[hyphens]{url}
+\usepackage[scale=3]{ccicons}  % per le icone creative commons
+\usepackage{hyperref}  % per i link nel pdf
+\usepackage[rmargin=3.0cm,lmargin=3.0cm]{geometry}
+%\usepackage{frontesp}  % prima pagina; il pacchetto frontesp.sty si trova nella stessa cartella del file .tex (deve essere adattato a mano)
+\usepackage{setspace}  % per l'interlinea
+\usepackage[italian]{babel}  % per sillabazione
+\usepackage[all]{xy} %diagrammi di funzioni
+\usepackage{xspace} %per assicurare la corretta gestione degli spazi finali quando uso e.g. \AC. NB: sarebbe meglio trovare un'altra soluzione...cfr. http://tex.stackexchange.com/questions/15220/no-space-present-after-ensuremath
+
+
+
+\theoremstyle{definition}
+\newtheorem{teo}{Teorema}[section]  % resetta la numerazione dei teoremi per ogni capitolo
+\newtheorem{defn}[teo]{Definizione}  % la numerazione delle definizioni dipende da quella dei teoremi
+\newtheorem{es}[teo]{Esempio}  % idem
+\newtheorem{oss}[teo]{Osservazione}  % idem
+\newtheorem{prop}[teo]{Proposizione}  % idem
+\newtheorem{lemma}[teo]{Lemma}  % idem
+\newtheorem{corollario}[teo]{Corollario}  % idem
+
+%%% inizio comandi per stile per teoremi: "numero. Titolo" %%%
+\newtheoremstyle{num.custom-title}
+  {\topsep}   % ABOVESPACE
+  {\topsep}   % BELOWSPACE
+  {\normalfont}  % BODYFONT
+  {0pt}       % INDENT (empty value is the same as 0pt)
+  {\bfseries} % HEADFONT
+  {}         % HEADPUNCT
+  {5pt plus 1pt minus 1pt} % HEADSPACE
+  {\thmnumber{#2.}\thmnote{ #3}}
+  
+\theoremstyle{num.custom-title}  
+\newtheorem{teo_custom-title}[teo]{} % per usarlo basta \begin{teo_custom-title}[<Titolo teorema>] (usa automaticamente la numerazione di [teo])
+%%% fine comandi per stile per teoremi: "numero. Titolo" %%%
+
+
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\orb}{orb}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Zdv}{Zdv}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\A}{\mathcal{A}}
+\DeclareMathOperator{\B}{\mathcal{B}}
+\DeclareMathOperator{\PP}{\mathcal{P}}
+\DeclareMathOperator{\LL}{\mathcal{L}}
+\DeclareMathOperator{\Hrtg}{\text{Hrtg}}
+\DeclareMathOperator{\Ord}{\text{Ord}}
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\M}{\mathfrak{M}}
+\DeclareMathOperator{\U}{\mathfrak{U}}
+\DeclareMathOperator{\PPP}{\mathbb{P}}
+\DeclareMathOperator{\a01}{\{0,1\}^{\star}}
+\DeclareMathOperator{\imp}{\Rightarrow}
+\DeclareMathOperator{\sm}{\setminus}
+\DeclareMathOperator{\sse}{\subseteq}
+
+
+\newcommand{\AC}{\ensuremath{\mathsf{AC}}\xspace}
+\newcommand{\CC}{\ensuremath{\mathsf{CC}}\xspace}
+\newcommand{\DC}{\ensuremath{\mathsf{DC}}\xspace}
+\newcommand{\ZF}{\ensuremath{\mathsf{ZF}}\xspace}
+\newcommand{\ZFC}{\ensuremath{\mathsf{ZFC}}\xspace}
+\newcommand{\LS}{\ensuremath{\mathsf{LS}}\xspace}
+\newcommand{\AMC}{\ensuremath{\mathsf{AMC}}\xspace}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} %per la prima pagina
+
+\renewcommand{\phi}{\varphi}
+\renewcommand{\S}{\mathcal{S}}
+
+
+%%%% INIZIO COMANDI PER EQUIVALENZE %%%%
+\newcommand{\Implies}[2]{$\text{\ref{statement#1}}\!\implies\!\text{\ref{statement#2}}$}% X => Y
+\newcommand{\punto}[1]{\item \label{statement#1}}
+
+
+\newenvironment{equivalence}
+    {\begin{enumerate}[label=(\arabic*),ref=(\arabic*)]
+    }
+    { 
+	\end{enumerate}
+    }
+%%%% FINE COMANDI PER EQUIVALENZE %%%
+
+
+
+% Interlinea 1.5
+%\onehalfspacing  
+
+
+%per le citazioni
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+  \hbox{}\nobreak\hfil(#1)%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+
+\newsavebox\mybox
+\newenvironment{aquote}[1]
+  {\savebox\mybox{#1}\begin{quote}}
+  {\signed{\usebox\mybox}\end{quote}}
+
+%disabilita colore link
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
+
+\begin{document}
+
+
+\paragraph{Exercise 10.} Let $G$ be an abelian simple group. Then $G$ is cyclic and has prime order.
+\begin{proof}
+$G$ is abelian, therefore every subgroup is normal. Then, since $G$ is simple by hypothesis, $\{1\}$ and $G$ are its only subgroups. $G$ is cyclic because otherwise there would exist an element $x \in G$ such that $\langle x \rangle \ne \{1\}$ is a proper subgroup of $G$. Let's consider a generator $g$. Furthermore, the order must be finite, since otherwise $\langle g^2 \rangle$ would be a proper subgroup of $\langle g \rangle = G$. Finally, suppose towards a contradiction that $G$ has order $n=p n$ with $p$ prime. Then $\langle g^p \rangle$ would be a proper subgroup of $\langle g \rangle$.
+\end{proof}
+
+\paragraph{Exercise 11.} Let $M$ be an $R$-module and $R_M=\{\lambda \cdot \id_M \mid \lambda \in R\} \sse \End_R(M)$. Then $R_M \cong R/\Ann_R(M)$.
+\begin{proof}
+Consider $\phi : R_M \to R/\Ann_R(M)$, $\lambda \cdot \id_M \mapsto [\lambda]$. $\phi$ is trivially an epimorphism and it's also injective since 
+\[
+[\lambda_1]=[\lambda_2] \imp \lambda_1=\lambda_2+r \imp \lambda_1 \cdot \id_M = (\lambda_2+r) \cdot \id_M = \lambda_2 \cdot \id_M + r \cdot \id_M = \lambda_2 \cdot \id_M
+\]
+\end{proof}
+
+\paragraph{Exercise 12.} Let $M$ be an $R$-module.
+\begin{enumerate}
+\item $M$ is simple iff $M=Rx$ for all $0 \ne x \in M$. (\textbf{Observation:} this means that every simple module is cyclic.)
+\item Give an example of a cyclic module which is not simple.
+\item If $M$ is simple, then $\End_R(M)$ is a division ring.
+\end{enumerate}
+\begin{proof}\
+\begin{enumerate}
+\item Trivial.
+\item $M=\Z$ is a cyclic $\Z$-module but $2\Z$ is a proper submodule.
+\item Thanks to the first point, if $0 \ne x \in M$ then $Rx=M$. Therefore, if $0 \not\equiv f \in \End_R(M)$ we have $Rf(x)=M$, i.e. 
+\[
+\forall x \in M \exists \lambda_x \in R [\lambda_x f(x) = x].
+\]
+Defining $g(x):=\lambda_x \id_M$ we obtain $g \circ f = f \circ g = \id_M$.
+\end{enumerate}
+\end{proof}
+
+\paragraph{Exercise 13.} Let $n \in \N$.
+\begin{enumerate}
+\item $\End_R(R^n) \cong \mathcal M_n(R)$.
+\item $p \in \N$ prime $\imp \End_{\Z}((\Z/p\Z)^n) \cong \mathcal M_n(\Z/p\Z)$.
+\item $\End_R(M^n) \cong \mathcal M_n(\End_R(M))$.
+\end{enumerate}
+\begin{proof}\
+\begin{enumerate}
+\item Consider $\phi: \End_R(R^n) \to \mathcal M_n(R)$, $f \mapsto (a_{i,j})_{i,j}$ where $a_{i,j}=(\pi_i \circ f)(e_j)$. It is immediate to check that $\phi$ is a morphism. Consider now $\psi: \mathcal M_n(R) \to \End_R(R^n)$, $(a_{i,j})_{i,j} \mapsto f$ where $f(\lambda_1 e_1 + ... + \lambda_n e_n)_i=\lambda_1 a_{i,1} + ... + \lambda_n a_{i,n}$. It's easy to check that $\psi=\phi^{-1}$.
+\item Follows immediatly from the last point and the following trivial observation:
+\[
+\End_{\Z}((\Z/p\Z)^n) \cong \End_{\Z/p\Z}((\Z/p\Z)^n)
+\]
+\item Consider $\phi: \End_R(M^n) \to \mathcal M_n(\End_R(M))$, $f \mapsto (f_{i,j})_{i,j}$ where $f_{i,j}: M \to M$, $x \mapsto \pi_i(f(0 e_0 + 0 e_1,...,+ x e_j,...,0 e_n))$.
+\end{enumerate}
+\end{proof}
+
+
+\paragraph{Exercise 14.} Let $I_1,...,I_n \lhd R$ be ideals of $R$ and let $M$ be an $R$-module. TFAE:
+\begin{itemize}
+\item[(a)] $M \cong R/I_1 \oplus ... \oplus R/I_n$.
+\item[(b)] There exist cyclic submodules $C_1,...C_n \sse M$ s.t. $\Ann_R(C_j)=I_j$ and $M=\oplus_{j=1}^n C_j$.
+\end{itemize}
+\begin{proof}\ \\
+(a) $\imp$ (b): $R/I_j$ is a submodule of $M$. We want to show that $\Ann(R/I_j)=I_j$. The inclusion $\supseteq$ is immediate. For the other inclusion, observe that 
+\[
+\forall [x] (\lambda [x] = [0]) \imp \lambda [1] = [0] \imp [\lambda] = [0] \imp \lambda \in I_j.
+\]
+Finally, $R/I_j= \{[\lambda] \mid \lambda \in R\}= \{\lambda[1] \mid \lambda \in R\}=\langle [1] \rangle$, i.e. is cyclic. Therefore defining $C_j:=R/I_j$ we are done.\\
+(b) $\imp$ (a): Let $g_j \in C_j$ be a generator of $C_j$. Consider $\phi: C_j \to R$, $\lambda g_j \mapsto \lambda$. $\phi$ is clearly an epimorphism. If we can prove $\ker \phi = \Ann_R(C_j)=I_j$, we obtain $C_j \cong R/I_j$ and so we are done. Thus observe
+\[
+\lambda \in \Ann_R(C_j) \imp \lambda g_j
+\]
+and viceversa
+\[
+\lambda g_j =0 \ \wedge \ c_j \in C_j \imp \lambda g_j=0 \ \wedge \ c_j=\mu g_j \imp \lambda c_j = \lambda (\mu g_j) = \mu (\lambda g_j)=0 \imp \lambda \in \Ann_R(C_j).
+\]
+\end{proof}
+
+\paragraph{Exercise 15.} Let $M$ be an $R$-module, $\sim$ a congruence relation on $M$ and $N=[0]_\sim$. Then there is a uniquely determined $R$-modulo structure on $M/N$ such that $\pi: M \to M/N$ is a $R$-epimorphism. We have that the scalar multiplication $R \times M/N \to M/N$ is given by $(\lambda, [a]) \mapsto [\lambda a]$.
+\begin{proof}
+Let $\alpha, \beta \in M/N$. We can write them as $\alpha=[a]$ and $\beta=[b]$ for some $a,b \in M$. By definition we have that $\pi(a+b)=[a+b]$ and by hypothesis we need to have $\pi(a+b)=\pi(a)+\pi(b)=[a]+[b]$. So $[a]+[b]=[a+b]$. Similarly, by definition $\pi(\lambda a)=[\lambda a]$, and by hypothesis $\pi(\lambda a)=\lambda \pi(a) = \lambda [a]$, so $\lambda [a] = [\lambda a]$.
+\end{proof}
+
+
+\end{document}

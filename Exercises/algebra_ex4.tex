@@ -1,0 +1,162 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage[utf8]{inputenc}
+\usepackage{longtable}
+\usepackage{amsthm}
+\usepackage{amscd}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage[hyphens]{url}
+\usepackage[scale=3]{ccicons}  % per le icone creative commons
+\usepackage{hyperref}  % per i link nel pdf
+\usepackage[rmargin=3.0cm,lmargin=3.0cm]{geometry}
+%\usepackage{frontesp}  % prima pagina; il pacchetto frontesp.sty si trova nella stessa cartella del file .tex (deve essere adattato a mano)
+\usepackage{setspace}  % per l'interlinea
+\usepackage[english]{babel}  % per sillabazione
+\usepackage[all]{xy} %diagrammi di funzioni
+\usepackage{xspace} %per assicurare la corretta gestione degli spazi finali quando uso e.g. \AC. NB: sarebbe meglio trovare un'altra soluzione...cfr. http://tex.stackexchange.com/questions/15220/no-space-present-after-ensuremath
+
+
+
+\theoremstyle{definition}
+\newtheorem{teo}{Teorema}[section]  % resetta la numerazione dei teoremi per ogni capitolo
+\newtheorem{defn}[teo]{Definizione}  % la numerazione delle definizioni dipende da quella dei teoremi
+\newtheorem{es}[teo]{Esempio}  % idem
+\newtheorem{oss}[teo]{Osservazione}  % idem
+\newtheorem{prop}[teo]{Proposizione}  % idem
+\newtheorem{lemma}[teo]{Lemma}  % idem
+\newtheorem{corollario}[teo]{Corollario}  % idem
+
+%%% inizio comandi per stile per teoremi: "numero. Titolo" %%%
+\newtheoremstyle{num.custom-title}
+  {\topsep}   % ABOVESPACE
+  {\topsep}   % BELOWSPACE
+  {\normalfont}  % BODYFONT
+  {0pt}       % INDENT (empty value is the same as 0pt)
+  {\bfseries} % HEADFONT
+  {}         % HEADPUNCT
+  {5pt plus 1pt minus 1pt} % HEADSPACE
+  {\thmnumber{#2.}\thmnote{ #3}}
+  
+\theoremstyle{num.custom-title}  
+\newtheorem{teo_custom-title}[teo]{} % per usarlo basta \begin{teo_custom-title}[<Titolo teorema>] (usa automaticamente la numerazione di [teo])
+%%% fine comandi per stile per teoremi: "numero. Titolo" %%%
+
+
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\orb}{orb}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\tor}{tor}
+\DeclareMathOperator{\Zdv}{Zdv}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\A}{\mathcal{A}}
+\DeclareMathOperator{\B}{\mathcal{B}}
+\DeclareMathOperator{\PP}{\mathcal{P}}
+\DeclareMathOperator{\LL}{\mathcal{L}}
+\DeclareMathOperator{\Hrtg}{\text{Hrtg}}
+\DeclareMathOperator{\Ord}{\text{Ord}}
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\M}{\mathfrak{M}}
+\DeclareMathOperator{\U}{\mathfrak{U}}
+\DeclareMathOperator{\PPP}{\mathbb{P}}
+\DeclareMathOperator{\a01}{\{0,1\}^{\star}}
+\DeclareMathOperator{\imp}{\Rightarrow}
+\DeclareMathOperator{\sm}{\setminus}
+\DeclareMathOperator{\sse}{\subseteq}
+
+
+\newcommand{\AC}{\ensuremath{\mathsf{AC}}\xspace}
+\newcommand{\CC}{\ensuremath{\mathsf{CC}}\xspace}
+\newcommand{\DC}{\ensuremath{\mathsf{DC}}\xspace}
+\newcommand{\ZF}{\ensuremath{\mathsf{ZF}}\xspace}
+\newcommand{\ZFC}{\ensuremath{\mathsf{ZFC}}\xspace}
+\newcommand{\LS}{\ensuremath{\mathsf{LS}}\xspace}
+\newcommand{\AMC}{\ensuremath{\mathsf{AMC}}\xspace}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} %per la prima pagina
+
+\renewcommand{\phi}{\varphi}
+\renewcommand{\S}{\mathcal{S}}
+
+
+%%%% INIZIO COMANDI PER EQUIVALENZE %%%%
+\newcommand{\Implies}[2]{$\text{\ref{statement#1}}\!\implies\!\text{\ref{statement#2}}$}% X => Y
+\newcommand{\punto}[1]{\item \label{statement#1}}
+
+
+\newenvironment{equivalence}
+    {\begin{enumerate}[label=(\arabic*),ref=(\arabic*)]
+    }
+    { 
+	\end{enumerate}
+    }
+%%%% FINE COMANDI PER EQUIVALENZE %%%
+
+
+
+% Interlinea 1.5
+%\onehalfspacing  
+
+
+%per le citazioni
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+  \hbox{}\nobreak\hfil(#1)%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+
+\newsavebox\mybox
+\newenvironment{aquote}[1]
+  {\savebox\mybox{#1}\begin{quote}}
+  {\signed{\usebox\mybox}\end{quote}}
+
+%disabilita colore link
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
+
+\begin{document}
+
+\paragraph{Exercise 21.} 
+\begin{proof}
+Let $M=\langle x_1, ..., x_n \rangle$. Consider the morphism $\phi: R \to M^n$ given by $r \mapsto (r x_1, ...., r x_n)$. It is immediate to check that $\ker \phi = \Ann_R M$. So $\phi(R) \simeq R/\Ann_R M$. But $\phi(R)$ is a submodule of $M^k$, which is noetherian by theory. Thus $\phi(R)$ is noetherian as well, and we are done.
+\end{proof}
+
+
+\paragraph{Exercise 22.}
+\begin{proof}\ 
+\begin{enumerate}
+\item Let $M_{\tor} = \{x \in M \mid \Ann_R (x) \neq 0\}$. Let $x,y \in M_{\tor}$. Then there exist $\lambda, \mu \in R$ s.t. $\lambda x = \mu x = 0$. Thus $\lambda \mu (x+y) =0$, i.e. $x+y \in M_{\tor}$. The closure under scalar multiplication is trivial.
+\item Suppose $M= \langle x_1,...,x_n \rangle$.  By hypothesis, there exist $\lambda_1,...,\lambda_n \in R$ s.t. $\lambda_i x_i = 0$ for all $i$. Thus, for every $x \in M$, $(\lambda_1 \cdot ... \cdot \lambda_n) x= \lambda_1 \cdot ... \cdot \lambda_n (a_1 x_1 + ... + a_n x_n)=0$.
+\item Let $(x_1,...,x_n)$ be a basis for $M$. Let $0 \neq x = a_1 x_1 + ... + a_n x_n$. Suppose $0 = \lambda x = \lambda (a_1 x_1 + ... + a_n x_n)$. Since $(x_1,...,x_n)$ is a basis, this means $\lambda a_i = 0$ for all $a_i$. By hypothesis, $x \neq 0$, so at least one $a_k$ is not $0$. Since $R$ is a domain, we have $\lambda = 0 \vee a_k = 0$, thus $\lambda=0$. MANCA IL CONTROESEMPIO!!!
+\end{enumerate}
+\end{proof}
+
+\paragraph{Exercise 23.}
+\begin{proof}
+First of all, we prove that $\{a \in S \mid aS \sse R\}= \Ann_R(S/R)$. The inclusion $\sse$ is trivial consequence of the definition of the factor ring. For the inclusion $\supseteq$, observe that $a (x + R) = 0 \imp ax + R = 0 \imp ax \in R$.\\
+It is immediate to show that $\mathfrak{f}_{S/R}$ is an ideal of $S$ and $R$. Consider now an ideal $I$ of $S$ which is also an ideal of $R$. Since every ideal is closed under multiplication of elements of the ring, we have that, for all $a \in I$ and $x \in S$, $a x \in I \sse R$, thus $a S \sse R$. That is, $I \sse \mathfrak{f}_{S/R}$.
+\end{proof}
+
+\paragraph{Exercise 24.}
+\begin{proof}
+Suppose $S= \langle x_1,...,x_n \rangle$. Since $S \sse q(R)$, we must have $x_i = a_i b_i^{-1}$ for some $a,b \in R$. Consider an arbitrary $x \in S$, that is $x = \lambda_1 a_1 b_1^{-1} + ... + \lambda_n a_n b_n^{-1}$, with $\lambda_1,...,\lambda_n \in R$. Then obviously $(b_1 \cdot ... \cdot b_n) x \in R$. Thus $b_1 \cdot ... \cdot b_n \in \mathfrak{f}_{S/R}$.
+\end{proof}
+
+\paragraph{Exercise 26.} 
+\begin{proof}
+Follows trivially by Corollary 2.36.
+\end{proof}
+
+
+
+\end{document}
