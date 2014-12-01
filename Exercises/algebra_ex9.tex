@@ -1,0 +1,183 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage[utf8]{inputenc}
+\usepackage{longtable}
+\usepackage{amsthm}
+\usepackage{amscd}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage[hyphens]{url}
+\usepackage[scale=3]{ccicons}  % per le icone creative commons
+\usepackage{hyperref}  % per i link nel pdf
+\usepackage[rmargin=3.0cm,lmargin=3.0cm]{geometry}
+%\usepackage{frontesp}  % prima pagina; il pacchetto frontesp.sty si trova nella stessa cartella del file .tex (deve essere adattato a mano)
+\usepackage{setspace}  % per l'interlinea
+\usepackage[english]{babel}  % per sillabazione
+\usepackage[all]{xy} %diagrammi di funzioni
+\usepackage{xspace} %per assicurare la corretta gestione degli spazi finali quando uso e.g. \AC. NB: sarebbe meglio trovare un'altra soluzione...cfr. http://tex.stackexchange.com/questions/15220/no-space-present-after-ensuremath
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[chapter] % resetta la numerazione dei teoremi per ogni capitolo
+\newtheorem{corollary}[theorem]{Corollary} % la numerazione delle definizioni dipende da quella dei teoremi
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem*{addendum}{Addendum}
+\newtheorem*{remark}{Remark}
+
+%%% inizio comandi per stile per teoremi: "numero. Titolo" %%%
+\newtheoremstyle{num.custom-title}
+  {\topsep}   % ABOVESPACE
+  {\topsep}   % BELOWSPACE
+  {\normalfont}  % BODYFONT
+  {0pt}       % INDENT (empty value is the same as 0pt)
+  {\bfseries} % HEADFONT
+  {}         % HEADPUNCT
+  {5pt plus 1pt minus 1pt} % HEADSPACE
+  {\thmnumber{#2.}\thmnote{ #3}}
+  
+\theoremstyle{num.custom-title}  
+\newtheorem{teo_custom-title}[theorem]{} % per usarlo basta \begin{teo_custom-title}[<Titolo teorema>] (usa automaticamente la numerazione di [teo])
+%%% fine comandi per stile per teoremi: "numero. Titolo" %%%
+
+\newenvironment{claim}[1]{\par\noindent\underline{Claim#1:}\space}{} %per i claim
+\newenvironment{claimproof}[1]{\par\noindent\underline{Proof:}\space#1}{\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill\quad\hbox{$\blacksquare$}} %per le dimostrazioni dei claim
+
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\orb}{orb}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\tor}{tor}
+\DeclareMathOperator{\Zdv}{Zdv}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\A}{\mathcal{A}}
+\DeclareMathOperator{\B}{\mathcal{B}}
+\DeclareMathOperator{\PP}{\mathcal{P}}
+\DeclareMathOperator{\LL}{\mathcal{L}}
+\DeclareMathOperator{\Hrtg}{\text{Hrtg}}
+\DeclareMathOperator{\Ord}{\text{Ord}}
+\DeclareMathOperator{\J}{\mathcal{J}}
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\M}{\mathfrak{M}}
+\DeclareMathOperator{\U}{\mathfrak{U}}
+\DeclareMathOperator{\PPP}{\mathbb{P}}
+\DeclareMathOperator{\p}{\mathfrak{p}}
+\DeclareMathOperator{\V}{\mathcal{V}}
+\DeclareMathOperator{\a01}{\{0,1\}^{\star}}
+\DeclareMathOperator{\imp}{\Rightarrow}
+\DeclareMathOperator{\sm}{\setminus}
+\DeclareMathOperator{\sse}{\subseteq}
+\DeclareMathOperator{\Spec}{Spec}
+
+
+\newcommand{\AC}{\ensuremath{\mathsf{AC}}\xspace}
+\newcommand{\CC}{\ensuremath{\mathsf{CC}}\xspace}
+\newcommand{\DC}{\ensuremath{\mathsf{DC}}\xspace}
+\newcommand{\ZF}{\ensuremath{\mathsf{ZF}}\xspace}
+\newcommand{\ZFC}{\ensuremath{\mathsf{ZFC}}\xspace}
+\newcommand{\LS}{\ensuremath{\mathsf{LS}}\xspace}
+\newcommand{\AMC}{\ensuremath{\mathsf{AMC}}\xspace}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} %per la prima pagina
+\newcommand{\qedblack}{\hfill $\blacksquare$}
+\newcommand{\ol}{\overline}
+\newcommand{\ul}{\underline}
+
+\renewcommand{\phi}{\varphi}
+\renewcommand{\S}{\mathcal{S}}
+\renewcommand{\P}{\mathbb{P}}
+
+
+%%%% INIZIO COMANDI PER EQUIVALENZE %%%%
+\newcommand{\Implies}[2]{$\text{\ref{statement#1}}\!\implies\!\text{\ref{statement#2}}$}% X => Y
+\newcommand{\punto}[1]{\item \label{statement#1}}
+
+
+\newenvironment{equivalence}
+    {\begin{enumerate}[label=(\arabic*),ref=(\arabic*)]
+    }
+    { 
+	\end{enumerate}
+    }
+%%%% FINE COMANDI PER EQUIVALENZE %%%
+
+
+
+% Interlinea 1.5
+%\onehalfspacing  
+
+
+%per le citazioni
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+  \hbox{}\nobreak\hfil(#1)%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+
+\newsavebox\mybox
+\newenvironment{aquote}[1]
+  {\savebox\mybox{#1}\begin{quote}}
+  {\signed{\usebox\mybox}\end{quote}}
+
+%disabilita colore link
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
+
+\begin{document}
+
+\noindent Andrea Gadotti \hfill 01/12/2014
+
+\paragraph{Exercise 48.}
+\begin{enumerate}
+\item We have to check that $I$ is closed under addition and multiplication by elements of $R$. The closure under addition is trivial since $I$ is an ideal. The closure under multiplication by elements of $R$ follows by the following:
+\[
+\lambda \in R, x \in I \imp \lambda x = \lambda (1_A x) = (\lambda 1_A) x
+\]
+where the last item is in $I$ since $\lambda 1_A$ is an element of $A$ and thus $(\lambda 1_A) x \in I$ since $I$ is an ideal of $A$.
+\item $A$ is a noetherian $R$-module because it is surjective image of $\oplus_{i=1}^n R$ for some $n \in \N$ (trivial), which is noetherian since $R$ is noetherian, and by theory we know that finite direct sum of noetherian modules is noetherian and that surjective image of a noetherian module is noetherian. We want now to prove that $A$ is a noetherian ring, that is, $A$ is a noetherian $A$-module. The $A$-submodules of $A$ are the ideals of $A$. But thanks to the first point, these are also $R$-modules, thus any ascending chain of them must stabilize.
+\end{enumerate}
+
+\paragraph{Exercise 49.} $\Z$ is a reduced ring (every integral domain is trivially a reduced ring).
+\begin{enumerate}
+\item Let $[x] \in R/I$ such that $[x]^n=0$ for some $n \in \N$. This means $x^n \in I$, but since $I$ is radical we have $x \in I$, that is $[x]=0$.
+\item Thanks to the first point, it suffices to prove that $\mathcal{I}(V)$ is radical. But this has already been proven in the proof of Hilbert's Nullstellenstatz (proof: If $f \in K[\mathbf{X}]$ with $f^n \in \mathcal{I}(V)$, then $f^n(\ul{a})=0$ for all $\ul{a} \in V$, and thus $f(\ul{a})=0$ for all $\ul{a} \in V$, since $L$ is a field and thus a domain).
+\end{enumerate}
+
+\paragraph{Exercise 50.} 
+\begin{enumerate}
+\item We know by Proposition 3.23 that
+\[
+I=\sqrt{I}= \bigcap_{\p \in \nu(I)} \p,
+\]
+where $\nu(I):=\{\p \in \Spec(I) \mid \p \supseteq I\}$. But by Theorem 3.18 (whose proof seems to work even getting rid of the ``domain'' hypothesis) we know that every noetherian ring has only a finite number of prime ideals. Therefore $\nu(I)$ is finite, and we are done.
+\item Of course we have that 
+\[
+\p_1 \cap ... \cap \p_r \sse \mathfrak{q}_k
+\]
+for all $k=1..s$. By Theorem 3.4, this means that $\p_i \sse \mathfrak{q}_k$ for some $i=1..r$. Repeating the same argument, we obtain that for all $i=1..r$ there exists $k=1..s$ such that $\mathfrak{q}_k \sse \p_i$. We must have that the equality $\p_i=\mathfrak{q}_k$ holds. In fact, suppose to the contrary that $\p_i \sse \mathfrak{q}_k$ and $\mathfrak{q}_{k'} \sse \p_i$. Then $\mathfrak{q}_{k'} \sse \mathfrak{q}_k$, which contradicts the hypothesis. So we are done.
+\end{enumerate}
+
+\paragraph{Exercise 51.}\ \\
+(a)$\imp$(b): By contraposition, suppose there exist $f,g \not\in \J(V)$ with $fg \in \J(V)$. Consider $\J(V)+(f) \supsetneq \J(V)$ and $\J(V)+(g) \supsetneq \J(V)$, and define $V_1:=\V_L(\J(V)+(f))$, $V_2:=\V_L(\J(V)+(g))$. Of course $V_1,V_2 \subsetneq V$. But $V=V_1 \cup V_2$, because (since $fg \in \J(V)$) we have $x \in V \imp fg(x)=0 \imp f(x)g(x)=0 \imp f(x)=0$ or $g(x)=0 \imp x \in V_1$ or $x \in V_2$.\\
+(b)$\imp$(a): By contraposition, suppose $V=V_1 \cup V_2$ with $V_1,V_2 \neq V$ varieties. Then of course\footnote{If $\J(V)=\J(V_1)$, then $V=\V_L(\J(V))=\V_L(\J(V_1))=V_1$.} $\J(V) \subsetneq \J(V_1)$ and $\J(V) \subsetneq \J(V_2)$, that is, there exist $f \in \J(V_1) \sm \J(V)$ and $g \in \J(V_2) \sm \J(V)$. But $fg$ vanishes on $V=V_1 \cup V_2$, so $fg \in \J(V)$, i.e. $\J(V)$ is not prime.
+
+
+
+
+\paragraph{Exercise 52.} 
+\begin{enumerate}
+\item TODO
+\item We have $\J(V)=\J(V_1 \cup ... \cup V_s=\J(V_1) \cap ... \cap \J(V_s)$. $\J(V_i)$ is a prime ideal for all $i=1..s$ thanks to Exercise 51, and thus $\J(V_i)=\p_i$ (after renumbering if necessary) thanks to Exercise 50.2. Therefore $V_i=\V_L(\J(V_i))=\V_L(\p_i)$.
+\end{enumerate}
+
+\end{document}
