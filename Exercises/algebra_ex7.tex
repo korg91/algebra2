@@ -1,0 +1,159 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage[utf8]{inputenc}
+\usepackage{longtable}
+\usepackage{amsthm}
+\usepackage{amscd}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage[hyphens]{url}
+\usepackage[scale=3]{ccicons}  % per le icone creative commons
+\usepackage{hyperref}  % per i link nel pdf
+\usepackage[rmargin=3.0cm,lmargin=3.0cm]{geometry}
+%\usepackage{frontesp}  % prima pagina; il pacchetto frontesp.sty si trova nella stessa cartella del file .tex (deve essere adattato a mano)
+\usepackage{setspace}  % per l'interlinea
+\usepackage[english]{babel}  % per sillabazione
+\usepackage[all]{xy} %diagrammi di funzioni
+\usepackage{xspace} %per assicurare la corretta gestione degli spazi finali quando uso e.g. \AC. NB: sarebbe meglio trovare un'altra soluzione...cfr. http://tex.stackexchange.com/questions/15220/no-space-present-after-ensuremath
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[chapter] % resetta la numerazione dei teoremi per ogni capitolo
+\newtheorem{corollary}[theorem]{Corollary} % la numerazione delle definizioni dipende da quella dei teoremi
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem*{addendum}{Addendum}
+\newtheorem*{remark}{Remark}
+
+%%% inizio comandi per stile per teoremi: "numero. Titolo" %%%
+\newtheoremstyle{num.custom-title}
+  {\topsep}   % ABOVESPACE
+  {\topsep}   % BELOWSPACE
+  {\normalfont}  % BODYFONT
+  {0pt}       % INDENT (empty value is the same as 0pt)
+  {\bfseries} % HEADFONT
+  {}         % HEADPUNCT
+  {5pt plus 1pt minus 1pt} % HEADSPACE
+  {\thmnumber{#2.}\thmnote{ #3}}
+  
+\theoremstyle{num.custom-title}  
+\newtheorem{teo_custom-title}[theorem]{} % per usarlo basta \begin{teo_custom-title}[<Titolo teorema>] (usa automaticamente la numerazione di [teo])
+%%% fine comandi per stile per teoremi: "numero. Titolo" %%%
+
+\newenvironment{claim}[1]{\par\noindent\underline{Claim#1:}\space}{} %per i claim
+\newenvironment{claimproof}[1]{\par\noindent\underline{Proof:}\space#1}{\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill\quad\hbox{$\blacksquare$}} %per le dimostrazioni dei claim
+
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\orb}{orb}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\tor}{tor}
+\DeclareMathOperator{\Zdv}{Zdv}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\A}{\mathcal{A}}
+\DeclareMathOperator{\B}{\mathcal{B}}
+\DeclareMathOperator{\PP}{\mathcal{P}}
+\DeclareMathOperator{\LL}{\mathcal{L}}
+\DeclareMathOperator{\Hrtg}{\text{Hrtg}}
+\DeclareMathOperator{\Ord}{\text{Ord}}
+\DeclareMathOperator{\J}{\mathcal{J}}
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\M}{\mathfrak{M}}
+\DeclareMathOperator{\U}{\mathfrak{U}}
+\DeclareMathOperator{\PPP}{\mathbb{P}}
+\DeclareMathOperator{\p}{\mathfrak{p}}
+\DeclareMathOperator{\V}{\mathcal{V}}
+\DeclareMathOperator{\a01}{\{0,1\}^{\star}}
+\DeclareMathOperator{\imp}{\Rightarrow}
+\DeclareMathOperator{\sm}{\setminus}
+\DeclareMathOperator{\sse}{\subseteq}
+\DeclareMathOperator{\Spec}{Spec}
+
+
+\newcommand{\AC}{\ensuremath{\mathsf{AC}}\xspace}
+\newcommand{\CC}{\ensuremath{\mathsf{CC}}\xspace}
+\newcommand{\DC}{\ensuremath{\mathsf{DC}}\xspace}
+\newcommand{\ZF}{\ensuremath{\mathsf{ZF}}\xspace}
+\newcommand{\ZFC}{\ensuremath{\mathsf{ZFC}}\xspace}
+\newcommand{\LS}{\ensuremath{\mathsf{LS}}\xspace}
+\newcommand{\AMC}{\ensuremath{\mathsf{AMC}}\xspace}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} %per la prima pagina
+\newcommand{\qedblack}{\hfill $\blacksquare$}
+\newcommand{\ol}{\overline}
+\newcommand{\ul}{\underline}
+
+\renewcommand{\phi}{\varphi}
+\renewcommand{\S}{\mathcal{S}}
+\renewcommand{\P}{\mathbb{P}}
+
+
+%%%% INIZIO COMANDI PER EQUIVALENZE %%%%
+\newcommand{\Implies}[2]{$\text{\ref{statement#1}}\!\implies\!\text{\ref{statement#2}}$}% X => Y
+\newcommand{\punto}[1]{\item \label{statement#1}}
+
+
+\newenvironment{equivalence}
+    {\begin{enumerate}[label=(\arabic*),ref=(\arabic*)]
+    }
+    { 
+	\end{enumerate}
+    }
+%%%% FINE COMANDI PER EQUIVALENZE %%%
+
+
+
+% Interlinea 1.5
+%\onehalfspacing  
+
+
+%per le citazioni
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+  \hbox{}\nobreak\hfil(#1)%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+
+\newsavebox\mybox
+\newenvironment{aquote}[1]
+  {\savebox\mybox{#1}\begin{quote}}
+  {\signed{\usebox\mybox}\end{quote}}
+
+%disabilita colore link
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
+
+\begin{document}
+
+\noindent Andrea Gadotti \hfill 01/12/2014
+
+\paragraph{Exercise 44.} \ \\
+(a)$\imp$(b): Let $\p$ be the unique prime ideal of $R$. Since every ring has a maximal ideal, and every maximal ideal is prime, $\p$ must be that maximal ideal. Thus $R/\p$ is a field. So, for any $x \in R \sm \p$, we must have $[x][y]=[1]$ for some $[y] \in R/\p$, which means that $xy \in 1+\p$. Furthermore, $\p=\sqrt{0}$, since $\sqrt{0}$ is the intersection of all the prime ideals, and $\p$ is the only one. This means that $xy=1+z$ where $z$ is nilpotent. By the fourth remark after the definition of $\J(R)$ we know that
+\[
+\J(R)=\{x \in R \mid 1+Rx \sse R^\times\}.
+\]
+But we know (immediate by definitions) that $\sqrt{0} \sse \J(R)$, so it must be true that $1+Rz \sse R^\times$, thus $1+z \in R^\times$. Therefore $xy$ is invertible, which implies that $x$ is invertible ($y(y^{-1}x^{-1})$ is the inverse of $x$).\\
+(b)$\imp$(a): Suppose that every element is either a unit or nilpotent. Consider $\sqrt{0}$. $\sqrt{0}$ is maximal, since every element in $R \sm \sqrt{0}$ is a unit (and thus generates the whole ring $R$). Hence $\sqrt{0}$ is prime as well. But $\sqrt{0}$ is the intersection of all the prime ideals of $R$, and since it is maximal it must be the unique prime ideal of $R$.
+
+\paragraph{Exercise 45.}
+\begin{enumerate}
+\item We know by the second remark after the definition of artinian rings that in artinian rings every prime ideal is maximal. Thus $\J(R)=\sqrt{0}$ trivially by definition.
+\item Let $\Omega:=\{\mathfrak{m}_1 \cap ... \cap \mathfrak{m}_n \mid n \in \N, \mathfrak{m}_i \in \max(R)\}$. $\Omega \neq \emptyset$, since every ring has a maximal ideal. But we know by theory that a ring is artinian iff every non-empty family of ideals contains a minimal element\footnote{Proof: immediate by Zorn's lemma, ordering the family by reverse inclusion.}. Hence there exists $\mathfrak{m}_1 \cap ... \cap \mathfrak{m}_n \in \Omega$ which is minimal. Now take any maximal ideal $\mathfrak{m}$. By minimality we must have $\mathfrak{m} \cap \mathfrak{m}_1 \cap ... \cap \mathfrak{m}_n = \mathfrak{m}_1 \cap ... \cap \mathfrak{m}_n$, and therefore $\mathfrak{m}_1 \cap ... \cap \mathfrak{m}_n \sse \mathfrak{m}$. Since $\mathfrak{m}$ is prime as well, by Theorem 3.4 we obtain $\mathfrak{m}_i \sse \mathfrak{m}$ for some $i=1..n$. Since $\mathfrak{m}_i$ is maximal, this means $\mathfrak{m}_i=\mathfrak{m}$. Hence the $\mathfrak{m}_i$'s are the only maximal ideals of $R$.
+\end{enumerate}
+
+
+
+
+
+
+\end{document}
