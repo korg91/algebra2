@@ -1,0 +1,182 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage[utf8]{inputenc}
+\usepackage{longtable}
+\usepackage{amsthm}
+\usepackage{amscd}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage[hyphens]{url}
+\usepackage[scale=3]{ccicons}  % per le icone creative commons
+\usepackage{hyperref}  % per i link nel pdf
+\usepackage[rmargin=3.0cm,lmargin=3.0cm]{geometry}
+%\usepackage{frontesp}  % prima pagina; il pacchetto frontesp.sty si trova nella stessa cartella del file .tex (deve essere adattato a mano)
+\usepackage{setspace}  % per l'interlinea
+\usepackage[english]{babel}  % per sillabazione
+\usepackage[all]{xy} %diagrammi di funzioni
+\usepackage{xspace} %per assicurare la corretta gestione degli spazi finali quando uso e.g. \AC. NB: sarebbe meglio trovare un'altra soluzione...cfr. http://tex.stackexchange.com/questions/15220/no-space-present-after-ensuremath
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[chapter] % resetta la numerazione dei teoremi per ogni capitolo
+\newtheorem{corollary}[theorem]{Corollary} % la numerazione delle definizioni dipende da quella dei teoremi
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem*{addendum}{Addendum}
+\newtheorem*{remark}{Remark}
+
+%%% inizio comandi per stile per teoremi: "numero. Titolo" %%%
+\newtheoremstyle{num.custom-title}
+  {\topsep}   % ABOVESPACE
+  {\topsep}   % BELOWSPACE
+  {\normalfont}  % BODYFONT
+  {0pt}       % INDENT (empty value is the same as 0pt)
+  {\bfseries} % HEADFONT
+  {}         % HEADPUNCT
+  {5pt plus 1pt minus 1pt} % HEADSPACE
+  {\thmnumber{#2.}\thmnote{ #3}}
+  
+\theoremstyle{num.custom-title}  
+\newtheorem{teo_custom-title}[theorem]{} % per usarlo basta \begin{teo_custom-title}[<Titolo teorema>] (usa automaticamente la numerazione di [teo])
+%%% fine comandi per stile per teoremi: "numero. Titolo" %%%
+
+\newenvironment{claim}[1]{\par\noindent\underline{Claim#1:}\space}{} %per i claim
+\newenvironment{claimproof}[1]{\par\noindent\underline{Proof:}\space#1}{\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill\quad\hbox{$\blacksquare$}} %per le dimostrazioni dei claim
+
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\orb}{orb}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\tor}{tor}
+\DeclareMathOperator{\Zdv}{Zdv}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\A}{\mathcal{A}}
+\DeclareMathOperator{\B}{\mathcal{B}}
+\DeclareMathOperator{\PP}{\mathcal{P}}
+\DeclareMathOperator{\LL}{\mathcal{L}}
+\DeclareMathOperator{\Hrtg}{\text{Hrtg}}
+\DeclareMathOperator{\Ord}{\text{Ord}}
+\DeclareMathOperator{\J}{\mathcal{J}}
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\M}{\mathfrak{M}}
+\DeclareMathOperator{\U}{\mathfrak{U}}
+\DeclareMathOperator{\PPP}{\mathbb{P}}
+\DeclareMathOperator{\p}{\mathfrak{p}}
+\DeclareMathOperator{\V}{\mathcal{V}}
+\DeclareMathOperator{\a01}{\{0,1\}^{\star}}
+\DeclareMathOperator{\imp}{\Rightarrow}
+\DeclareMathOperator{\sm}{\setminus}
+\DeclareMathOperator{\sse}{\subseteq}
+\DeclareMathOperator{\Spec}{Spec}
+
+
+\newcommand{\AC}{\ensuremath{\mathsf{AC}}\xspace}
+\newcommand{\CC}{\ensuremath{\mathsf{CC}}\xspace}
+\newcommand{\DC}{\ensuremath{\mathsf{DC}}\xspace}
+\newcommand{\ZF}{\ensuremath{\mathsf{ZF}}\xspace}
+\newcommand{\ZFC}{\ensuremath{\mathsf{ZFC}}\xspace}
+\newcommand{\LS}{\ensuremath{\mathsf{LS}}\xspace}
+\newcommand{\AMC}{\ensuremath{\mathsf{AMC}}\xspace}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} %per la prima pagina
+\newcommand{\qedblack}{\hfill $\blacksquare$}
+\newcommand{\ol}{\overline}
+\newcommand{\ul}{\underline}
+\newcommand{\q}{\mathsf{q}}
+
+\renewcommand{\phi}{\varphi}
+\renewcommand{\S}{\mathcal{S}}
+\renewcommand{\P}{\mathbb{P}}
+
+
+%%%% INIZIO COMANDI PER EQUIVALENZE %%%%
+\newcommand{\Implies}[2]{$\text{\ref{statement#1}}\!\implies\!\text{\ref{statement#2}}$}% X => Y
+\newcommand{\punto}[1]{\item \label{statement#1}}
+
+
+\newenvironment{equivalence}
+    {\begin{enumerate}[label=(\arabic*),ref=(\arabic*)]
+    }
+    { 
+	\end{enumerate}
+    }
+%%%% FINE COMANDI PER EQUIVALENZE %%%
+
+
+
+% Interlinea 1.5
+%\onehalfspacing  
+
+
+%per le citazioni
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+  \hbox{}\nobreak\hfil(#1)%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+
+\newsavebox\mybox
+\newenvironment{aquote}[1]
+  {\savebox\mybox{#1}\begin{quote}}
+  {\signed{\usebox\mybox}\end{quote}}
+
+%disabilita colore link
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
+
+\begin{document}
+
+\noindent Andrea Gadotti \hfill 08/12/2014
+
+\paragraph{Exercise 53.} Let $R$ be a UFD. Consider $x=c^{-1}b \in \q(R)$. Suppose that there exists a polynomial of $R[X]$ which has $x$ as a solution. This means
+\[
+x^n+a_{n-1}x^{n-1}+ ... +a_0=0
+\]
+for some $a_0,...,a_{n-1}\in R$. Since $R$ is a UFD, we can suppose that $b,c$ have no non-unit common divisor. Multiply the above equation by $c^n$ to get
+\[
+b^n+a_{n-1}cb^{n-1}+ ... +a_0b^n=0
+\]
+i.e.
+\[
+b^n= -a_{n-1}cb^{n-1}- ... -a_0b^n
+\]
+Let now $d$ be an irreducible divisor of $c$. Then $d$ is prime since $R$ is a UFD. Now, $d|b^n$ since it divides the member on the right and thus (since $d$ is prime) $d|b$. But $b, c$ have no non-unit common divisors, so $d$ must be a unit. Thus $c$ is a unit as well and hence $x \in R$, as wanted.
+
+\paragraph{Exercise 55.} We follow the hint: let $R_1=K[X]$. So $K[X,Y]=R_1[Y]$. Observe that, since $K$ is a field, $K[X]$ is a PID, and thus a UFD. Thanks to Exercise 53, we have that $R_1=K[X]$ is integrally closed. 
+%Furthermore, if $f$ and $g$ are relatively prime in $K[X,Y]$ they must obviously (``even more'') be relatively prime in $R_1[Y]$ as well (that is, they are relatively prime if seen as polynomials over $R_1$ with variable $Y$). MI SA CHE NON SERVE A UN CAZZO STA PRECISAZIONE...LA NOZIONE DI DEFINIBILITÀ È ESATTAMENTE LA STESSA, NON DIPENDE DA COME GUARDO K[X,Y] (se lo guardo come anello dei polinomi in due variabili o come "1 variabile + 1 variabile")
+Thus we satisfy the hypothesis of Exercise 54, and so there exist $p,q \in R_1[Y]$ s.t. $pf+qg=a \in R_1=K[X]$. Now suppose $(\alpha,\beta) \in \V_{\ol{K}}(f) \cap \V_{\ol{K}}(g)$. This implies
+\[
+0=p(\alpha)f(\alpha)+q(\alpha)g(\alpha)=a(\alpha),
+\]
+i.e. $\alpha$ must be a zero of $a$. By the Foundamental Theorem of Algebra, this means that we have only finitely many choices for $\alpha$.\\
+The same argument works defining $R_2=K[Y]$ and considering $K[X,Y]=R_2[X]$. Hence there are only finitely many choices for $\beta$ as well, whereby there are only finitely many choices for $(\alpha,\beta)$.
+
+
+\paragraph{Exercise 56.} First, observe that we can see $R/(Q \cap R)$ as a subring of $S/Q$ because
+\[
+\phi: R \to S/Q, \quad r \mapsto r+Q
+\]
+is a homomorphism and $\ker \phi = Q \cap R$. Now, let $x+Q \in S/Q$. Since $x \in S$, by hypothesis there exist $a_0,...,a_{n-1} \in R$ s.t.
+\[
+x^n + a_{n-1}x^{n-1}+ ... + a_0 = 0.
+\]
+We trivially have (in $S/Q$)
+\[
+(x+Q)^n + (a_{n-1} + Q)(x+Q)^{n-1} + ... + (a_0 + Q) = 0+Q,
+\]
+so
+\[
+X^n + (a_{n-1} + Q)X^{n-1} + ... + (a_0 + Q)
+\]
+is a polinomial in $S/Q[X]$ which has $x$ as a zero. But since $a_0,...,a_{n-1} \in R$, we have that $a_0+Q,...,a_{n-1}+Q \in \phi[R]$, i.e. we can see them as elements of $R/(Q \cap R)$, which means that the polynomial is actually in $R/(Q \cap R)[X]$.
+\end{document}
