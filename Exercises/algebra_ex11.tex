@@ -1,0 +1,303 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage[utf8]{inputenc}
+\usepackage{longtable}
+\usepackage{amsthm}
+\usepackage{amscd}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage[hyphens]{url}
+\usepackage[scale=3]{ccicons}  % per le icone creative commons
+\usepackage{hyperref}  % per i link nel pdf
+\usepackage[rmargin=3.0cm,lmargin=3.0cm]{geometry}
+%\usepackage{frontesp}  % prima pagina; il pacchetto frontesp.sty si trova nella stessa cartella del file .tex (deve essere adattato a mano)
+\usepackage{setspace}  % per l'interlinea
+\usepackage[english]{babel}  % per sillabazione
+\usepackage[all]{xy} %diagrammi di funzioni
+\usepackage{xspace} %per assicurare la corretta gestione degli spazi finali quando uso e.g. \AC. NB: sarebbe meglio trovare un'altra soluzione...cfr. http://tex.stackexchange.com/questions/15220/no-space-present-after-ensuremath
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[chapter] % resetta la numerazione dei teoremi per ogni capitolo
+\newtheorem{corollary}[theorem]{Corollary} % la numerazione delle definizioni dipende da quella dei teoremi
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem*{addendum}{Addendum}
+\newtheorem*{remark}{Remark}
+
+%%% inizio comandi per stile per teoremi: "numero. Titolo" %%%
+\newtheoremstyle{num.custom-title}
+  {\topsep}   % ABOVESPACE
+  {\topsep}   % BELOWSPACE
+  {\normalfont}  % BODYFONT
+  {0pt}       % INDENT (empty value is the same as 0pt)
+  {\bfseries} % HEADFONT
+  {}         % HEADPUNCT
+  {5pt plus 1pt minus 1pt} % HEADSPACE
+  {\thmnumber{#2.}\thmnote{ #3}}
+  
+\theoremstyle{num.custom-title}  
+\newtheorem{teo_custom-title}[theorem]{} % per usarlo basta \begin{teo_custom-title}[<Titolo teorema>] (usa automaticamente la numerazione di [teo])
+%%% fine comandi per stile per teoremi: "numero. Titolo" %%%
+
+\newenvironment{claim}[1]{\par\noindent\underline{Claim#1:}\space}{} %per i claim
+\newenvironment{claimproof}[1]{\par\noindent\underline{Proof:}\space#1}{\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill\quad\hbox{$\blacksquare$}} %per le dimostrazioni dei claim
+
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\orb}{orb}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\tor}{tor}
+\DeclareMathOperator{\Zdv}{Zdv}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\A}{\mathcal{A}}
+\DeclareMathOperator{\B}{\mathcal{B}}
+\DeclareMathOperator{\PP}{\mathcal{P}}
+\DeclareMathOperator{\LL}{\mathcal{L}}
+\DeclareMathOperator{\Hrtg}{\text{Hrtg}}
+\DeclareMathOperator{\Ord}{\text{Ord}}
+\DeclareMathOperator{\J}{\mathcal{J}}
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\M}{\mathfrak{M}}
+\DeclareMathOperator{\U}{\mathfrak{U}}
+\DeclareMathOperator{\PPP}{\mathbb{P}}
+\DeclareMathOperator{\p}{\mathfrak{p}}
+\DeclareMathOperator{\V}{\mathcal{V}}
+\DeclareMathOperator{\a01}{\{0,1\}^{\star}}
+\DeclareMathOperator{\imp}{\Rightarrow}
+\DeclareMathOperator{\sm}{\setminus}
+\DeclareMathOperator{\sse}{\subseteq}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\supp}{supp}
+
+
+\newcommand{\AC}{\ensuremath{\mathsf{AC}}\xspace}
+\newcommand{\CC}{\ensuremath{\mathsf{CC}}\xspace}
+\newcommand{\DC}{\ensuremath{\mathsf{DC}}\xspace}
+\newcommand{\ZF}{\ensuremath{\mathsf{ZF}}\xspace}
+\newcommand{\ZFC}{\ensuremath{\mathsf{ZFC}}\xspace}
+\newcommand{\LS}{\ensuremath{\mathsf{LS}}\xspace}
+\newcommand{\AMC}{\ensuremath{\mathsf{AMC}}\xspace}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} %per la prima pagina
+\newcommand{\qedblack}{\hfill $\blacksquare$}
+\newcommand{\ol}{\overline}
+\newcommand{\ul}{\underline}
+\newcommand{\q}{\mathsf{q}}
+
+\renewcommand{\phi}{\varphi}
+\renewcommand{\S}{\mathcal{S}}
+\renewcommand{\P}{\mathbb{P}}
+
+
+%%%% INIZIO COMANDI PER EQUIVALENZE %%%%
+\newcommand{\Implies}[2]{$\text{\ref{statement#1}}\!\implies\!\text{\ref{statement#2}}$}% X => Y
+\newcommand{\punto}[1]{\item \label{statement#1}}
+
+
+\newenvironment{equivalence}
+    {\begin{enumerate}[label=(\arabic*),ref=(\arabic*)]
+    }
+    { 
+	\end{enumerate}
+    }
+%%%% FINE COMANDI PER EQUIVALENZE %%%
+
+
+
+% Interlinea 1.5
+%\onehalfspacing  
+
+
+%per le citazioni
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+  \hbox{}\nobreak\hfil(#1)%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+
+\newsavebox\mybox
+\newenvironment{aquote}[1]
+  {\savebox\mybox{#1}\begin{quote}}
+  {\signed{\usebox\mybox}\end{quote}}
+
+%disabilita colore link
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
+
+\begin{document}
+
+\noindent Andrea Gadotti \hfill 12/01/2015
+
+\paragraph{Exercise 63.} Let $L/K$ be an algebraic function field, $x \in L$ transcendent over $K$, $[L:K(x)] = n<\infty$ and $y \in L$ with $L=K(x,y)$. Then:
+\begin{enumerate}
+\item There exists an irreducible polynomial $f \in K[X,Y] \sm K$, uniquely determined up to factors from $K^\times$, such that $f(x,y)=0$.
+\item Let $\ol{K}$ be an algebraic closure of $K$, $C = \V_{\ol{K}} \sse \ol{K}^2$ the associated curve, and $x_C,y_C \in K(C)$ the coordinate function of $C$. Then there is a unique $K$-isomorphism $\Phi : L \to K(C)$ with $\Phi(x)=x_C$ and $\Phi(y)=y_C$.
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item Since $L=K(x,y)$, we have $[K(x,y):K(x)]=n$, i.e. the minimal polynomial of $y$ over $K(x)$ has degree $n$. This means that there exists $g \in K(x)[Y]$ irreducible such that
+\[
+g(y) = a_n y^n + \ldots + a_0 = 0,
+\]
+where $a_0,...,a_n \in K(x)$. Let $m$ be the least common multiple of the denominators of $a_0,...,a_n$. By multiplying $g$ by $m$, we get $f(X,Y) \in K[X,Y] \sm K$ such that $f(x,y)=0$. Thus $(f) \sse \J(V)$. We want to show that the equality holds. Suppose to the contrary that there exists $f' \in K[X,Y] \sm K$ such that $f'(x,y)=0$. Then $f'(x,Y) \in K(x)[Y] \sm K$ is such that $f'(x,y)=0$, i.e. $y$ is a root of $f'(x,Y)$, and thus $f'|g$. But since $g$ is irreducible, this means $f'= a g$ for some $a \in K(x)$. Since $f' \in K[X,Y] \sm K$, by definition of $m$ we must have $m | a$, i.e. $f|f'$, which finally means $f' \in (f)$.
+\\
+\\
+So $\J(V)=(f)$. Since $V$ is a singleton, it is trivially irreducible (but we should show that it is a variety!!!). Thus, by Exercise 51, $\J(V)$ is a prime ideal. Therefore $f$ is irreducible, and of course it is uniquely determined up to a constant of $K^\times$.
+\item First, observe that if such a $K$-isomorphism exists, then it is trivially unique, since $L=K(x,y)$ and thus every $K$-homomorphism is uniquely determined by its behaviour on $x$ and $y$ (should be explained better).\\
+Now consider
+\begin{align*}
+\phi : K[X,Y] & \to K[x,y] \\
+X & \mapsto x \\
+Y & \mapsto y.
+\end{align*}
+$\phi$ is obviously a well defined $K$-homomorphism. It is also trivially surjective. Now observe that
+\[
+h \in \ker \phi \iff h(x,y)=0 \iff h \in \J(\{(x,y)\})=\J(V),
+\]
+i.e. $\ker \phi = \J(V)$. So $K[x,y] \simeq K[X,Y]/\J(V)$. But 
+\[
+\J(C)=\J(\V_{\ol{K}}(f))=\sqrt{(f)}=(f)=\J(V)
+\]
+and thus $K[x,y] \simeq K[X,Y]/\J(C) =: K[C]$, whereby easily follows $K(x,y) \simeq K(C)$.\\
+Finally, it's easy to show that the isomorphism between $K(x,y)$ and $K(C)$ inducted by $\phi$ is precisely $\Phi$.
+\end{enumerate}
+\end{proof}
+
+\paragraph{Exercise 64.} \ 
+\begin{enumerate}
+\item We already know that $(R[H],+)$ is an abelian group. The associativity of $\cdot$ follows easily by the one of $R$'s multiplication. It is also clear that $\cdot$ is commutative. Also the distributivity is immediate. We only have to check that $X^0$ is the unit element:
+\[
+(f \cdot X^h)(z) = \sum_{\substack{(x,y) \in H \times H \\ x+y=z}} f(x) X^0(y) = \sum_{\substack{(x,0) \in H \times \{0\} \\ x=z}} f(x) = f(z).
+\]
+As for $\theta : R \to R[H]$, it's easy to show that it's a ring homomorphism. It is also injective since
+\[
+\theta(a) \equiv 0 \imp \theta(a)(0_H) = 0_R \imp a = 0_R.
+\]
+As for the map $h \mapsto X^h$, observe that
+\[
+(X^h \cdot X^k)(z) = \sum_{\substack{(x,y) \in H \times H \\ x+y=z}} X^h(x) X^k(y) =
+\begin{cases}
+1_R, \quad \text{if } z=h+k, \\
+0_R, \quad \text{otherwise,}
+\end{cases}
+\]
+i.e. $X^h \cdot X^k = X^{h+k}$. So $h \mapsto X^h$ is a semigroup homomorphism. The injectivity is trivial.
+\item We have
+\[
+f = \sum_{h \in \supp(f)} f(h) X^h,
+\]
+thus, defining $a_h := f(h)$ for all $h \in H$ and recalling that $|\supp(f)| < \aleph_0$, follows that every $f \in R[H]$ has a representation like the one in the statement. It is trivially unique.
+\item The statement about the sum is trivial. The statement about the product is trivial by definition of $X^h$ and $f \cdot g$, since $a_x = f(x)$ and $g(y) = b_y$.
+\end{enumerate}
+
+\paragraph{Exercise 65.} Let $f \in R[G]$ be
+\[
+f = \prod_{i=1}^l (X^{g_i} - a_i),
+\]
+where by $a_i$ we actually mean $\theta(a_i)$.\\
+ We have already proved that $(R[H],+,\cdot)$ is a commutative ring (with unit element $X^0$), and that $X^h \cdot X^k = X^{h+k}$. So we can write $f$ as
+\[
+f= X^{\sum_{g \in S} g} + \ldots + \prod_{i=1}^l a_i = X^{\sum_{g \in S} g} + \ldots + X^0 \cdot \prod_{i=1}^l a_i.
+\]
+Let's evaluate the last expression in $0_H$. By the last line of the first point of Exercise 64, we have
+\[
+\left( X^0 \cdot \prod_{i=1}^l a_i \right) (0_H) = \prod_{i=1}^l a_i.
+\]
+Furthermore, all the other terms are $0_R$ when evaluated in $0_H$, because in all the other terms there is a term of the form $X^{\sum_{g \in I} g}$ for some $I \sse S$, which is necessarily $\neq X^0$ because $S$ is zero-sum free, and so they all are $0_R$ when evaluated in $0_H$.\\
+Therefore $f(0)= \prod_{i=1}^l a_i \neq 0$ since $R$ is a domain, and thus $f \neq 0$.
+
+
+\paragraph{Exercise 66.}
+\begin{enumerate}
+\item By the same argument of Exercise 7 it follows that $2$ is irreducible (since, if $d<-2$, then $a^2-db^2 \neq 2$ for all $a,b \in \Z$).\\
+In order to show that $2$ is not prime, we consider two different cases:
+\begin{itemize}
+\item If $d$ is even: then $2 \mid -d = -\sqrt{d}\sqrt{d}$, but $2$ does not divide any of the two factors.
+\item If $d$ is odd: then $2 \mid 1-d = (1+\sqrt{d})(1-\sqrt{d})$, but $2$ does not divide any of the two factors.
+\end{itemize}
+\item ``$\imp$'': If $x \in K_d^\circ$, then $x=\frac{y}{z}$ with $y,z \in R_d$. Let $q,r$ be the quotient and the rest of $y$ divided by $z$. We have
+\[
+|N_{K_d/\Q}(x-q)| = \Big| N_{K_d/\Q} \left( \frac{y}{z}-q \right) \Big| = \frac{|N_{K_d/\Q}(y-zq)|}{|N_{K_d/\Q}(z)|} = \frac{|N_{K_d/\Q}(r)|}{|N_{K_d/\Q}(z)|} <1.
+\]
+``$\Leftarrow$'': Let $y,z \in R_d$. Then $x := \frac{y}{z} \in K_d$. Let $q \in R_d$ be such that $|N_{K_d/\Q}(x-q)|<1$. Then we obtain (same computations of above):
+\[
+\frac{|N_{K_d/\Q}(y-zq)|}{|N_{K_d/\Q}(z)|} <1.
+\]
+By defining $r:=y-zq$ we have $y=zq+r$ with $|N_{K_d/\Q}(r)|<|N_{K_d/\Q}(z)|$, as wanted.
+\item Consider the basis $\mathbf{u} = \big( (1,0),(0,\sqrt{d}) \big)$ for $K_d$ over $\Q$. Let $\alpha = a+b\sqrt{d} \in K_d$, i.e. $a,b \in \Q$. Then $\mu_\alpha : K_d \to K_d$ given by $\mu_\alpha(\beta)=\alpha\beta$ is such that
+\[
+\mathcal M_{\mathbf{u},\mathbf{u}}(\mu_\alpha) = 
+\begin{pmatrix}
+a & bd \\
+b & a
+\end{pmatrix},
+\]
+and so
+$N_{K_d/\Q}(\alpha) = \det(\mu_\alpha) = a^2 - db^2$. \\
+Now, in order to prove that $R_d$ is an Euclidean ring it is sufficient to show that for any $\alpha \in K_d$ there exists $q = q_1 + q_2\sqrt{d} \in R_d$ such that
+\[
+1> |N_{K_d/\Q}(\alpha-q)| = |(a-q_1)^2 - d (b-q_2)^2|.
+\]
+Let's define $q_1$ and $q_2$ as follows:
+\[
+q_1 :=
+\begin{cases}
+\lfloor a \rfloor & \text{if } 0 \leq a - \lfloor a \rfloor < \frac{1}{2}, \\
+\lceil a \rceil & \text{if } -\frac{1}{2} < a - \lceil a \rceil \leq 0,
+\end{cases}
+\quad \text{and} \quad
+q_2 :=
+\begin{cases}
+\lfloor b \rfloor & \text{if } 0 \leq b - \lfloor b \rfloor < \frac{1}{2}, \\
+\lceil b \rceil & \text{if } -\frac{1}{2} < b - \lceil b \rceil \leq 0.
+\end{cases}
+\]
+Of course $q_1$ and $q_2$ are well-defined and are such that $a-q_1 < $ and $b-q_2 < 1/2$. Before the conclusion, we introduce the following notation:\\
+\textbf{Notation:} Given $r_1,r_2,s_1,s_2,t \in \Q$, we define $[r_1,r_2]+t[s_1,s_2] := \{h = r +ts \mid r \in [r_1,r_2], s \in [s_1,s_2]\}$.
+
+So $q_1$ and $q_2$ are such that $(a-q_1)^2 \in [0,1/4]$ and $(b-q_2)^2 \in [0,1/4]$. Now:
+\begin{itemize}
+\item $d=-1$. We have $|(a-q_1)^2+(b-q_2)^2| < 1$, since $[0,1/4]+[0,1/4] = [0,1/2] \sse (-1,1)$.
+\item $d=-2$. We have $|(a-q_1)^2+2(b-q_2)^2| < 1$, since $[0,1/4]+2[0,1/4] = [0,3/4] \sse (-1,1)$.
+\item $d=2$. We have $|(a-q_1)^2-2(b-q_2)^2| < 1$, since $[0,1/4]-2[0,1/4] = [-1/2,1/4] \sse (-1,1)$.
+\item $d=3$. We have $|(a-q_1)^2-3(b-q_2)^2| < 1$, since $[0,1/4]-3[0,1/4] = [-3/4,1/4] \sse (-1,1)$.
+\end{itemize}
+
+\end{enumerate}
+
+\paragraph{Exercise 68}
+\begin{enumerate}
+\item We must show that $\phi$ is a $K$-vector space iff $\phi_{|_K} = \id_K$.\\
+``$\imp$'' Let $\lambda \in K$. Then $\phi(\lambda) = \phi(\lambda 1_L) = \lambda \phi(1_L) = \lambda 1_{L'} = \lambda$.\\
+``$\Leftarrow$'' Let $\lambda,\mu \in K$ and $u,v \in L$. Then $\phi(\lambda u + \mu v) = \phi(\lambda) \phi(u) + \phi(\mu) \phi(v) = \lambda \phi(u) + \mu \phi(v)$.
+\item By first point, the element of $\text{Gal}(L/K)$ are precisely the $K$-vector space endomorphisms of $L$, and it is well known that they form a group under composition.
+\item Trivial.
+\item If $L/K$ is of finite degree, then $L$ is a finite-dimension $K$-vector space, and thus (by the first point and by Rank-Nullity Theorem) an injective $K$-endomomorphism must be also surjective, i.e. it is an isomorphism.\\
+If $L/K$ is not of finite degree (which is possible!), then I don't know (and I even guess it's not true).
+\end{enumerate}
+
+\paragraph{Exercise 69.} Consider the following collection:
+\[
+\Omega := \{ N \subsetneq M \mid N \text{ subm. and } N \text{ is not a finite intersection of irreducible submodules}\}.
+\]
+Suppose towards a contradiction that $\Omega \neq \emptyset$. Then $\Omega$ has a maximal element $Q$, since $M$ is noetherian (because it's finitely generated over a noetherian ring).\\
+Of course $Q$ is not irreducible. This means that there exist $N_1,N_2$ such that $Q=N_1 \cap N_2$ with $Q \neq N_1$ and $Q \neq N_2$, i.e. $Q \subsetneq N_1,N_2 \neq M$. By maximality of $Q$, this means that $N_1$ and $N_2$ can be written as a finite intersection of irreducible submodules, and thus $Q$ as well, contradiction.
+
+
+
+
+
+
+
+\end{document}
