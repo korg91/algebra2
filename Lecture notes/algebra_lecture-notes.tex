@@ -1,0 +1,2435 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage[utf8]{inputenc}
+\usepackage{longtable}
+\usepackage{amsthm}
+\usepackage{amscd}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage[hyphens]{url}
+\usepackage[scale=3]{ccicons}  % per le icone creative commons
+\usepackage{hyperref}  % per i link nel pdf
+\usepackage[rmargin=3.0cm,lmargin=3.0cm]{geometry}
+%\usepackage{frontesp}  % prima pagina; il pacchetto frontesp.sty si trova nella stessa cartella del file .tex (deve essere adattato a mano)
+\usepackage{setspace}  % per l'interlinea
+\usepackage[english]{babel}  % per sillabazione
+\usepackage[all]{xy} %diagrammi di funzioni
+\usepackage{xspace} %per assicurare la corretta gestione degli spazi finali quando uso e.g. \AC. NB: sarebbe meglio trovare un'altra soluzione...cfr. http://tex.stackexchange.com/questions/15220/no-space-present-after-ensuremath
+\usepackage{stmaryrd}
+\usepackage{xfrac}
+\usepackage{tikz-cd}
+\usetikzlibrary{matrix,positioning,decorations.pathreplacing}
+\usepackage{graphicx}
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[chapter] % resetta la numerazione dei teoremi per ogni capitolo
+\newtheorem{corollary}[theorem]{Corollary} % la numerazione delle definizioni dipende da quella dei teoremi
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{Remark}[theorem]{Remark}
+\newtheorem*{addendum}{Addendum}
+\newtheorem*{examples}{Examples}
+\newtheorem*{remark}{Remark}
+\newtheorem*{remex}{Remarks and Examples}
+
+%%% inizio comandi per stile per teoremi: "numero. Titolo" %%%
+\newtheoremstyle{num.custom-title}
+  {\topsep}   % ABOVESPACE
+  {\topsep}   % BELOWSPACE
+  {\normalfont}  % BODYFONT
+  {0pt}       % INDENT (empty value is the same as 0pt)
+  {\bfseries} % HEADFONT
+  {}         % HEADPUNCT
+  {5pt plus 1pt minus 1pt} % HEADSPACE
+  {\thmnumber{#2.}\thmnote{ #3}}
+  
+\theoremstyle{num.custom-title}  
+\newtheorem{teo_custom-title}[theorem]{} % per usarlo basta \begin{teo_custom-title}[<Titolo teorema>] (usa automaticamente la numerazione di [teo])
+%%% fine comandi per stile per teoremi: "numero. Titolo" %%%
+
+\newenvironment{claim}[1]{\par\noindent\underline{Claim#1:}\space}{} %per i claim
+\newenvironment{claimproof}[1]{\par\noindent\underline{Proof:}\space#1}{\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill\quad\hbox{$\blacksquare$}} %per le dimostrazioni dei claim
+
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\orb}{orb}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\tor}{tor}
+\let\o\relax % elimina \o dai comandi già definiti
+\DeclareMathOperator{\o}{\mathsf{o}}
+\let\Im\relax % elimina \o dai comandi già definiti
+\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\Zdv}{Zdv}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\A}{\mathcal{A}}
+\DeclareMathOperator{\B}{\mathcal{B}}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\PP}{\mathcal{P}}
+\DeclareMathOperator{\LL}{\mathcal{L}}
+\DeclareMathOperator{\Hrtg}{\text{Hrtg}}
+\DeclareMathOperator{\Ord}{\text{Ord}}
+\DeclareMathOperator{\J}{\mathcal{J}}
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\U}{\mathfrak{U}}
+\DeclareMathOperator{\PPP}{\mathbb{P}}
+\DeclareMathOperator{\V}{\mathcal{V}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\a01}{\{0,1\}^{\star}}
+\DeclareMathOperator{\imp}{\Rightarrow}
+\DeclareMathOperator{\pmi}{\Leftarrow}
+\DeclareMathOperator{\Pic}{Pic}
+\DeclareMathOperator{\sm}{\setminus}
+\DeclareMathOperator{\sse}{\subseteq}
+\DeclareMathOperator{\cl}{cl}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\q}{\mathsf{q}}
+\DeclareMathOperator{\h}{h}
+%\DeclareMathOperator{\gcd}{GCD}
+
+
+\newcommand{\AC}{\ensuremath{\mathsf{AC}}\xspace}
+\newcommand{\CC}{\ensuremath{\mathsf{CC}}\xspace}
+\newcommand{\DC}{\ensuremath{\mathsf{DC}}\xspace}
+\newcommand{\ZF}{\ensuremath{\mathsf{ZF}}\xspace}
+\newcommand{\ZFC}{\ensuremath{\mathsf{ZFC}}\xspace}
+\newcommand{\LS}{\ensuremath{\mathsf{LS}}\xspace}
+\newcommand{\AMC}{\ensuremath{\mathsf{AMC}}\xspace}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} %per la prima pagina
+\newcommand{\qedblack}{\hfill $\blacksquare$}
+\newcommand{\ol}{\overline}
+\newcommand{\ul}{\underline}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\p}{\mathfrak{p}}
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\IFF}{\Longleftrightarrow}
+
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\H}{\mathcal{H}}
+\renewcommand{\S}{\mathcal{S}}
+\renewcommand{\O}{\mathcal{O}}
+\renewcommand{\P}{\mathbb{P}}
+\renewcommand{\u}{\mathbf{u}}
+\renewcommand{\iff}{\Leftrightarrow}
+
+
+
+%%%% INIZIO COMANDI PER EQUIVALENZE %%%%
+\newcommand{\Implies}[2]{$\text{\ref{statement#1}}\!\implies\!\text{\ref{statement#2}}$}% X => Y
+\newcommand{\punto}[1]{\item \label{statement#1}}
+
+
+\newenvironment{equivalence}
+    {\begin{enumerate}[label=(\arabic*),ref=(\arabic*)]
+    }
+    { 
+	\end{enumerate}
+    }
+%%%% FINE COMANDI PER EQUIVALENZE %%%
+
+
+
+% Interlinea 1.5
+%\onehalfspacing  
+
+
+%per le citazioni
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+  \hbox{}\nobreak\hfil(#1)%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+
+\newsavebox\mybox
+\newenvironment{aquote}[1]
+  {\savebox\mybox{#1}\begin{quote}}
+  {\signed{\usebox\mybox}\end{quote}}
+
+%disabilita colore link
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
+
+\begin{document}
+
+\chapter{Ideals and Divisibility}
+
+Notation:\\
+\textbf{Semigroup:} commutative semigroup with unit element (i.e. non-empty set together with a binary, associative, commutative operation having a unit element).\\
+\textbf{Monoid:} semigroup satisfying the cancellation law (i.e. $\forall a,b,c \ (ab=ac \imp b=c)$).\\
+\textbf{Ring:} commutative ring with unit element.\\
+\\
+All the semigroup/ring homomorphisms respect the unit element.\\
+\\
+Let $M$ be a monoid. We define the following notions:\\
+$M^\times= \{x \in M \mid \exists y \in M \ (xy=1)\}$ is the \textbf{unit group} of $M$.\\
+$M$ is called \textbf{reduced} if $M^\times=\{1\}$. $M$ is a \textbf{group} if $M^\times=M$.\\
+A group $Q$ is called a \textbf{quotient group} for $M$ if $M \sse Q$ and $Q=\{ab^{-1} \mid a,b \in M\}$. Every monoid has a quotient group $q(M)$. Every multiplicatively closed subset of an abelian group is a monoid.\\
+\\
+Let $R$ be a ring. We define:\\
+$R^\times=\{x \in R \mid \exists y \in R \ (xy=1_R)\}$ is the \textbf{unit group} of $R$.\\
+$R^\circ=R \sm \{0\}$.\\
+$\Zdv(R)=\{x \in R \mid \exists y \in R^\circ (xy=0_R)\}$ is the set of \textbf{zero divisors} of $R$.
+We have:
+\begin{itemize}
+\item $R=\{0\} \IFF 0=1$.
+\item $0 \in \Zdv(R) \IFF R \neq \{0\}$.
+\item $R^\times \cap \Zdv(R) = \emptyset$ (if $a \in R^\times$ and $x \in R$, then $x=1 \cdot x = a^{-1} a x = a^{-1} 0 = 0$).
+\end{itemize}
+\ \\
+A subset $T \sse R$ is called \textbf{multiplicatively closed} if $1 \in T$ and $a,b \in T \imp ab \in T$.\\
+$R$ is called an \textbf{integral domain} (or just \textbf{domain}) if $\Zdv(R)=\{0\}$ ($\IFF R^\circ$ is multiplicatively closed $\IFF R^\circ \sse R$ is a semigroup (if this holds, then $R^\circ$ is a monoid)).\\
+$R$ is called a \textbf{field} if $R^\circ=R^\times$. Every subring of a field is a domain.\\
+A field $K$ is called a \textbf{quotient field} of $R$ if $R \sse K$ and $K=\{a b^{-1} \mid a,b \in R, b \neq 0\}$.\\
+It can be proved that every domain $R$ has a quotient field $\q(R)$ and that every finite domain is a field.\\
+\textbf{Algebraic number field:} field extension $K/Q$ of finite degree (i.e. there is an $\alpha \in K$ s.t. $K=Q(\alpha)$, $[K:Q]:=\dim_Q K = \deg($minimal polynomial of $\alpha$ over $Q)$.\\
+\\
+\textbf{Examples:}
+\begin{itemize}
+\item $a=\sqrt{d}, d \in \Z^\circ$ squarefree. $R=\Z[\sqrt{d}] \sse K=\Q(\alpha)$.
+\item $\alpha= \xi_n = e^{\frac{2\pi i}{n}}$. $R=\Z[\xi_n] \sse \Q(\xi_n)$.
+\end{itemize}
+
+
+\section{Divisibility}
+
+If $R$ is a domain, then $R^\circ$ is a monoid. We are going to define all the concepts of divisibility for monoids, and use them for domains.\\
+Let $M$ be a monoid and $a,b \in M$. We say that $a$ \textbf{divides} $b$, in symbols $a|b$, if $\exists c \in M (ac=b)$.\\
+Two elements are called \emph{associated} if $a|b$ and $b|a$ (equivalently, if $aM^\times := \{a\epsilon \mid \epsilon \in M^\times\} = bM^\times$; equivalently, if $b \in aM^\times$). Of course ``to be associated'' is an equivalence relation on $M$, and the equivalence class of an element $a$ is precisely $aM^\times$.\\
+An element $p \in M$ is called 
+\begin{itemize}
+\item \textbf{irreducible} (or \textbf{atom}) in $M$ if $p \not\in M^\times$ and $\forall a,b \in M (p=ab \imp a \in M^\times \vee b \in M^\times)$.
+\item \textbf{prime} in $M$ if $p \not\in H^\times$ and $\forall a,b \in M (p|ab \imp p|a \vee p|b)$.
+\end{itemize}
+$\A(M)$ is the \textbf{set of atoms}.\\
+It can be proved that every prime element is irreducible.
+
+\begin{examples} (we use the following notation: $\N=\{1,2,...\}$ and $\N_0 = \{0,1,2,...\}$.)
+\begin{itemize}
+\item $M=(N, \cdot)$
+\item $M(4\N_0+1, \cdot)$. Observe that $9 \in M$ is irreducible, but not prime, since $9|9 \cdot 49 = 21 \cdot 21$.
+\end{itemize}
+\end{examples}
+
+\noindent A monoid is called 
+\begin{itemize}
+\item \textbf{atomic} if every $a \in M \sm M^\times$ has a factorization into atoms (i.e. $\forall a \in M \sm M^\times \exists l \in \N \exists u_1,...,u_l \in \A(M)$ s.t. $a=u_1 \cdot ... \cdot u_l$). Observe that the factorization might not be unique.
+\item \emph{factorial}, if every $a \in M \sm M^\times$ has a factorization into primes.
+\end{itemize}
+
+Of course, every factorial monoid is atomic.
+
+\begin{addendum}
+Observe that, a priori, in a factorial monoid the factorization might not be unique. Nevertheless, the following holds (cfr. \cite{Bre2006}, p. 209):
+
+\textbf{Proposition.} Let $M$ be a monoid. The following conditions are equivalent:
+\begin{enumerate}
+\item $M$ is factorial.
+\item $M$ is atomic and every atom is prime.
+\item Every $a \in M \sm M^\times$ is a product of atoms, and this factorization is unique up to associates and order (cfr. Lemma \ref{prime_el_prop}).
+\end{enumerate}
+\end{addendum}
+
+\noindent A domain is called \emph{atomic} (resp. \emph{factorial}) if the monoid $(R^\circ,\cdot)$ is atomic (resp. factorial).
+
+\begin{examples}\ 
+\begin{enumerate}
+\item Fundamental Theorem of Arithmetic: $(\N,\cdot)$ is factorial (and $\Z$ is factorial).
+\item Every Euclidean domain\footnote{Recall the definition of \emph{Euclidean domain}: a ring $R$ is an Euclidean domain if there exists a map $\delta : R^\circ \to \N_0$ s.t. $\forall a,b \in R^\circ \, \exists q,r$ s.t. $a=bq+r$ and $r=0$ or $\delta(r) < \delta(b)$. Such a $\delta$ is called \emph{euclidean norm}, and it's not necessarily unique.} is factorial. The polynomial ring over a field in one indeterminate is Euclidean with $\delta:=\deg$.
+\item $M=(\N_0+1,\cdot)$ is not factorial, since $21 \cdot 21 = 9 \cdot 49$. (??? e allora? 21 e 9 mica sono primi...)
+\item $R=\Z[\sqrt{-5}]$ is not atomic, since $6 = 2 \cdot 3 = (1+\sqrt{-5}) \cdot (1-\sqrt{-5})$, and all the factors are irreducible and non-associated. (NOTA: aggiungere dimostrazione in appendice)
+\end{enumerate}
+\end{examples}
+
+\begin{defn}
+Let $M$ be a monoid and $A \sse M$ a subset.
+\begin{enumerate}
+\item An element $d \in M$ is called a \emph{greatest common divisor of $A$} if the following two conditions are satisfied:
+\begin{enumerate}
+\item[(i)] $d|a$ for all $a \in A$.
+\item[(ii)] If $e \in M$ and $e|a$ for all $a \in A$, then $e|d$.
+\end{enumerate}
+We define $\gcd_M (A)$ as the set of all greatest common divisors of $A$.
+\item $M$ is called a \emph{GCD-monoid} if $\gcd_M (A) \neq \emptyset$ for all $\emptyset \neq A \sse M$ finite. A domain $R$ is a \emph{GCD-domain} if $R^\circ$ is a GCD-monoid.
+\end{enumerate}
+\end{defn}
+
+\begin{examples}
+For any monoid, consider the set of prime elements. We are interested in a set $\P$ of representatives\footnote{Observe that, if the Axiom of Choice holds, such a set always exists.} for the equivalence relation of ``being associate'' on the set of primes.
+\begin{itemize}
+\item $H=(\Z^\circ,\cdot)$. Since $\Z^\times=\{-1,1\}$, a possible candidate for $\P$ is $\{2,3,5,7,...\}$. Of course also $\{2,-3,-5,7,11,-13,...\}$ works.
+\item $R=K[X]$ is factorial. It can be proved that $R^\times=K^\times$. We can define $\P$ as the set of irreducible polynomials with leading coefficient $1$.
+\end{itemize}
+\end{examples}
+
+\begin{lemma}\label{lemma_gcd-monoid}
+Let $M$ be a GCD-monoid. The following hold:
+\begin{enumerate}
+\item If $A \sse M$ and $d \in \gcd(A)$, then $\gcd(A)=dM^\times$.
+\item If $a,b,c \in M$ with $a|bc$, then $a=b'c'$ for some $b',c' \in M$ s.t. $b'|b$ and $c'|c$.
+\item If $a,b,c \in M$ with $a|bc$ and $\gcd(a,b)=M^\times$, then $a|c$.
+\item Every atom is prime.
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item To show ``$\sse$'', observe that if $d' \in \gcd(A)$, then $d|d'$ and $d'|d$, hence $d' \in dM^\times$. As for ``$\supseteq$'', let $u \in M^\times$. Observe that
+\begin{enumerate}
+\item[(i)] If $a \in A$, then $d|a$ and so $du|a$.
+\item[(ii)] If $e \in M$ with $e|a$ for all $a \in A$, then $e|d$ and thus $e|du$.
+\end{enumerate}
+Therefore $du \in \gcd(A)$.
+\item No proof. (???)
+\item By second point, we have $a=b'c'$ with $b'|b$ and $c'|c$. Then $b'$ divides both $a$ and $b$, whereby $b'|1$, i.e. $b'$ is a unit. Hence $a|c'|c$.
+\item Let $p$ be an atom and $b,c \in M$ with $p|bc$. Second point implies that $p=b'c'$ with $b'|b$ and $c'|c$. We can assume WLOG that $b'$ is a unit (??? perché? devo stare attento alla condizione $c'|c$ !!!), whereby $p|c$.
+\end{enumerate}
+\end{proof}
+\end{lemma}
+
+Let's denote with ``$\simeq$'' the equivalence relation of ``being associate''.
+
+\begin{lemma}[Properties of prime elements]\label{prime_el_prop}
+Let $M$ be a monoid.
+\begin{enumerate}
+\item Let $m,n \in \N_0$ and let $p_1,...,p_n,q_1,...,q_m \in M$ be primes. Let $c,d \in M$ be such that $p_i \not| d$ and $q_j \not| c$ for all $i \in [1,n], j \in [1,m]$. Suppose $p_1 \cdot ... \cdot p_n \cdot c \simeq q_1 \cdot ... \cdot q_m \cdot d$. Then $m=n$, and there is a bijection $\sigma \in S_n$ such that $q_{\sigma(i)} \simeq p_i$ for $i \in [1,n]$.
+\item Let $M$ be atomic and $P \sse M$ a set of prime elements. Then every $a \in M$ may be written in the form $a=p_1 \cdot ... \cdot p_n \cdot c$, with $n \in \N$, $p_1,...,p_n \in P$ and $c \in M$, where $c$ is not divisible by any $p \in P$. Furthermore, $p_1,...,p_n$ and $c$ are uniquely determined (up to the order and up to associates).
+\item Let $M$ be atomic, $p \in M$ prime, and $a \in \q(M)$. Then there exist $b,c \in M$ and $n \in \Z$ s.t. $a=p^n c^{-1} b$ with $p \not| bc$. Furthermore, the exponent $n$ is uniquely determined by $aM^\times$ and $pM^\times$.
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item We proceed by induction on $n$. If $n=0$, then necessarily $m=0$, and we are done. Suppose now $n>0$. Then $p_1 | q_1 \cdot ... \cdot q_m d$, and since $p_1 \not| d$ we obtain by primality that $p_1 | q_j$ for some $j \in [1,m]$. Since $p_1,q_j \in \A(M)$, we get $p_1 \simeq q_j$ and hence
+\[
+p_2 \cdot \ldots \cdot p_n \cdot c \simeq q_1 \cdot \ldots \cdot q_{j-1} \cdot q_{j+1} \cdot \ldots \cdot q_m \cdot d.
+\]
+Now the assertion follows immediately by the induction hypothesis.
+\item By first point, it is sufficient to show the existence of such a factorization. Let $a \in M$. Then $a= \epsilon \cdot r_1 \cdot ... \cdot r_n$, where $n \in \N_0$ and $r_1,...,r_n \in \A(M)$. After renumbering if necessary, there is an $m \in [0,n]$ s.t. $r_j \in P$ (???NOTA: mi sa che bisogna aumentare un po' la generalità...ovvero, ``s.t. $r_j \simeq p$ for some $p \in P$'') for each $j \in [1,m]$ and $r_j \not\simeq p$ for any $p \in P, \ j \in [m+1,n]$. Thus the assertion holds with $c = \epsilon \cdot r_{m+1} \cdot ... \cdot r_n$.
+\item Existence: If $a \in M$, then (by second point with $P:=\{p\}$) there exist $n \in \N_0$ and $b \in M$ s.t. $p \not| b$ and $a=p^nb$.\\
+If $a \in \q(M)$, then $a=a_0^{-1} a_1$ for some $a_0,a_1 \in M$. For $i \in \{0,1\}$, we can write $a_i=p^{n_i} b$ and hence $a=p^{n_1-n_0} b_0^{-1} b_1$, where $p \not| b_0b_1$.
+
+Uniqueness: Let $a$ and $p$ be the same of above. Let $a_1 = va$ and $p_1=up$ with $u,v \in M^\times$. We can write $a=p^nc^{-1}b$ and $a_1 = p_1^{n_1} c_1^{-1} b_1$, where $n,n_1 \in \Z$, $b,c,b_1,c_1 \in M$, $p \not| bc$ and $p_1 \not| b_1c_1$.\\
+Let $k \in \N_0$ be such that $k+n \geq 0$ and $k+n_1 \geq 0$. Then 
+\[
+vp^n \frac{b}{c} = va = a_1 = (up)^{n_1} \frac{b_1}{c_1},
+\]
+whereby $p^{n+k} c_1 v b = p^{n_1+k} c u^{n_1} b_1$, and it's an element of $M$. Hence (by second point with $P:=\{p\}$) we get $n+k=n_1+k$, i.e. $n=n_1$.
+\end{enumerate}
+\end{proof}
+\end{lemma}
+
+The third point of Lemma \ref{prime_el_prop} assures that the following function is well defined:
+
+\begin{defn}
+The map $v_p : \q(M) \to \Z$ given by $p^n c^{-1} b \mapsto n$ is called the \emph{p-adic valuation} of $M$. We have $v_p(M)=\N_0$ and $v_p$ is a homomorphism.
+\end{defn}
+
+\begin{lemma}
+Let $M$ be a monoid and $P$ a set of representatives of prime elements of $M$. The following are equivalent:
+\begin{enumerate}
+\item[(a)] $M$ is factorial.
+\item[(b)] Every $a \in M \sm M^\times$ is a product of primes, and the representation is unique up to associate and up to the order. In particular
+\[
+a = \epsilon \prod_{p \in P} p^{v_p(a)}
+\]
+for some $\epsilon \in M^\times$.
+\item[(c)] $M$ is atomic and $\gcd(A) \neq \emptyset$ for all $\emptyset \neq A \sse M$ finite.
+\item[(d)] $M$ is atomic, and every atom is prime.
+\end{enumerate}
+Furthermore, if $M$ is factorial and $\emptyset \neq A \sse M$, then
+\[
+\gcd(A) = \prod_{p \in P} p^{\min\{v_p(a) \mid a \in A\}} M^\times \tag{$*$}
+\]
+(??? does $A$ have to be finite here? otherwise, this also means that if $M$ is factorial then the $\gcd$ is never empty (which is not a problem, of course))
+\begin{proof}\ \\
+(a)$\imp$(b): For free by Lemma \ref{prime_el_prop}.\\
+(b)$\imp$(c): It is sufficient to prove $(*)$. By Lemma \ref{lemma_gcd-monoid} it suffices to show that
+\[
+d := \prod_{p \in P} p^{\min\{v_p(a) \mid a \in A\}} \in \gcd(A).
+\]
+First check (easy exercise) that for any $a,b \in M$ the following holds:
+\begin{center}
+$a|b$ if and only if $v_p(a) \leq v_p(b)$ for all $p \in P$.
+\end{center}
+By this it follows easily (exercise) that $d$ satisfies the definition of $\gcd$.\\
+(c)$\imp$(d): For free by Lemma \ref{lemma_gcd-monoid}(4).\\
+(d)$\imp$(a): Trivial by definition.
+\end{proof}
+\end{lemma}
+
+\section{Rings and Ideals}
+
+Let $R$ be a ring and $I,J \lhd R$ ideals. Then $I \cap J$, $I+J := \{a+b \mid a \in I, b \in J\}$ and $IJ := \{\sum_{i=1}^m a_i b_i \mid m \in \N_0, a_i \in I, b_i \in J\} = {}_R\langle ab \mid a \in I, b \in J \rangle$ are ideals.\\
+\\
+We define the following objects:
+\begin{itemize}
+\item $(\F(R), \cdot)$ is the \emph{semigroup of ideals of $R$}. The unit element is $R={}_R\langle 1 \rangle$.
+\item $(\F^\circ(R), \cdot)$ is the \emph{set of non-zero ideals of $R$}.
+\item $(\H(R), \cdot)$ is the \emph{set of non-zero principal ideals of $R$}.
+\end{itemize}
+
+If $R$ is a domain, then $\H(R) \sse \F^\circ(R) \sse \F(R)$ are (sub)monoids.\\
+The function $\theta : R^\circ \sm R^\times \to \H(R)$ given by $aR^\times \mapsto aR$ is a semigroup isomorphism.\\
+The group $K^\times / R^\times := \q(R^\circ / R^\times) \simeq \q(\H(R)) = \{aR \mid a \in K^\times\}$ is called \emph{group of divisibility}.
+
+\begin{lemma}\label{char_prime_ideals}
+Let $I \subsetneq R$ be an ideal. The following are equivalent:
+\begin{enumerate}
+\item[(a)] $R/I$ is a domain.
+\item[(b)] If $a,b \in R$ and $ab \in I$, then $a \in I$ or $b \in I$.
+\item[(c)] If $A,B \lhd R$ and $AB \sse I$, then $A \sse I$ or $B \sse I$.
+\item[(d)] $R \sm I$ is multiplicatively closed.
+\end{enumerate}
+\begin{proof}\ \\
+(a)$\iff$(b): Well known\footnote{See \url{https://proofwiki.org/wiki/Prime_Ideal_iff_Quotient_Ring_is_Integral_Domain}.}\\
+(b)$\iff$(d): Trivial by definition.\\
+(c)$\imp$(b): It's sufficient to consider singletons.\\
+(b)$\imp$(c): By contraposition. Suppose $AB \sse I$, $A \nsubseteq I$ and $B \nsubseteq I$. Then there are $a \in A \sm I$, $b \in B \sm I$ and $ab \in AB \sse I$, i.e. $\neg$(b).
+\end{proof}
+\end{lemma}
+
+\begin{defn}
+An ideal $I \sse R$ is called
+\begin{itemize}
+\item \emph{prime} if $I \neq R$ and one of the equivalent statements of Lemma \ref{char_prime_ideals} holds.
+\item \emph{maximal} If $I \neq R$ and there are no ideals $J \sse R$ s.t. $I \nsubseteq J \nsubseteq R$.
+\end{itemize}
+\end{defn}
+
+It is a well-know result that an ideal $I \lhd R$ is maximal if and only if $R/I$ is a field\footnote{See \url{https://proofwiki.org/wiki/Maximal_Ideal_iff_Quotient_Ring_is_Field}.}.\\
+The following results should be already known by the reader.
+
+\begin{Remark}\ 
+\begin{enumerate}
+\item Every maximal ideal is prime.
+\item Let $R$ be a domain and $p \in R^\circ$. Then $pR \lhd R$ is prime iff $p \in R$ is a prime element.
+\item $\{0\} \sse R$ is a prime ideal iff $R$ is a domain.
+\item We denote by $\Spec(R)$ the set of prime ideals, and by $\max(R)$ the set of maximal ideals.
+\item Let $R$ be a domain. Then $R$ is factorial $\stackrel{\text{def}}{\iff} (R^\circ,\cdot)$ is factorial $\iff$ $(\H(R),\cdot)$ is factorial.
+\end{enumerate}
+\end{Remark}
+
+\begin{lemma}
+Let $R$ be a PID (principal ideal domain). The following hold:
+\begin{enumerate}
+\item $\{pR \mid p \in R \text{ is prime}\} = \Spec(R) \sm \{(0)\}$.
+\item $\Spec(R) \sm \{(0)\} = \max(R)$.
+\item $\F^\circ(R) = \H(R)$, it is factorial and $\Spec(R) \sm \{(0)\}$ is the set of prime elements of $\F^\circ(R)$.
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item See point 2. of previous remark.
+\item It suffices to show ``$\sse$''. Let $p \in R$ be prime and $I=bR \lhd R$ such that $pR \nsubseteq bR \lhd R$. We have to show that $I=R$. Since $p \in bR$, we get $p=bc$ for some $c \in R$. Since $b \not\in pR$, this implies $p|c$, i.e. $c=pd$ for some $d \in R$. Then $p=bpd$, which means that $b \in R^\times$, thus $bR=I=R$.
+\item Exercise.
+\end{enumerate}
+\end{proof}
+\end{lemma}
+
+\begin{remark}\ 
+\begin{enumerate}
+\item In general, a domain (and even a factorial domain) need not be a principal ideal domain:
+\begin{itemize}
+\item Let $K$ be a field. Then $K[X,Y]$ is a factorial domain. Since $K[X,Y]/\langle X \rangle \simeq K[Y]$, which is a domain, the ideal $\langle X \rangle$ is prime, but of course is not maximal ($\langle X \rangle \nsubseteq \langle X, Y^2 \rangle \nsubseteq K[X,Y]$).
+\item $R=\Z[X]$ is factorial, but for $p \in \P$ the ideal ${}_R\langle p,X \rangle$ is not a principal ideal.
+\end{itemize}
+\item A domain $R$ is called a \emph{Dedekind domain} if $\F^\circ(R)$ is factorial (and then $\Spec(R) \sm \{(0)\}$ is the set of prime elements).\\
+The rings of integers in algebraic number fields are Dedekind domains (e.g. $\Z[\xi_n] \sse \Q(\xi_n)$).
+\end{enumerate}
+\end{remark}
+
+
+\chapter{An introduction to Module Theory}
+
+Throughout this whole chapter, $R$ is a ring.
+
+\section{Submodules, factor modules and homomorphisms.}
+
+\subsection{Submodules.}
+
+\begin{defn}
+Let $(M,+)$ be an additive abelian group. An \emph{$R$-module structure} on $M$ is a map
+\begin{align*}
+R \times M &\to M \\
+(\lambda,x) &\mapsto \lambda \cdot x = \lambda x
+\end{align*}
+such that for all $\lambda,\mu \in R$ and all $x,y \in M$ the follwing conditions hold:
+\begin{enumerate}
+\item $1 \cdot x = x$.
+\item $(\lambda \mu) x = \lambda (\mu x)$.
+\item $\lambda (x+y) = \lambda x + \lambda y$.
+\item $(\lambda + \mu) x = \lambda x + \mu x$.
+\end{enumerate}
+An \emph{$R$-module} $M$ is an additive abelian group together with an $R$-module structure (also called \emph{scalar multiplication}).
+\end{defn}
+
+\begin{remex}\ 
+\begin{enumerate}
+\item If $\lambda \in R$, then $\lambda 0 = \lambda (0+0) = \lambda 0 + \lambda 0$, and hence $\lambda 0 = 0$.
+\item If $R$ is a field, then an $R$-module is an $R$-vector space.
+\item Set $R=\Z$. Every abelian group is a $\Z$-module (with the usual multiplication as scalar multiplication).
+\item The ring multiplication $R \times R \to R$, $(x,y) \mapsto x \cdot_R y$ is an $R$-module structure, i.e. $R$ is an $R$-module.
+\item Let $f: R \to S$ be a ring homomorphism. Then $S$ is an $R$-module with the structure
+\begin{align*}
+R \times S &\to S \\
+(r,s) &\mapsto f(r)s.
+\end{align*}
+In particular, if $R \sse S$ is a subring, then $S$ is an $R$-module by ring multiplication (e.g. $R \sse R[X_1,...,X_n]$).
+\end{enumerate}
+\end{remex}
+
+\begin{defn}
+Let $M$ be an $R$-module. A subset $N \sse M$ is called an \emph{($R$-)submodule of $M$} if 
+\begin{enumerate}
+\item $N \sse M$ is a subgroup.
+\item For all $\lambda \in R$ and all $x \in N$, $\lambda x \in N$.
+\end{enumerate}
+Then $\cdot_{|_{R \times N}} ; R \times N \to N$ is an $R$-module structure on $N$, i.e. $N$ is an $R$-module.
+\end{defn}
+
+\begin{remex}\ 
+\begin{enumerate}
+\item Let $G$ be an abelian group and $H \sse G$ a subset. Then $H \sse G$ is a subgroup iff $H \sse G$ is a $\Z$-submodule.
+\item Let $I \sse R$ be a subset. Then $I \sse R$ is an ideal iff $I \sse R$ is an $R$-submodule.
+\item By abuse of notation, we denote by $0$ the zero-module $\{0_R\}$. $0$ and $M$ are trivially $R$-submodules of $M$. $M$ is called \emph{simple} if $0 \neq M$ and $0,M$ are the only submodules of $M$.
+\item If $(M_j)_{j \in J}$ is a family of $R$-submodules, then $\bigcap_{j \in J} M_j$ and
+\[
+\sum_{j \in J} M_j := \left\{ \sum_{j \in J} m_j \ \Bigg| \ m_j \in M_j, \ m_j = 0 \text{ for almost all } j \in J \right\}
+\]
+are submodules of $M$. In particular, if $M_1,M_2 \sse M$ are submodules, then $M_1+M_2 = \{m_1 + m_2 \mid m_1 \in M_1, m_2 \in M_2\}$ is a submodule.
+\end{enumerate}
+\end{remex}
+
+\begin{defn}
+Let $M$ be an $R$-module and $E \sse M$ a subset. Then 
+\[
+{}_R \langle E \rangle := \langle E \rangle := \left\{ \sum_{i=1}^n \ \Bigg| \ n \in \N, \ \lambda_1, \ldots, \lambda_n \in R, \ x_1, \ldots, x_n \in E \right\}
+\]
+is the \emph{submodule generated by E}.
+\end{defn}
+
+\begin{remark}\ 
+\begin{enumerate}
+\item It is immediate to check that 
+\[
+\langle E \rangle = \bigcap_{\substack{E \sse N \sse M \\ N \, \text{$R$-subm.}}} N = \sum_{x \in E} Rx,
+\]
+and therefore $\langle E \rangle$ is the smallest submodule of $M$ containing $E$.
+\item If $E = \{x\}$, then $\langle E \rangle = Rx$.\\ 
+If $E = \{x_1,...,x_n\}$, then $\langle E \rangle = Rx_1 + ... + Rx_n$.\\
+If $(M_j)_{j \in J}$ is a family of submodules of $M$, then $\langle \cup_{j \in J} M_j \rangle = \sum_{j \in J} M_j$.
+\item A subset $E \sse M$ is called an ($R$-module) generating set of $M$ if ${}_R \langle E \rangle = M$.\\
+$M$ is called \emph{finitely generated} if $M$ has a finite generating set. The following considerations are trivial:
+\begin{itemize}
+\item Suppose $R$ is a field. Then $M$ is a f.g. $R$-module iff $\dim_R(M) < \infty$.
+\item Set $R=\Z$. $M$ is a f.g. $\Z$-module iff $M$ is a f.g. abelian group.
+\item $R[X]$ is not a finitely generated $R$-module.
+\end{itemize}
+\item Let $M$ be a f.g. $R$-module. Then every generating set contains a finite generating set.
+\begin{proof}
+Let $E \sse M$ be a finite generating set and let $E' \sse M$ be an arbitrary generating set. So $E \sse M = \langle E' \rangle$, and since $E$ is finite there is a finite subset $E'' \sse E$ such that $E \sse \langle E'' \rangle$. This implies $M = \langle E \rangle \sse \langle \langle E'' \rangle \rangle = \langle E'' \rangle$.
+\end{proof}
+\end{enumerate}
+\end{remark}
+
+\begin{defn}
+Let $M$ and $N$ be $R$-modules. A map $f : M \to N$ is said to be a \emph{($R$-module) homomorphism} if it's a group homomorphism and it's linear, i.e. for all $x,y \in M, \lambda \in R$
+\begin{itemize}
+\item $f(x+y)=f(x)+f(y)$.
+\item $f(\lambda x) = \lambda f(x)$.
+\end{itemize}
+We define $\Hom_R(M,N)$ as the set of all $R$-homomorphisms $M \to N$ and $\End_R(M) := \Hom_R(M,M)$, the set of all \emph{$M$-endomorphisms}. \emph{Monomorphisms}, \emph{epimorphisms} and \emph{isomorphisms} are defined as injective, surjective and bijective homomorphisms respectively.
+\end{defn}
+
+\begin{remex}\ 
+\begin{enumerate}
+\item Suppose $R$ is a field. Then the $R$-module homomorphisms are precisely the $R$-vector space homomorphisms, i.e. the linear maps.\\
+If $R=\Z$, then the $\Z$-module homomorphisms are precisely the group homomorphisms.\label{Z-hom=goup_hom}
+\item Let $M' \sse M$ and $N' \sse N$ be $R$-submodules. We have:
+\begin{enumerate}
+\item $f[M'] \sse N$ and $f^{-1}[N'] \sse M$ are $R$-submodules. In particular $\Im(f) := f[M] \sse M$ and $\ker(f) := f^{-1}(0) \sse M$ are $R$-submodules.
+\item If $f[M'] \sse N'$, then $f_{|_{M'}} : M' \to N'$ is an $R$-homomorphism. In particular, $f : M \to f[M]$ is an $R$-epimorphism.
+\end{enumerate}
+\item Let $g : M \to N$ be an $R$-homomorphism and $E \sse M$. We have:
+\begin{enumerate}
+\item $\langle f[E] \rangle = f[ \langle E \rangle ]$.
+\item $f_{|_E} = g_{|_E} \iff f_{|_{\langle E \rangle}} = g_{|_{\langle E \rangle}}$.
+\end{enumerate}oblique
+\item If $f: M \to N$ and $g: N \to P$ are $R$-homomorphisms, then so is $g \circ f$. If $f$ is an $R$-isomorphism, then so is $f^{-1}$.\\
+Notation: we write $M \simeq_R N$ to state that there is an $R$-isomorphism between $M$ and $N$.
+\item If $f,g \in \Hom_R(M,N)$, then $f+g$ and $-f$ are $R$-homomorphisms $M \to N$, where the function are define as pointwise sum and inverse. Now observe that
+\begin{align*}
+\alpha f : M &\to N \\
+x &\mapsto \alpha f(x)
+\end{align*}
+is a group homomorphism. Finally, $\lambda (\alpha f) = (\lambda \alpha) f$.\\
+We have just proved the following: $\Hom_R(M,N)$ is an $R$-module w.r.t. pointiwise addition and scalar multiplication $(\alpha,f) \mapsto \alpha f$.
+\item Observe that $(\End_R(M),+,\circ) \sse (\End_{\Z}(M),+,\circ)$ is a subring, where $1_{\End_R(M)} = \id_M$ (the identity map).
+\end{enumerate}
+\end{remex}
+
+\subsection{Congruence relation and factor modules.}
+
+\begin{defn}
+Let $M$ be a non-empty set and $\sim$ an equivalence relation on $M$.
+\begin{enumerate}
+\item For $a \in M$, let $[a]_\sim := [a] := \{x \in M \mid x \sim a\}$ denote the \emph{equivalence class of $a$}. We can define the \emph{quotient set} $M/\sim := \{[a] \mid a \in M\}$ and the \emph{canonical projection map}
+\begin{align*}
+\pi_\sim = \pi : M &\to M/\sim \\
+a &\mapsto [a].
+\end{align*}
+\item Suppose that $*: M$ is a binary operation on $M$, i.e. $*: M \times M \to M$. Then $\sim$ is called a \emph{congruence relation} (w.r.t. $*$) if, for all $a,a',b,b' \in M$,
+\[
+a \sim a', \ b \sim b' \imp a*b \sim a'*b'.
+\]
+\end{enumerate}
+\end{defn}
+
+\begin{lemma}\label{lemma_operation_on_factor}
+Let $(M,*)$ be a a semigroup with unit element $e$ and let $\sim$ be a congruence relation on $M$. Then there is precisely one operation $\tilde{*}$ on $M/{\sim}$ such that $\pi : M \to M/{\sim}$ is a $(*,\tilde{*})$-epimorphism. In particular:
+\begin{enumerate}
+\item If $(M,*)$ is a group, then so is $(M/{\sim},\tilde{*})$.
+\item For all $a,b \in M$, we have $[a] \tilde{*} [b] = [a*b]$ and $\ker(\pi) = [e]$ is the unit element of $M/{\sim}$.
+\end{enumerate}
+\begin{proof}
+Convince yourself that there is nothing to do!
+\end{proof}
+\end{lemma}
+
+\begin{defn}
+Let $M$ be an $R$-module. An equivalence relation $\sim$ on $M$ is called a \emph{($R$-module) congruence relation} if for all $x,x',y,y' \in M$ and $\lambda \in R$:
+\begin{enumerate}
+\item $x \sim x', y \sim y' \imp x+y \sim x'+y'$.
+\item $x \sim x' \imp \lambda x \sim \lambda x'$.
+\end{enumerate}
+\end{defn}
+
+\begin{remark}\ 
+\begin{enumerate}
+\item Let $N \sse M$ be a submodule. For $x,y \in M$ we define $x \equiv_\sim y$ if $x-y \in N$. Then $\equiv_\sim$ is a congruence relation on $M$.
+\item Let $\sim$ be a congruence relation on $M$ and $N:=[0]_\sim$. Then $N \sse M$ is a submodule and $\sim \ = \ \equiv_\sim$.
+\begin{proof}[Sketch of proof]
+We know from group theory that $N \sse M$ is a subgroup. Let $x \in N, \lambda \in R$. We have to check that $\lambda x \in N$:
+\[
+x \in N \imp x \sim 0 \imp \lambda x \sim \lambda 0 = 0 \imp \lambda x \in N.
+\]
+Clearly, we have $\sim \ = \ \equiv_\sim$. 
+\end{proof}
+Furthermore, $[a]_\sim = a+N$, and we set $M/N := M/{\sim} = \{[a] \mid a \in M\}$.
+\end{enumerate}
+\end{remark}
+
+\begin{lemma}\label{quotient_mod_str}
+Let $M$ be an $R$-module, $\sim$ a congruence relation on $M$ and $N=[0]_\sim$. Then there is a uniquely determined $R$-module structure on $M/N$ such that $\pi_ M \to M/N$ is an $R$-epimorphism. We have that the structure is
+\begin{align*}
+\cdot \colon R \times M/N &\to M/N \\
+(\lambda,[a]) &\mapsto [\lambda a].
+\end{align*}
+\begin{proof}
+Exercise.
+\end{proof}
+\end{lemma}
+
+\begin{corollary}
+Let $M$ be an $R$-module, $N \sse M$ a submodule and $\pi : M \to M/N$. Then the maps
+\begin{align*}
+\{N' \sse M \mid N \sse N' \sse M, \ N' \ R\text{-subm.}\} &\to \{R\text{-submodules of } M/N\} \\
+N' & \mapsto N'/N = \pi[N'] \\
+\pi^{-1}[P] &\mapsfrom P
+\end{align*}
+are bijections which are inverse to each other. (??? perché è un corollario?)
+\end{corollary}
+
+\begin{lemma}
+Let $M$ and $\ol{M}$ be two non-empty sets. Let $f: M \to \ol{M}$ and let $\sim_f$ be defined by
+\[
+\forall a,b \in M \ (a \sim_f b \iff f(a) = f(b)).
+\]
+Then
+\begin{enumerate}
+\item $\sim_f$ is an equivalence relation on $M$, and for all $a \in M$ we have $[a]_{\sim_f} = f^{-1}[f(a)]$.
+\item There is a unique bijection $f^* : M/{\sim_f} \to f[M]$ and a unique injection $\ol{f}: M/{\sim_f} \to \ol{M}$ such that the following diagram commutes:
+\[
+\begin{tikzcd}
+M \arrow{r}{f} \arrow[swap]{d}{\pi_{\sim_f}} & \ol{M} \\
+M/{\sim_f} \arrow{ur}{\ol{f}} \arrow{r}{f^*} & f[M] \arrow[hookrightarrow]{u}{}
+\end{tikzcd}
+\]
+i.e. $\ol{f}([a]_{\sim_f}) = f(a)$ and $f^*([a]_{\sim_f})=f(a)$. (??? chiedere se così il diagramma è giusto).
+\end{enumerate}
+\end{lemma}
+
+\begin{lemma}[Abstract homomorphism theorem]
+Let $f: (M,*) \to (M,\cdot)$ be a semigroup homomorphism. Then $\sim_f$ is a congruence relation on $M$, and $f^* \colon M/{\sim_f} \to f[M]$ is a $(\tilde{*}, \cdot)$ homomorphism which is bijective, where $M/{\sim_f}$ is equipped with $\tilde{*}$. i.e. the operation induced by $*$ (see Lemma \ref{lemma_operation_on_factor}). (??? chiedere se era effettivamente questo che si intendeva)
+\end{lemma}
+
+\begin{theorem}[Homomorphism Theorem for Modules]\label{mod-hom-thm}
+Let $f: M \to N$ be an $R$-module homomorphism, $M' \sse M$ and $N' \sse N$ be submodules such that $f[M'] \sse N'$. Then there is a unique $R$-homomorphism  $f^*: M/M' \to N/N'$ satisfying 
+\[
+f^*(x+M') = f(x)+N' \tag{$*$}
+\]
+for all $x \in M$. So we have the following commutative diagram:
+\[
+\begin{tikzcd}
+M \arrow{r}{f} \arrow[swap]{d}{\pi_M} & N \arrow{d}{\pi_N} \\
+M/M' \arrow[dashrightarrow]{r}{f^*} & N/N' 
+\end{tikzcd} 
+\]
+Moreover, $\ker(f^*) = f^{-1}[N']/M'$ and $\Im(f^*) = (f[M]+N')/N'$.\\
+As a special case, suppose $M'=\ker(f)$ and $N'=0$. Then $f^*: M/\ker(f) \to N$ is an $R$-monomorphism\footnote{Of course, we identify $N$ and $N/0$.} and thus $M/\ker(f) \simeq f[M]$.
+\begin{proof}
+The uniqueness is trivial, since condition $(*)$ completely determines $f^*$.\\
+We now want to prove the existence, so we have to show that the funciton $f^*$ defined by $(*)$ is an $R$-homomorphism. By group theory, we already know that $f^*$ is a group homomorphism. Let $x \in M$ and $\lambda \in R$. We have
+\[
+f^*(\lambda(x+M')) \stackrel{(1)}{=} f^*(\lambda x+M') \stackrel{(2)}{=} f(\lambda x)+N' \stackrel{(3)}{=} \lambda f(x)+N' \stackrel{(4)}{=} \lambda(f(x)+N') \stackrel{(5)}{=} \lambda f^*(x+M'),
+\]
+where (1) and (4) follow by definition of structure on quotient modules (cfr. Lemma \ref{quotient_mod_str}), (2) and (4) are by definition of $f^*$, and (3) holds because $f$ is an $R$-module homomorphism by hypothesis.\\
+Clearly, $\ker(f^*)$ and $\Im(f^*)$ have the given form.
+\end{proof}
+\end{theorem}
+
+\begin{corollary}[First isomorphism Theorem for Modules]\label{1-iso-thm}
+Let $M$ be an $R$-module and $A,B \sse N$ submodules. Then
+\begin{align*}
+f^* \colon A/A \cap B &\to (A+B)/B \\
+a+ (A \cap B) &\mapsto a+B
+\end{align*}
+is an isomorphism.
+\begin{proof}
+By Theorem \ref{mod-hom-thm} (with $M:=A$, $N:=A+B$, $M':=A+B$, $N':=B$ and $f := (A \hookrightarrow A+B)$), there is an $R$-homomorphism
+\[
+f^* \colon M/M' = A/A \cap B \to N/N' = (A+B)/B
+\]
+with
+\[
+\ker(f^*) = f^{-1}[B]/A \cap B = (A \cap B) / (A \cap B) = 0
+\]
+and
+\[
+\Im(f^*) = (f[M]+N')/N' = (A+B)/B.
+\]
+\end{proof}
+\end{corollary}
+
+\begin{corollary}[Second isomorphism Theorem for Modules]
+Let $M$ be an $R$-module and $B \sse A \sse M$ submodules. Then 
+\begin{align*}
+\tilde{f} \colon (M/B)/(A/B) &\to M/A \\
+(a+B)+(A/B) &\mapsto a+A
+\end{align*}
+is an isomorphism.
+\begin{proof}
+By Theorem \ref{mod-hom-thm} (with $f:=\id_M$, $M':=B$, $N':=A$) there is an $R$-epimorphism $M/B \to M/A$ with $\ker(f^*) = A/B$.
+\end{proof}
+\end{corollary}
+
+\begin{defn}
+Let $M$ be an $R$-module.
+\begin{enumerate}
+\item An element $c \in R$ is called a \emph{zero-divisor} on $M$ if there exists $0 \neq x \in M$ s.t. $cx=0$.\\
+We define $\Zdv_R(M)$ as the set of zero-divisors on $M$.\\
+$M$ is called \emph{$R$-torsionfree} if $\Zdv_R(M)=0$.
+\item Let $E \sse M$ be a subset. Then
+\[
+\Ann_R(E) := \{\lambda \in R \mid \lambda x = 0 \text{ for all } x \in E\}
+\]
+is called the \emph{annihilator} of $E$.
+\item $M$ is called \emph{cyclic} if $M={}_R \langle x \rangle = Rx$ for some $x \in M$.
+\end{enumerate}
+\end{defn}
+
+\begin{remark}\ 
+\begin{enumerate}
+\item For $E \sse M$ we have that $\Ann_R(E) = \Ann_R(\langle E \rangle) = \bigcap_{x \in E} \Ann_R(x) \lhd R$ is an ideal of $R$. Moreover, $\Ann_R(E)=R$ iff $E = \emptyset,\{0\}$.
+\item We have $\Zdv_R(M) = \bigcup_{\neq x \in M} \Ann_R(x)$. Furthermore
+\[
+M \neq 0 \iff \Zdv_R(M) \neq \emptyset \iff 0 \in \Zdv_R(M).
+\]
+\item If $\pi \colon M \to N$ is an $R$-epimorphism and $M=Rx$ for some $x \in N$, then $N=R\pi(x)$.
+\end{enumerate}
+\end{remark}
+
+\begin{theorem}[Classification of cyclic $R$-modules]
+Let $M$ be an $R$-module. Then $M$ is cyclic if and only if there exists an ideal $\g \lhd R$ such that $M \simeq R/\g$.
+\begin{proof}\ \\
+``$\imp$'': If $M=Rx$ with $x \in M$, then $f: R \to M$ given by $\lambda \mapsto \lambda x$ is an $R$-epimorphism with $\ker f = \Ann_R(M) \lhd R$.\\
+``$\pmi$'': Since $\pi : R \to R/\g$ is an $R$-epimorphism and $R={}_R\langle 1 \rangle$, $R/\g$ is cyclic by point (3) of the remark above.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+Let $M$ be an $R$-module. Then
+\begin{align*}
+\phi \colon M &\to \Hom_R(R,M) \\
+x &\mapsto (\lambda \mapsto \lambda x)
+\end{align*}
+is an $R$-isomorphism.
+\begin{proof}
+We will first prove that $\phi$ is an $R$-homomorphism (1), and then we'll show that it is bijective (2).
+\begin{enumerate}
+\item Let $x,x' \in M$. Then, for all $\lambda \in R$,
+\[
+\phi(x+x')(\lambda) = \lambda(x+x') = \lambda x + \lambda x' = \phi(x)(\lambda)+\phi(x')(\lambda) = (\phi(x)+\phi(x'))(\lambda)
+\]
+and hence $\phi(x+x')=\phi(x)+\phi(x')$.\\
+Let $x \in M$ and $\mu \in R$. Then, for all $\lambda \in R$,
+\[
+\phi(\mu x)(\lambda) = \lambda(\mu x) = \mu(\lambda x) = \mu(\phi(x)(\lambda)) = (\mu\phi(x))(\lambda)
+\]
+and hence $\phi(\mu x) = \mu \phi(x)$.
+\item Consider 
+\begin{align*}
+\psi \colon \Hom_R(R,M) &\to M \\
+g &\mapsto g(1).
+\end{align*}
+Then, for all $\lambda \in R$,
+\[
+(\phi \circ \psi)(g)(\lambda) = \phi(\psi(g))(\lambda) = \lambda \psi(g) = \lambda g(1) = g(\lambda)
+\]
+and hence $(\phi \circ \psi)(g)=g$. Furthermore, for all $x \in M$,
+\[
+(\psi \circ \phi)(x) = \phi(x)(1) = 1x = x
+\]
+and hence $\phi \circ \psi = \id_{\Hom_R(R,M)}$ and $\psi \circ \phi=\id_M$. Therefore $\phi$ and $\psi$ are inverse to each other, and we are done.
+\end{enumerate}
+\end{proof}
+\end{theorem}
+
+\begin{theorem}\label{thm-equiv-hom}
+Let $M$ be an $R$-module and $I \lhd R$ with $I \sse \Ann_R(M)$. Then
+\begin{enumerate}
+\item The function
+\begin{align*}
+R/I \times M &\to M \\
+(\lambda + I, m) &\mapsto \lambda m
+\end{align*}
+is an $R/I$-module structure on $M$.
+\item If $N$ is an $R$-module and $I \sse \Ann_R(N)$, then
+\[
+\Hom_R(M,N) = \Hom_{R/I}(M,N),
+\]
+where $M$ and $N$ are equipped with the $R/I$-module structure of point (1).
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item If we show that the map is well-defined, then it's easy to check that it is indeed a structure. Let $\lambda,\lambda' \in R$ be s.t. $\lambda + I = \lambda' + I$. We have $\lambda - \lambda' \sse \Ann_R(M)$, and thus for all $x \in M$ we get $(\lambda-\lambda')x=0$, i.e. $\lambda x = \lambda' x$.
+\item ``$\sse$'': Let $f \in \Hom_R(M,N)$. We have to verify that $f$ is $R/I$-linear. If $\lambda \in R$ and $x \in M$, then
+\[
+f((\lambda + I)x) = f(\lambda x) = \lambda f(x) = (\lambda + I) f(x).
+\]
+``$\supseteq$'': Let $f \in \Hom_{R/I}(M,N)$. We have to verify that $f$ is $R$-linear. If $\lambda \in R$ and $x \in M$, then
+\[
+f(\lambda x) = f((\lambda + I)x) = (\lambda + I) f(x) = \lambda f(x).
+\]
+\end{enumerate}
+\end{proof}
+\end{theorem}
+
+\begin{examples}
+Observe that for $R=\Z$, $I=p\Z$, $N=\Z/p\Z$, Theorem \ref{thm-equiv-hom} implies that the group homomorphisms (cfr. first remark at page \pageref{Z-hom=goup_hom}) are the precisely the $\Z/p\Z$-vector space homomorphisms
+\end{examples}
+
+\begin{defn}
+Let $M$ be an $R$-module and $I \lhd R$ an ideal. Then
+\[
+IM := \left\{ \sum_{i=1}^k \lambda_i x_i \ \Bigg| \ k \in \N, \ \lambda_1,\ldots,\lambda_k \in I, \ x_1,\ldots,x_k \in M \right\}.
+\]
+\end{defn}
+
+\begin{remark}\ 
+\begin{enumerate}
+\item $IM \sse M$ is an $R$-submodule.
+\item If $M=J \lhd R$ then $IJ$ is the usual ideal multiplication.
+\item If $J \lhd R$, then $(IJ)M=I(JM)$.
+\item Since $I \sse \Ann_R(M/IM)$, $M/IM$ carries an $R/I$-module structure by the previous results.
+\end{enumerate}
+\end{remark}
+
+\subsection{Direct sums, products and free modules.}
+
+\begin{defn}
+Let $(M_i)_{i \in I}$ be a family of $R$-modules. Then the generalized Cartesian product $\times_{i \in I} M_i$ (NOTA: aggiungere definizione) is an $R$-module with component-wise addition and scalar multiplication:
+\begin{itemize}
+\item $(x_i)_{i \in I} + (y_i)_{i \in I} := (x_i+y_i)_{i \in I}$.
+\item $\lambda \cdot (x_i)_{i \in I} := (\lambda x_i)_{i \in I}$.
+\end{itemize}
+We denote $(\times_{i \in I} M_i, +, \cdot)$ by $\prod_{i \in I} M_i$ and we call it \emph{direct product of} $(M_i)_{i \in I}$.\\
+Furthermore, we define the \emph{direct sum of} $(M_i)_{i \in I}$ as
+\[
+\bigoplus_{i \in I} M_i := \left\{ (x_i)_{i \in I} \in \prod_{i \in I} \ \Bigg| \ x_i = 0 \text{ for almost all} i \in I \right\},
+\]
+which is an $R$-submodule of $\prod_{i \in I} M_i$.
+\end{defn}
+
+\begin{defn}
+For every $j \in I$, we define 
+\begin{align*}
+p_j \colon \prod_{i \in I} M_i &\to M_j  \quad \quad \quad \quad \quad \text{and}  &\epsilon_j \colon M_j &\to \prod_{i \in I} M_i \\
+(x_i)_{i \in I} &\mapsto x_j    &x_j &\mapsto (...,0,x_j,0,...)
+\end{align*}
+Then $p_j$ is an $R$-epimorphism (called the \emph{canonical projection}) and $\epsilon_j$ is an $R$-monomorphism (called the \emph{canonical embedding}).\\
+Special cases:
+\begin{enumerate}
+\item If $M_i = M$ for all $i \in I$, the we trivially have $\prod_{i \in I} M_i = M^I$, and we denote $M^{(I)} := \bigoplus_{i \in I} M_i$.
+\item If $I=[1,n]$, then we have
+\[
+\prod_{i \in I} M_i = \prod_{i=1}^n M_i = M_1 \times \ldots \times M_n = M_1 \oplus \ldots \oplus M_n = \bigoplus_{i=1}^n M_i = \bigoplus_{i \in I} M_i,
+\]
+and if we also have $\forall i \in I \ (M_i=M)$, then the set above is simply $M^n$.
+\end{enumerate}
+\end{defn}
+
+\begin{defn}\label{def-free_m-sum_dir}
+Let $M$ be an $R$-module.
+\begin{enumerate}
+\item $M$ is called \emph{free} if $M \simeq R^{(I)}$ for some set $I$.
+\item Let $(M_i)_{i \in I}$ be a family of submodules of $M$ and define
+\begin{align*}
+g \colon \bigoplus_{i \in I} M_i &\to M \\
+(x_i)_{i \in I} &\mapsto \sum_{i \in I} x_i.
+\end{align*}
+Then $g$ is an $R$-homomorphism with $\Im g = \sum_{i \in I} M_i$.\\
+We say that $\sum_{i \in I} M_i$ is \emph{direct} if $g$ is an $R$-monomorphism.\\
+Moreover, $M$ is called \emph{(inner) direct sum} of $(M_i)_{i \in I}$ if one of the following equivalent statements is satisfied:
+\begin{enumerate}
+\item $g$ is an $R$-isomorphism.
+\item $M=\sum_{i \in I} M_i$ and the sum is direct.
+\item For all $x \in M$ there is a unique tuple $(x_i)_{i \in I} \in \bigoplus_{i \in I} M_i$ such that $x \in \sum_{i \in I} x_i$.
+\item Every $x \in M$ has a unique representation of the form $x = \sum_{i \in I} x_i$ where $x_i \in M_i$ and $x_i = 0$ for almost all $i \in I$.
+\end{enumerate}
+Observe that if $M$ is inner direct sum of $(M_i)_{i \in I}$, then we can identify $M$ and $\bigoplus_{i \in I} M_i$.
+\end{enumerate}
+\end{defn}
+
+\addtocounter{theorem}{-1} %wrong enumeration in class
+
+\begin{theorem}
+Let $M$ be a module.
+\begin{enumerate}
+\item For any family $(M_i)_{i \in I}$ of $R$-submodules the following statements are equivalent:
+\begin{enumerate}
+\item The sum of $(M_i)_{i \in I}$ is direct.
+\item For all $j \in I$, $M \cap \sum_{i \in I \sm \{j\}} = 0$.
+\end{enumerate}
+\item Let $M_1,M_2 \sse M$ be submodules. The following are equivalent:
+\begin{enumerate}
+\item $M = M_1+M_2$ and the sum is direct.
+\item Every $x \in M$ has a unique representation of the form $x = x_1+x_2$ with $x_1 \in M_1$ and $x_2 \in M_2$.
+\item $M=M_1+M_2$ and $M_1 \cap M_2 = 0$.
+\end{enumerate}
+If these conditions are satisfied, then
+\begin{align*}
+M_1 &\to M/M_2  \quad \quad \quad \quad \quad \text{and}  &M_2 &\to M/M_1 \\
+x_1 &\mapsto x_1+M_2    &x_2 &\mapsto x_2+M_1
+\end{align*}
+are isomorphisms.
+\end{enumerate}
+\begin{proof}
+Let $g : \bigoplus_{i \in I} M_i \to M$ be the homomorphism given in Definition \ref{def-free_m-sum_dir}.(2).
+\begin{enumerate}
+\item (a)$\imp$(b): By hypothesis, $g$ is injective. Let $j \in I$ and consider an element $z \in M \cap \sum_{i \in I \sm \{j\}} M_i$. Then $z = \sum_{i \in I \sm \{j\}} x_i$ for some $x_i \in M_i$ with $x_i = 0$ for almost all $i \in I \sm \{j\}$. Set $x_j := -z$. We have $g((x_i)_{i \in I})=0$, and hence $(x_i)_{i \in I} = 0$, i.e. $z=0$.\\
+(b)$\imp$(a): If $(x_i)_{i \in I} \in \ker g$, then 
+\[
+\underbrace{-x_j}_{\in M_j} = \underbrace{\sum_{i \in I \sm \{j\}} x_i}_{\in \sum_{i \in I \sm \{j\}} M_i},
+\]
+for all $j \in J$. Thus $x_j \in M \cap \sum_{i \in I \sm \{j\}}$ for all $j \in J$, and so $(x_i)_{i \in I} =0$, i.e. $g$ is injective.
+\item (a)$\iff$(b): See characterization (d) in Definition \ref{def-free_m-sum_dir}.(2).\\
+(b)$\iff$(c): This is a particular case of (1).
+
+Finally, by 2(c) it follows that $M_1/(M_1 \cap M_2) = M_1/0 = M_1$ and $(M_1+M_2)/M_2 = M/M_2$, so the statement follows by the First isomorphism Theorem (Corollary \ref{1-iso-thm}).
+\end{enumerate}
+\end{proof}
+\end{theorem}
+
+\begin{defn}\label{def-basis}
+Let $M$ be an $R$-module, $(e_i)_{i \in I}$ a family of elements of $M$ and
+\begin{align*}
+g \colon R^{(I)} &\to M \\
+(\lambda_i)_{i \in I} &\mapsto \sum_{i \in I} \lambda_i e_i.
+\end{align*}
+Observe that $g$ is an $R$-homomorphism. The family $(e_i)_{i \in I}$ is called
+\begin{itemize}
+\item \emph{($R$-)linearly independent} if $g$ is an $R$-monomorphism.
+\item an \emph{($R$-)basis} if $g$ is an $R$-isomorphism, or equivalently, if:
+\begin{center}
+Every $x \in M$ has a unique representation of the form $x \in \sum_{i \in I} \lambda_i e_i$ with $\lambda_i \in R$ and $\lambda_i=0$ for almost all $i \in I$,
+\end{center}
+or, equivalently, if:
+\begin{center}
+$(e_i)_{i \in I}$ is linearly independent and $M = {}_R \langle e_i \mid i \in I \rangle$.
+\end{center}
+\item A set $B \sse M$ is called \emph{linearly independent} (resp. \emph{basis}) if the family $(b)_{b \in B}$ is linearly independent (resp. a basis).
+\end{itemize}
+\end{defn}
+
+\begin{remark}\ 
+\begin{enumerate}
+\item Consider a ring $R$ as an $R$-module. Then:
+\begin{itemize}
+\item $\{1\}$ is an $R$-basis of $R$.
+\item An element $a \in R$ is l.i. iff $a \not\in \Zdv(R)$.
+\item If $a,b \in R$, then $(a,b)$ is l.i. in (??? COPIARE).
+\end{itemize}
+\item Let $I$ be a set (??? COPIARE)
+\item Let $R$ be a domain and let $K := \q(R)$. Then $K$ is a torsionfree $R$-module and for all $a,b \in K$ the pair $(a,b) \in K \oplus K$ is linearly independent over $R$.
+\item Let $n \in \N_{\geq 2}$. The $\Z$-module $\Z/n\Z$ has no independent elements, since $n(a+n\Z)=0$ for all $a \in \Z$, and so it has no basis. Moreover, we have that $\Z = {}_{\Z} \langle 2,3 \rangle$, i.e. $\{2,3\}$ is a generating set for $\Z$ as a $\Z$ module.
+\end{enumerate}
+\end{remark}
+
+\begin{theorem}\label{thm-free-mod-prop}
+Let $M$ be an $R$-module. The following statements hold:
+\begin{enumerate}
+\item $M$ is free iff $M$ has a basis.
+\item For a family $(e_i)_{i \in I}$ the following are equivalent:
+\begin{enumerate}
+\item $(e_i)_{i \in I}$ is a basis.
+\item $M = \sum_{i \in I} Re_i$, where the sum is direct, and $\Ann_R(e_i)=0$ for all $i \in I$.
+\end{enumerate}
+\item If $M$ is free, then $\Zdv_R(M) \sse \Zdv_R(R)$. In particular, if $R$ is a domain then every free module is torsionfree.
+\item If $M$ is free, then $\Ann_R(M)=0$.
+\item Let $B$ be a basis of $M$, $N$ an $R$-module and $f_\circ : B \to N$ a map. Then there is a unique $f \in \Hom_R(M,N)$ s.t. $f_{|B} = f_\circ$.
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item ``$\imp$'': $M$ is free, i.e. by definition there exists an $R$-isomorphism $f: R^{(I)} \to M$. If $(e_i)_{i \in I}$ is the basis of $R^{(I)}$ given in the previous Remark, then $(f(e_i))_{i \in I}$ is a basis of $M$ by Definition \ref{def-basis}.\\
+``$\pmi$'': Observe that by hypothesis it immediately follows that
+\begin{align*}
+g: R^{(I)} &\to M \\
+(\lambda_i)_{i \in I} &\mapsto \sum_{i \in I} \lambda_i e_i
+\end{align*}
+is an $R$-isomorphism. Then $M$ is free by definition.
+\item Consider
+\begin{alignat*}{3}
+g \colon && R^{(I)} &\stackrel{\phi}{\to} \bigoplus_{i \in I} Re_i &&\stackrel{\psi}{\to} M \\
+&& (\lambda_i)_{i \in I} &\mapsto (\lambda_i e_i)_{i \in I} &&\mapsto \sum_{i \in I} \lambda_i e_i .
+\end{alignat*}
+Observe that $\phi$ is an $R$-epimorphism and $\ker \phi = \bigoplus_{i \in I} \Ann_R(e_i)$. We have:
+\begin{center}
+$(e_i)_{i \in I}$ is a basis $\iff$ $g$ is an isomorphism $\iff$ $\phi$ and $\psi$ are $R$-isomorphisms $\iff$ $M=\sum_{i \in I} Re_i$, where the sum is direct, and $\Ann_R(e_i)=0$ for all $i \in I$.
+\end{center}
+\item Let $(e_i)_{i \in I}$ be a basis of $M$ and $c \in \Zdv_R(M)$. Then there is a $0 \neq x \in M$ s.t. $cx=0$. Write $x = \sum_{i \in I} \lambda_i e_i$ with $\lambda_i \in R$. If $j \in I$ is such that $\lambda_j \neq 0$, since
+\[
+0 = cx = \sum_{i \in I} c\lambda_i e_i,
+\]
+we obtain $c \lambda_j = 0$, i.e. $c \in \Zdv_R(R)$.
+\item If $(e_i)_{i \in I}$ is a basis of $M$, then $\Ann_R(M) \sse \Ann_R(e_i)=0$ for any $i \in I$.
+\item Every $x \in M$ has a unique representation, therefore $x = \sum_{b \in B} \lambda_b b$ with $\lambda_b \in R$ and $\lambda_b = 0$ for almost all $b \in B$. Then
+\begin{align*}
+f \colon M &\to N \\
+x &\mapsto \sum_{b \in B} \lambda_b f_\circ(b)
+\end{align*}
+is an $R$-homomorphism which extends $f_\circ$. It is trivially the only one.
+\end{enumerate}
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+Let $R \neq \{0\}$.
+\begin{enumerate}
+\item $R$ is a field if and only if every $R$-module is free.
+\item $R$ is a PID if and only if every submodule of a free module is free.
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item ``$\pmi$'': By contraposition: if $R$ is not a field, then there exists $a \in R^\circ \sm R^\times$, and hence $R/aR \neq 0$, so $\Ann_R(R/aR) = aR \neq 0$. Then Theorem \ref{thm-free-mod-prop} implies that $R/aR$ is not free.\\
+``$\imp$'': Suppose $R$ is a field and let $M$ be an $R$-module. Consider
+\[
+\Omega := \{B \sse M \mid B \text{ is $R$-linearly independent}\}.
+\]
+$\Omega \neq \emptyset$, since $\emptyset \in \Omega$. If $\Sigma \sse \Omega$ is a chain, then $\bigcup_{B \in \Sigma} B \in \Omega$,\footnote{This is trivial, but observe that it is basically due to the fact that the definition of linear independency considers only finite subset.} and it's obviously an upper bound for $\Sigma$. Therefore $\Omega$ has a maximal element $B^*$ by Zorn's Lemma.\\
+Since $B* \in \Omega$ it is linearly independent, so it is left to show that $\langle B^* \rangle = M$. Assume to the contrary that there exists $z \in M \sm \langle B^* \rangle$.
+\begin{claim}{}
+$B^* \cup \{z\}$ is linearly independent.
+\begin{claimproof}
+Suppose $\lambda z + \sum_{b \in B^*} \lambda_b b =0$, where $\lambda,\lambda_b \in R$ and almost all $\lambda_b = 0$. If $\lambda \neq 0$, then $z = -\sum_{b \in B^*} \frac{\lambda_b}{\lambda} b \in \langle B^* \rangle$, contradiction.
+\end{claimproof}
+\end{claim}
+
+The claim clearly contradicts the maximality of $B^*$.
+\item ``$\pmi$'': Since $R$ is free as an $R$-module (cfr. point (1) of last Remark), by hypothesis every ideal of $R$ is free as an $R$-module. 
+\begin{claim}{}
+$\Zdv(R) = \{0\}$, i.e. $R$ is a domain.
+\begin{claimproof}
+Assume to the contrary that there is a $0 \neq \theta \in \Zdv(R)$. Then there is a $c \in R^\circ$ s.t. $c\theta=0$, i.e. $c \in \Ann_R(\theta R)$ and $\theta R \sse R$ is not free by Theorem \ref{thm-free-mod-prop}.(3), contradiction.
+\end{claimproof}
+\end{claim}
+
+Now let $I \lhd R$ be an ideal. $I$ must be free, so we consider a basis $(e_i)_{i \in I}$ of $I$ over $R$. But necessarily $|(e_i)_{i \in I}|=1$, since $e_i e_j + e_j (-e_i) = 0$. Therefore $I = R e$ for some $e \in I$.\footnote{Observe that we proved the following: if $B \sse R$ is an $R$-linearly independent subset, then $|B|=1$.}
+
+``$\imp$'': Let $M$ be a free $R$-module, $B$ a basis of $M$ and $N \sse M$ a submodule. Let $\Omega$ be the set of all triples $(C,C',f)$ with $C' \sse C \sse B$ and $f: C' \to {}_R \langle C \rangle \cap N$ is such that $f[C']$ is a basis of $\langle C \rangle \cap N$. Since $(\emptyset, \emptyset, \emptyset) \in \Omega$, we have that $\Omega \neq \emptyset$. We define the partial order ``$\leq$'' on $\Omega$ in the obvious way\footnote{Recall that a function is a set of ordered pairs.}
+\[
+(C,C',f) \leq (D,D',g) \iff (C \sse D, C' \sse D', f \sse g).
+\]
+By considering the union of chains as usual, it is immediate to check that $(\Omega,\leq)$ satisfies the assumptions of Zorn's lemma, and hence it has a maximal element $(C,C',f)$.\\
+We claim that $C=B$ (then $f[C']$ is a basis of $N$, and we are done). Assume to the contrary that there is a $u \in B \sm C$. Define $D := C \cup \{u\}$ and observe that
+\begin{center}
+$\langle D \rangle = \langle C \rangle + Ru$, where the sum is direct (because $B$ is l.i.), and $\langle C \rangle \subsetneq \langle D \rangle$.
+\end{center}
+We now have two possible cases:\\
+\textsc{Case 1:} $\langle D \rangle \cap N = \langle C \rangle \cap N$. Then obviously $f[C']$ is a base of $\langle D \rangle \cap N$ too, and so $(D,C',f) \in \Omega$. But $(D,C',f) \gneq (C,C',f)$, which contradicts the maximality of $(C,C',f)$.\\
+\textsc{Case 2:} $\langle D \rangle \cap N \supsetneq \langle C \rangle \cap N$. We define:
+\[
+\mathfrak{a} := \{\lambda \in R \mid \exists y \in \langle C \rangle \text{ s.t. } y + \lambda u \in N\} \sse R.
+\]
+Then $0 \neq \mathfrak{a} \lhd R$, and so by hypothesis we have $\mathfrak{a} = aR$ for some $a \in R^\circ$. Choose $x \in \langle C \rangle$ s.t. $x + au \in N$. Now define $D' := C' \cup \{u\}$ and
+\begin{align*}
+g \colon D' &\to \langle D \rangle \cap N \\
+g_{|_{C'}} &= f \\
+u &\mapsto x + au.
+\end{align*}
+\begin{claim}{}
+$g[D']$ is a basis of $\langle D \rangle \cap N$.
+\begin{claimproof}
+We proceed in two steps:
+\begin{enumerate}
+\item[(i)] $g[D']$ is $R$-linearly independent.
+\item[(ii)] $\langle g[D'] \rangle = \langle D \rangle \cap N$.
+\end{enumerate}
+In order to show (i), suppose that $\lambda(x+au) + \sum_{y \in f[C']} \lambda_y y =0$, where $\lambda,\lambda_y \in R$. If $\lambda = 0$, then all $\lambda_y = 0$. If $\lambda \neq 0$, then $(\lambda a) u = -\lambda x - \sum \lambda_y y \in \langle C \rangle$. Since $R$ is a domain, we obtain $\lambda a \neq 0$, which is contradicts the assumption $u \in B \sm C$.
+
+As for (ii), observe that we only have to show the ``$\supseteq$'' inclusion. Let $z \in \langle D \rangle \cap N$. Since $z \in \langle D \rangle$, then $z = y+cu$ for some $y \in \langle C \rangle$ and $c \in R$. But $z \in N$ too, so $c \in \mathfrak{a} = aR$, i.e. $c=ab$ for some $b \in R$. Then $z-b(x+au) = y-bx \in \langle C \rangle \cap N = \langle f[C'] \rangle$. Hence $z \in \langle f[C'] \rangle + R g(u) = \langle g[D'] \rangle$.
+\end{claimproof}
+\end{claim}
+
+The claim implies that $(D,D',g) \in \Omega$ and $(D,D',g) \gneq (C,C',f)$, which contradicts the maximality of $(C,C',f)$.
+\end{enumerate}
+\end{proof}
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Ideal Theory}
+
+In this section, let $R$ be a ring.
+
+\section{Prime ideals and maximal ideals}
+
+\begin{teo_custom-title}[Krull's Existence Theorem.] Let $I \lhd R$ be an ideal, $T \sse R$ a multiplicatively closed subset of $R$ with $T \cap I = \emptyset$ and let $\Omega=\{J \lhd R \mid I \sse J, J \cap T = \emptyset\}$. Then:
+\begin{enumerate}
+\item $\Omega$ has a maximal element w.r.t. set-inclusion.
+\item Every maximal element of $\Omega$ is a prime ideal. Particularly, there is a prime ideal $P$ with $I \sse P$ and $T \cap P = \emptyset$.
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item If $\Sigma \sse \Omega$ is a chain, the $\bigcup_{Q \in \Sigma} Q$ is an upper bound for $\Sigma$. Thus the preconditions of Zorn's lemma are satisfied and $\Omega$ has a maximal element.
+\item Let $P \in \Omega$ be maximal and let $a,b \in R$ with $ab \in P$. Suppose towards a contradiction that $a \not\in P$ and $b \not\in P$. Then $P+aR \not\in \Omega$ and $P+bR \not\in \Omega$. By definition of $\Omega$, this means $(P+aR) \cap T \neq \emptyset$ and $(P+bR) \cap T \neq \emptyset$. Let then $p_1,p_2 \in P$ and $c_1,c_2 \in R$ be such that $p_1+c_1 a \in T$ and $p_2+c_2 b \in T$. Then
+\[
+(p_1+c_1 a)(p_2+c_2 b)=(p_2+c_2 b)p_1 + (c_1 a) p_2 + (c_1 c_2)ab \in P \cap T = \emptyset,
+\]
+contradiction.
+\end{enumerate}
+\end{proof}
+\end{teo_custom-title}
+
+\begin{corollary}
+Let $R \neq 0$.
+\begin{enumerate}
+\item Every proper ideal $I \lhd R$ is contained by a maximal ideal. Especially, $\max(R) \neq \emptyset$.
+\item For all $a \in R \sm R^\times$ there is a $m \in \max(R)$ with $a \in m$.
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item We use last theorem with $T=\{1\}$. Since $J=0 \subsetneq R$, we get $\max(R) \neq \emptyset$.
+\item Follows from (1) with $I=aR$.
+\end{enumerate}
+\end{proof}
+\end{corollary}
+
+\begin{teo_custom-title}[Cohen's Theorem.]
+If every prime ideal of $R$ is finitely generated, then $R$ is noetherian.
+\begin{proof}
+We proceed by contraposition: suppose $R$ is not noetherian. We shall find a prime ideal which is not finitely generated.\\
+Let $\Omega=\{J \lhd R \mid J$ not finitely generated$\} \neq \emptyset$.
+\begin{claim}{ 1}
+Chains in $\Omega$ have upper bounds.
+\begin{claimproof}
+Let $\Sigma \sse \Omega$ be a chain and let $I=\bigcup_{Q \in \Sigma} Q$. Then $I \sse R$ is an ideal. Suppose $I$ is finitely generated, i.e. $I= \langle a_1,...,a_n \rangle$. Then there exists $Q \in \Sigma$ such that $a_1,...,a_n \in Q$, which means $I \sse Q \sse I$, that is $I=Q$. Thus $Q$ is finitely generated, contradiction.
+\end{claimproof}
+\end{claim}\\
+Therefore, by Zorn's lemma, $\Omega$ has a maximal element $P$. Of course, since $P \in \Omega$, $P$ is not finitely generated. If we show that $P$ is prime, we are done.
+\begin{claim}{ 2}
+$P$ is a prime ideal.
+\begin{claimproof}
+Suppose to the contrary that there exist $a,b \in R \sm P$ s.t. $ab \in P$. Since $P+Ra \subsetneq P$, then $P \not\in \Omega$, that is $P+Ra$ is finitely generated. Let $P+Ra= \langle p_1+c_1 a,...,p_k+c_k a \rangle$ with $p_i \in P$, $c_i \in R$. Consider $J=\{y \in R \mid ya \in P\} \sse R$, which is an ideal\footnote{More in general, we define the \emph{ideal quotient} of two ideals $I,I'$ as $(I:I'):=\{x \in R \mid xI' \sse I\}$. So, in our case, $J=(P:Ra)$.}. We have $P \subsetneq P+Rb \sse J$, where the last inclusion is immediate to check. Therefore $J$ is finitely generated as well, i.e. $J=\langle b_1,...,b_l \rangle$ for some $b_1,...,b_l \in R$. We now want to show that $P=\langle p_1,...,p_k,b_1a,...,b_la \rangle$, which contradicts the fact that $P$ is not finitely generated. The ``$\supseteq$'' is trivial. In order to prove ``$\sse$'', let $x \in P$. Since $P \sse P+aR$, we have
+\[
+x=\sum_{i=1}^k \lambda_i(p_i+c_i a) \qquad \text{ for some } \lambda_1,...,\lambda_k \in R.
+\]
+Then $\left( \sum_{i=1}^k \lambda_i c_i \right) a = x - \sum_{i=1}^k \lambda_i p_i \in P$. This means $\sum_{i=1}^k \lambda_i c_i \in J$, thus $\sum_{i=1}^k \lambda_i c_i = \sum_{j=1}^l \mu_j b_j$ with $\mu_1,...,\mu_l \in R$. Finally we get
+\[
+x= \sum_{i=1}^k \lambda_i p_i + a \sum_{j=1}^l \mu_j b_j \in \langle p_1,...,p_k,b_1a,...,b_la \rangle.
+\]
+\end{claimproof}
+\end{claim}\\
+So $P$ is a prime ideal, and it's not finitely generated, as wanted.
+\end{proof}
+\end{teo_custom-title}
+
+\begin{addendum}
+For commutative rings, an ideal $P$ is prime if and only if $P\neq R$ and for all ideals $A,B$ of $R$, if $AB\subseteq P$ then $A \sse P$ or $B \sse P$. (see \url{http://math.stackexchange.com/questions/73213/equivalence-of-definitions-of-prime-ideal-in-commutative-ring})
+\end{addendum}
+
+\begin{theorem}
+Let $k \geq 2$.
+\begin{enumerate}
+\item If $P \in \Spec(R)$, $I_1,...,I_k \lhd R$ and $\bigcap_{j=1}^k I_j \sse P$, then $I_j \in P$ for some $j \in \{1,...,k\}$.
+\item Let $I,P_1,...,P_k \lhd R$ with $I \sse \bigcup_{j=1}^k P_j$. If $P_1,...,P_k$ are prime, then $I \sse P_j$ for some $j \in \{1,...,k\}$.
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item Remember that $I_1 \cdot ... \cdot I_k \sse I_1 \cap ... \cap I_k$, thus $I_1 \cdot ... \cdot I_k \sse P$, and thus $I_j \sse P$ for some $j$, since $P$ is prime.
+\item We proceed by induction on $k$. Let $k=2$. Assume to the contrary that $I \nsubseteq P_1$ and $I \nsubseteq P_2$. Let $a_j \in I \sm P_j$, with $j=1,2$. Since $I \sse P_1 \cup P_2$, we have $a_2 \in P_1$. Furthermore, $a_1+a_2 \in I \sse P_1 \cup P_2$. Suppose WLOG $a_1+a_2 \in P_1$. But then $a_1=(a_1+a_2)-a_2 \in P_1$, contradiction.\\
+Suppose now that $k \geq 3$ and that the assertion holds for $k-1$. If there exists a $\ol{j} \in \{1,...,k\}$ with 
+\[
+I \sse \bigcup_{\substack{j=1\\ j \neq \ol{j}}}^k P_k,
+\]
+then the statement follows by the induction hypothesis. So we may assume WLOG (towards a contradiction) that for all $j \in \{1,...,k\}$ there exist 
+\[
+a_j \in I \sm \bigcup_{\substack{i=1\\ i \neq j}}^k P_k \sse P_j.
+\]
+Consider then $a=a_1 \cdot ... \cdot a_{k-1} + a_k \in I$. If $a \in P_j$ for some $j \in \{1,...,k-1\}$, then $a_k=a-a_1 \cdot ... \cdot a_{k-1} \in P_j$, contradiction. So necessarily $a \in P_k$, thus $a-a_k=a_1 \cdot ... \cdot a_{k-1} \in P_k$, and since $P_k$ is prime this means $a_j \in P_k$ for some $j \in \{1,...,k-1\}$, again a contradiction.
+\end{enumerate}
+\end{proof}
+\end{theorem}
+
+\begin{lemma}
+Let $f:R \to S$ be a ring homomorphism.
+\begin{enumerate}
+\item If $Q \lhd S$ is prime, then $f^{-1}[Q] \lhd R$ is prime.
+\item If $f$ is surjective and $Q \lhd S$ is maximal, then $f^{-1}[Q]$ is maximal.
+\end{enumerate}
+\end{lemma}
+
+\begin{lemma}
+The following statements are equivalent:
+\begin{enumerate}
+\item $|\max(R)|=1$.
+\item $R \sm R^\times \sse R$ is an ideal.
+\end{enumerate}
+\end{lemma}
+
+\begin{defn}
+A ring $R$ is called
+\begin{itemize}
+\item \emph{local} if $R \sm R^\times$ is an ideal (see 2.46!).
+\item \emph{semilocal} if $|\max(R)|<\infty$.
+\end{itemize}
+\end{defn}
+
+\begin{remark}\ 
+\begin{enumerate}
+\item Every field is local.
+\item If $p \in \P$, then
+\[
+\Z_{(p)} = \left\{ x \in \Q \Big| \, x=\frac{a}{s},\, a \in \Z,\, s \in \N \sm p\N\right\} \sse \Q
+\]
+is a local ring.
+\end{enumerate}
+\end{remark}
+
+\begin{defn}
+Ideals $(Q_i)_{i \in I}$ of $R$ are called (pairwise) comaximal if $Q_i+Q_j=R$ for all $i \neq j \in I$.
+\end{defn}
+
+\begin{theorem}
+Let $m \geq 2$, $(Q_j)_{j=1}^m$ be a family of comaximal ideals with $Q_j \neq R$ for all $j=1,...,m$. The following holds:
+\begin{enumerate}
+\item $Q_1 \cap ... \cap Q_{m-1}$ and $Q_m$ are comaximal.
+\item $Q_1 \cap ... \cap Q_m = Q_1 \cdot ... \cdot Q_m$.
+\item (Chinese Reminder Theorem) The map
+\begin{align*}
+  \phi \colon R &\to \prod_{i=1}^m R/Q_i\\
+   a &\mapsto (a+Q_1,...,a+Q_m)
+\end{align*}
+is a ring epimorphism with $\ker \phi = \prod_{i=1}^m Q_i$.
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item Suppose $m \geq 3$ and define $Q=Q_1 \cap ... \cap Q_{m-1}$. Assume to the contrary that $Q$ and $Q_n$ are not comaximal. Then there is a maximal ideal $\mathfrak{M}$ with $Q+Q_n \sse \mathfrak{M}$. Then $Q \sse \mathfrak{M}$, and thus by 3.4.1! $Q_j \sse \mathfrak{M}$ for some $j=1,...,k-1$. This implies $Q_j+Q_m \sse \mathfrak{M}$, but this is impossible, since $Q_j+Q_m=R$.
+\item It suffices to show $\sse$. We proceed by induction on $m$. If $m=2$, then 
+\begin{multline*}
+Q_1 \cap Q_2 = (Q_1 \cap Q_2) R = (Q_1 \cap Q_2) (Q_1+Q_2) \\ = \underbrace{(Q_1 \cap Q_2)}_{\sse Q_2} Q_1 + \underbrace{(Q_1 \cap Q_2)}_{\sse Q_1} Q_2 \sse Q_1Q_2 \sse Q_1 \cap Q_2.
+\end{multline*}
+Let $m \geq 3$. By induction hypothesis we have $Q:= \bigcap_{j=1}^{m-1} Q_j = \prod_{j=1}^{m-1} Q_j$. Thanks to point (1), $Q$ and $Q_m$ are comaximal, and thus, again by induction hypothesis we obtain
+\[
+\bigcap_{j=1}^m Q_j = Q \cap Q_m = Q \cdot Q_m = \prod_{j=1}^m Q_j.
+\]
+\item Obviously, $\phi$ is a ring homomorphism with $\ker \phi = \bigcap_{i=1}^m Q_i = \prod_{i=1}^m Q_i$.\\
+In order to show that $\phi$ is surjective, let $x_1,...,x_m \in R$. For all $j=1,...,m$, the ideals $Q_j$ and $\prod_{\substack{i=1\\ i \neq j}}^m Q_i$ are comaximal (by (1)), and hence there exist $u_j \in Q_j$ and $v_j \in \prod_{\substack{i=1\\ i \neq j}}^m Q_i$ such that $u_j+v_j=1$. Therefore $v_j \equiv \delta_{ij} \mod Q_i$, for $i=1,...,m$, and hence 
+\[
+x:= \sum_{k=1}^m v_k x_k \equiv x_j \mod Q_j
+\]
+for all $j=1,...,m$. This means that $x$ is a preimage for $(x_1+Q_1,...,x_m+Q_m)$.
+\end{enumerate}
+\end{proof}
+\end{theorem}
+
+\section{Nakayama's Lemma and Krull's Intersection Theorem}
+
+\begin{defn}
+Given an $R$-module $M$, the \emph{Jacobson radical} of $M$ is
+\[
+\J(M):= \bigcap_{\substack{N \sse M \\ N \text{ maximal}}} N.
+\]
+If there are no maximal submodules, then $\J(M):=M$.\\
+If $M=R$, then $\J(R)$ is the Jacobson radical of $R$.
+\end{defn}
+
+%\noindent\textbf{Remarks and examples.}
+\begin{remex}\ 
+\begin{enumerate}
+\item If $M$ is simple, then $\J(M)= \{0\}$.
+\item $\J(M) = \displaystyle\bigcap_{\substack{\phi : M \to E \\ E \text{ simple}}} \ker (\phi)$.
+\begin{proof}
+If $\phi \not\equiv 0$, then $M/\ker(\phi) \simeq E$, hence $\ker(\phi) \sse M$ is maximal.\\
+Conversely, every maximal submodule $N \sse M$ is the kernel of the canonical epimorphism $M \to M/N$, and $M/N$ is simple.
+\end{proof}
+\item $\J(\Z) = \displaystyle\bigcap_{p \in \P} p\Z = \{0\}$.
+\item $\J(R) = \{ x \in R \mid 1+Rx \sse R^\times \}$.
+\begin{proof}\ 
+\begin{itemize}
+\item[``$\sse$''] Let $x \in \J(R)$ and $a \in R$. Assume to the contrary that $1+ax \not\in R^\times$. By Corollary 3.2, there is an $\m \in \max(R)$ such that $1+ax \in \m$. Since $ax \in \J(R)$, then $ax \in \m$, and it follows that $1 \in \m$, contradiction.
+\item[``$\supseteq$''] Let $x \in R$ such that $1+Rx \sse R^\times$. Assume to the contrary that there is an $\m \in \max(R)$ such that $x \not\in \m$. Then $R=\m+Rx$, whence $1=m+ax$ for some $m \in \m$, $a \in R$, and thus $m = 1-ax \in 1+Rx \sse R^\times$, contradiction.
+\end{itemize}
+\end{proof}
+\end{enumerate}
+\end{remex}
+
+\begin{lemma}\ 
+\begin{enumerate}
+\item If $\phi : M_1 \to M_2$ is an $R$-homomorphism, then $\phi(\J(M_1)) \sse \J(M_2)$.
+\item If $N \sse M$ is a submodule with $N \sse \J(M)$, then $\J(M/N)=\J(M)/N$.
+\item $\J(M/\J(M)) = 0$.
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item If $E$ is simple and $\psi : M \to E$ is a homomorphism, then $\psi \circ \phi : M_1 \to E$ is a homomorphism, and hence $\J(M_1) \sse \ker(\psi \circ \phi)$. Then $\phi(\J(M_1)) \sse \ker(\psi)$. Since $\J(M_2)$ is the intersection of all such $\ker(\psi)$'s, it follows that $\phi(\J(M_1)) \sse \J(M_2)$.
+\item The maximal submodules of $M/N$ are precisely the ones of the form $M'/N$ with $M' \sse M$ maximal and $N \sse M'$. Since $N \sse \J(M)$, we always have $N \sse M'$. Thus
+\[
+\J(M/N) = \bigcap_{\substack{M' \sse M \\ M' \text{ maximal}}} (M'/N) = \left( \bigcap_{\substack{M' \sse M \\ M' \text{ maximal}}} M' \right) /N = \J(M)/N. 
+\]
+\item Follows from (2) with $N=\J(M)$.
+\end{enumerate}
+\end{proof}
+\end{lemma}
+
+\begin{defn}
+A submodule $M' \sse M$ is called \emph{superfluous in $M$} if the following condition holds:
+\[
+N+M' = M \Longrightarrow N=M, \quad \text{for all } N \sse M.
+\]
+\end{defn}
+
+\begin{proposition}\ 
+\begin{enumerate} 
+\item The following statements are equivalent:
+\begin{itemize}
+\item[a)] $M$ is finitely generated.
+\item[b)] $M/\J(M)$ is finitely generated and $\J(M)$ is superfluous.
+\end{itemize}
+\item $\J(R)M \sse \J(M)$.
+\item \textbf{Nakayama's Lemma:}
+\begin{center}
+If $M$ is finitely generated, then $\J(R)M$ is superfluous.
+\end{center}
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item ``(a)$\imp$(b)'' Since factor modules of finitely generated modules are finitely generated (see 2.34), $M/\J(M)$ is finitely generated. Let $N \subsetneq M$ be a submodule. By Exercise 35, there is a maximal submodule $N \sse M' \subsetneq M$. This implies $\J(M) \sse M'$, $N + \J(M) \sse M'$ and hence $N + \J(M) \neq M$.\\
+``(b)$\imp$(a)'' Let $x_1,...,x_n \in M$ be such that
+\[
+M/\J(M) = \sum_{i=1}^n R(x_i + \J(M)).
+\]
+Then $M = (\sum_{i=1}^n R x_i) + \J(M)$, and since $\J(M)$ is superfluous we get $M = \sum_{i=1}^n R x_i$.
+\item For all $x \in M$, the map $R \to M$ given by $\lambda \mapsto \lambda x$ is an $R$-homomorphism. Thus Lemma 3.11.1 implies that $\J(R) x \sse \J(M)$, and hence $\J(R)M \sse \J(M)$.
+\item Since $M$ is finitely generated, point (1) implies that $\J(M)$ is superfluous, and by point (2) it follows that $\J(K)M \sse \J(M)$ is superfluous.
+\end{enumerate}
+\end{proof}
+\end{proposition}
+
+\begin{corollary}
+Let $M$ be an $R$-module and $I \sse \J(R)$ an ideal. The following statements hold:
+\begin{enumerate}
+\item If $M$ is finitely generated and $IM=M$, then $M=0$.
+\item If $N \sse M$ is a submodule such that $M/N$ is finitely generated and $M=N+IM$, then $M=N$.
+\end{enumerate}
+\begin{proof}
+Exercise.
+\end{proof}
+\end{corollary}
+
+\begin{teo_custom-title}[Krull's intersection theorem.]
+Let $R$ be a noetherian ring, $M$ a finitely generated $R$-module, and $I \lhd R$. The following statements hold:
+\begin{enumerate}
+\item If $N = \displaystyle\bigcap_{n \geq 0} I^n M$, then $I N = N$.
+\item If $I \sse \J(R)$, then $\displaystyle\bigcap_{n \geq 0} I^n M \stackrel{(1)}{=} 0$ and $\displaystyle\bigcap_{n \geq 0} I^n \stackrel{(2)}{=} 0$.
+\item If $N \sse M$ and $I \sse \J(R)$, then $N = \displaystyle\bigcap_{n \geq 0} (N + I^n M)$.
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item Let $N=\bigcap_{n \geq 0} I^n M$, and $\Omega = \{L \sse M \mid IN \sse L, \ IN=L \cap N \}$. From $IN \in \Omega$ follows $\Omega \neq \emptyset$. By Corollary 2.36, $M$ is noetherian, and thus $\Omega$ has a maximal element $L$.
+\begin{claim}{}
+There is an $h \in \N$ with $I^h M \sse L$.
+\begin{claimproof}
+We will show that for every $c \in I$, there is an $n \in \N$ such that $c^n M \sse L$. Then, since $R$ is noetherian, there are $a_1,...,a_k \in I$ such that $I = \langle a_1,...,a_k \rangle$. So there is an $h \in \N$ with $a_i^h M \sse L$ for all $i \in [1,k]$.\\
+By Exercise 40 we have 
+\[
+I^h M \sse \langle a_1^h,...,a_k^h \rangle M = \sum_{i=1}^k a_i^h M \sse L.
+\]
+Let $c \in I$. If $m \in \N$ and $M_m = \{x \in M \mid c^m x \sse L\}$, then $M_1 \sse M_2 \sse ...$ is an ascending chain\footnote{if $c^m x \in L$, then also $c^{m+1}x \in L$, since $L$ is a module.}, and thus there is an $n \in \N$ such that $M_m = M_n$ for all $m \geq n$. We claim that
+\[
+(c^n M + L) \cap N = IN. \tag{$*$}
+\]
+Then $c^n M + L \in \Omega$, thus $c^n M + L= L$ by maximality of $L$, and hence $c^n M \sse L$, as wanted.\\
+Let's show $(*)$. The inclusion ``$\supseteq$'' is trivial, since $IN \sse N$ and $IN \sse L$. As for ``$\sse$'', let $z = c^n x + y \in (c^n M + L) \cap N$ with $x \in M$ and $y \in L$. Then $c z = c^{n+1} x + cy \in cN \sse L$, and thus $c^{n+1}x = cz - cy \in L$, i.e. $x \in M_{n+1} = M_n$. Thus $c^n x \in L$ and therefore $z \in L \cap N = IN$.
+\end{claimproof}
+\end{claim}\ \\
+So we have $N \sse I^n M \sse L$, and thus $N \sse I^n M \cap N \sse L \cap N = IN \sse N$, i.e. $N=IN$.
+\item Let $N = \bigcap_{n \geq 0} I^nM$. By the first point, we have $IN=N$, thus $N=0$ by Corollary 3.14.1. Thus equality (1) follows. Equality (2) follows from (1) with $M=R$.
+\item By the second point, we have $\bigcap_{n \geq 0} I^n (M/N) = 0$. Consider $\pi : M \to M/N$. Then
+\begin{multline*}
+N = \pi^{-1}(0) = \pi^{-1} \left( \bigcap_{n \geq 0} I^n (M/N) \right) = \bigcap_{n \geq 0} \pi^{-1} \Big( I^n (M/N) \Big)\\
+\stackrel{\footnotemark}{=} \bigcap_{n \geq 0} \pi^{-1} \Big( (I^n M + N)/N \Big) = \bigcap_{n \geq 0} (I^n M + N).
+\end{multline*}
+\footnotetext{Observe that $[\lambda x + y] = [\lambda x] = \lambda [x]$.}
+\end{enumerate}
+\end{proof}
+\end{teo_custom-title}
+
+\begin{defn}
+Let $R$ be a ring and $I \lhd R$. Then the \emph{variety of $I$} is
+\[
+\V(I) = \{ \p \in \Spec(R) \mid I \sse \p \}.
+\]
+The minimal elements of $\V(I)$ are called \emph{prime divisors of $I$}, and $\P(I)$ is the set of minimal prime divisors of $I$. The set $\P(0)$ contains exactly the minimal prime ideals of $R$.\\
+If $\p \in \Spec(R)$, then $\P(\p)=\{\p\}$.
+\end{defn}
+
+\begin{lemma}
+If $\Sigma \sse \Spec(R)$ is a chain, then $\bigcup_{\p \in \Sigma} \p$ and $\bigcap_{\p \in \Sigma} \p$ are prime ideals.
+\end{lemma}
+
+\begin{theorem}
+Let $I \lhd R$. Then
+\begin{enumerate}
+\item For all $\p \in \V(I)$ there is a $\p_0 \in \P(I)$ such that $\p_0 \sse \p$.
+\item If $R/I$ is noetherian, then there are $\p_1,...,\p_n \in \P(I)$ with $\p_1 \ldots \p_n \sse I$. Particularly, every noetherian domain has only finitely many prime ideals.
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item Let $\p \in \V(I)$. Define $\Omega = \{ \p' \in \V(I) \mid \p' \sse \p \}$. We define the partial order $\leq$ on $\Omega$ given by reverse inclusion, i.e. $\p' \leq \p'' \Leftrightarrow \p' \supseteq \p''$.\\
+If $\Sigma \sse \Omega$ is a chain, then by Lemma 3.17 it follows that $\bigcap_{\mathfrak{q} \in \Sigma} \mathfrak{q} \in \Omega$. Then $\Omega$ has a maximal element $\p_0$ by Zorn's Lemma.
+\item Let $X := \{ \p_1 \ldots \p_n \mid n \in \N, \ \p_1,...,\p_n \in \P(I) \}$. Suppose towards a contradiction that for all $\mathfrak{a} \in X$ it holds $\mathfrak{a} \not\subseteq I$. Then
+\[
+I \in \Sigma := \Big\{ J \lhd R \mid I \sse J, \ \forall \mathfrak{a} \in X \, [\mathfrak{a} \not\subseteq J] \Big\}.
+\]
+Since $R/I$ is noetherian, $\Sigma$ has a maximal element $\mathfrak{q}$.
+\begin{claim}{}
+$\mathfrak{q} \in \Spec(R)$.
+\begin{claimproof}
+Suppose there are $a,b \in R \sm \mathfrak{q}$ with $ab \in \mathfrak{q}$. Then $\mathfrak{q}+aR \not\in \Sigma$ and $\mathfrak{q}+bR \not\in \Sigma$. Hence there are $\mathfrak{a}_1, \mathfrak{a}_2 \in X$ such that $\mathfrak{a}_1 \sse \mathfrak{q}+aR$ and $\mathfrak{a}_2 \sse \mathfrak{q}+bR$ and thus
+\[
+\mathfrak{a}_1 \mathfrak{a}_2 \sse (\mathfrak{q}+aR)(\mathfrak{q}+bR) \sse \mathfrak{q},
+\]
+which contradicts $\mathfrak{q} \in \Sigma$.
+\end{claimproof}
+\end{claim}\\
+By point (1), there is a $\p_0 \in \P(I)$ with $\p_0 \sse \mathfrak{q}$. But obviously $\mathfrak{a}_1 \mathfrak{a}_2 \in X$, and this contradicts $\mathfrak{q} \in \Sigma$. The proof is complete.\\
+In order to show that every noetherian domain has only finitely many prime ideals, consider $\{0\} \lhd R$, which is prime since $R$ is a domain. Of course $R/\{0\}$ is noetherian and $\P(\{0\})$ are the minimal prime ideals of $R$. AND THEN???
+\end{enumerate}
+\end{proof}
+\end{theorem}
+
+\section{Hilbert's Basis Theorem and Hilbert's Nullstellensatz.}
+
+\begin{teo_custom-title}[Hilbert's Basis Theorem.]
+Let $R$ be noetherian and $n \in \N$. Then $R[X_1,...,X_n]$ is noetherian.
+\begin{proof}
+It suffices to show the statement for $n=1$. Suppose there is an $I \lhd R[X]$ which is not finitely generated. Let $0 \neq f_1 \in I$ of minimal degree. For $k \geq 1$, we recursively define a sequence $(f_k)_{k \geq 1}$ such that
+\[
+0 \neq f_{k+1} \in I \sm \langle f_1, \ldots , f_k \rangle
+\]
+and $f_{k+1}$ is of minimal degree. For $k \in \N$, let $n_k = \deg(f_k)$ and $a_k \in R$ be the leading coefficient of $f_k$. Then $n_1 \leq n_2 \leq ...$ and $\langle a_1 \rangle \sse \langle a_1,a_2 \rangle \sse ...$ is an ascending chain of ideals.\\
+Since $R$ is noetherian, there exists $k \in \N$ such that $\langle a_1,...,a_{k'} \rangle = \langle a_1,...,a_k \rangle$ for every $k' \geq k$. Then there are $b_1,...,b_k \in R$ with $a_{k+1} = \sum_{i=1}^k b_i a_i$ and
+\[
+g = f_{k+1} - \sum_{i=1}^k b_i X^{n_{k+1}-n_i} f_i \in I \sm \langle f_1, \ldots, f_k \rangle
+\]
+with $\deg(g) < \deg(f_{k+1})$, contradiction.\\
+Observe that $g \not\in \langle f_1, \ldots, f_k \rangle$ because otherwise $f_{k+1} = g + \sum_{i=1}^k b_i X^{n_{k+1}-n_i} f_i \in \langle f_1,...,f_k \rangle$.
+\end{proof}
+\end{teo_custom-title}
+
+\begin{corollary}
+Let $R \sse S$ be commutative rings, with $S$ finitely generated on $R$ as a ring (i.e. there are $c_1,...,c_n \in S$ such that $S=R[c_1,...,c_n]$). Then $S$ is called \emph{finitely generated $R$-algebra} (or \emph{affine $R$-algebra}). If $R$ is noetherian, then so is $S$.
+\begin{proof}
+We consider the valuation homomorphism
+\begin{align*}
+\Phi_{c_1,\ldots,c_n}^{X_1,...,X_n} \colon R[X_1,\ldots,X_n] & \to R[c_1,\ldots,c_n]=S \\
+X_i & \mapsto c_i.
+\end{align*}
+By Theorem 3.19, $R[X_1,...,X_n]$ is noetherian, and thus $S$ is noetherian by 2.37.
+\end{proof}
+\end{corollary}
+
+\begin{defn}
+Let $I \lhd R$ be an ideal. The \emph{radical} of $I$ is
+\[
+\sqrt{I} = \{ x \in R \mid \exists n \in \N \colon x^n \in I \}.
+\]
+Obviously $I \sse \sqrt{I} \sse R$, and $I$ is called \emph{radical ideal} if $I=\sqrt{I}$.
+\end{defn}
+
+\begin{proposition}
+Let $I,J \lhd R$. Then:
+\begin{enumerate}
+\item If $I \sse J$, then $\sqrt{I} \sse \sqrt{J}$.
+\item $\sqrt{I} = \sqrt{\sqrt{I}} = \sqrt{I^n}$, for all $n \in \N$.
+\item $\sqrt{IJ} = \sqrt{I \cap J} = \sqrt{I} \cap \sqrt{J}$.
+\item If $I \neq R$, then $\sqrt{I} \neq R$.
+\item $\sqrt{I +J} = \sqrt{\sqrt{I}+\sqrt{J}}$.
+\item If $I \in \Spec(R)$, then $I = \sqrt{I}$.
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item Trivial.
+\item We have $I^n \sse I \sse \sqrt{I}$, thus by point (1) we get $\sqrt{I^n} \sse \sqrt{I} \sse \sqrt{\sqrt{I}}$. If $x \in \sqrt{\sqrt{I}}$, then there is an $l \in \N$ with $x^l \in \sqrt{I}$, and so there is a $k \in \N$ with $x^{kl} \in I$. Thus $x^{kln} \in I^n$ and $x \in \sqrt{I^n}$.
+\item We have $IJ \sse I \cap J \sse \sqrt{I} \cap \sqrt{J} \sse \sqrt{\sqrt{I} \cap \sqrt{J}}$. If $x \in \sqrt{\sqrt{I} \cap \sqrt{J}}$, then there is an $m \in \N$ with $x^m \in I$ and $x^m \in J$, thus $x^{2m} \in IJ$, i.e. $x \in \sqrt{IJ}$.
+\item If $\sqrt{I} = R$, then there are $x \in I$ and $m \in \N$ such that $x^m = 1$, and thus $x \in I \cap R^\times$, i.e. $I=R$.
+\item We have $I+J \sse \sqrt{I} + \sqrt{J} \sse \sqrt{\sqrt{I}+\sqrt{J}}$. If $x \in \sqrt{\sqrt{I}+\sqrt{J}}$, then there are $n,m \in \N$ such that $x^m = a+b$ with $a^n \in I$ and $b^n \in I$. It follows that
+\[
+x^{2mn} = (a+b)^{2n} = \sum_{\nu=0}^{2n} \binom{2n}{\nu} a^\nu b^{2n-\nu} \in I+J.
+\]
+\end{enumerate}
+\end{proof}
+\end{proposition}
+
+\begin{proposition}
+Let $I \lhd R$ be an ideal.
+\begin{enumerate}
+\item $\displaystyle \sqrt{I} = \bigcap_{\p \in \V(I)} \p = \bigcap_{\p \in \P(I)} \p$.
+\item If $J \lhd R$ is finitely generated and $J \sse \sqrt{I}$, then there is an $m \in \N$ such that $J^m \sse I$.
+\item $\displaystyle \sqrt{0} = \bigcap_{\p \in \Spec(R)} \p = \bigcap_{\m \in \max(R)} \m = \J(R)$. $\sqrt{0}$ is called \emph{nilradical of $R$}.
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item We will show
+\[
+\sqrt{I} \stackrel{\text{(i)}}{\sse} \bigcap_{\p \in \V(I)} \p \stackrel{\text{(ii)}}{\sse} \bigcap_{\p \in \P(I)} \p \stackrel{\text{(iii)}}{\sse} \sqrt{I}.
+\]
+\begin{enumerate}
+\item[(i)] If $x \in \sqrt{I}$ and $\p \in \V(I)$, then there is an $m \in \N$ with $x^m \in I \sse \p$, and thus $x \in \p$.
+\item[(ii)] Trivial.
+\item[(iii)] Let $a \in R \sm \sqrt{I}$. We claim that there is a $\p_0 \in \V(I)$ such that $a \not\in \p_0$. The set $S=\{a^n \mid n \in \N_0 \}$ is multiplicatively closed with $S \cap I = \emptyset$. Then it follows
+\[
+I \in \Omega = \{ J \lhd R \mid J \cap S = \emptyset, \ I \sse J \}.
+\]
+By Krull's Existence Theorem, $\Omega$ has a maximal element $\p \in \Spec(R)$. By Theorem 3.18.1, there is a $\p_0 \in \P(I)$ such that $I \sse \p_0 \sse \p$.
+\end{enumerate}
+\item Let $J = _R \langle x_1,...,x_k \rangle$. Then there is an $n \in \N$ with $x_i^n \in I$ for all $i \in [1,k]$. If $a \in J$, then $a = \sum_{i=1}^k \lambda_i x_i$ with $\lambda_1,...,\lambda_k \in R$, and thus $a^{nk}$ is a sum of products of $nk$ factors of $\{\lambda_1 x_1,...,\lambda_k x_k\}$ and hence $a^{nk} \in I$.
+\item This follows from (1), since $\p \in \Spec(R)$ contains zero and since every maximal ideal is prime.
+\end{enumerate}
+\end{proof}
+\end{proposition}
+
+\begin{defn}
+Let $K \sse L$ be fields and $n \in \N$.
+\begin{enumerate}
+\item Let $Z \sse K[X_1,...,X_n]$. We denote with $\V_L(Z)$ the set
+\[
+\V_L(Z) := \{ \X \in L^n \mid \forall f \in Z \colon f(x)=0 \}	 \sse L^n, 
+\]
+which is the set of solutions of the system of polynomial equations $f(\X) = 0$ for all $f \in Z$ in $L^n$.
+\item A subset $V \sse L^n$ is called \emph{(affine, algebraic) $K$-variety} if there are $f_1,...,f_m \in K[X_1,...,X_n]$ such that $V$ is the set of solutions of the system
+\[
+\begin{cases}
+f_1(x_1,\ldots,x_n)=0 \\
+\vdots \\
+f_m(x_1,\ldots,x_n)=0
+\end{cases}
+\]
+in $L^n$, i.e. if $V = \V_L(\{f_1,...,f_m\})$.
+\end{enumerate}
+\end{defn}
+
+\begin{theorem}
+Let $K \sse L$ be fields and $Z \sse K[X_1,...,X_n]$. We have:
+\begin{itemize}
+\item $\V_L(Z) = \V_L( _{K[\X]} \langle Z \rangle )$.
+\item There is a finite subset $E \sse Z$ such that $\V_L(E) = \V_L(Z)$.
+\end{itemize}
+\begin{proof}\ 
+\begin{enumerate}
+\item The inclusion ``$\supseteq$'' is trivial. Let's show ``$\sse$''. Let $\X \in \V_L(Z)$. If $f \in \langle Z \rangle$, then $f = \sum_{i=1}^k g_i h_i$ with $g_i \in K[\X]$ and $h_i \in Z$ for all $i \in [1,k]$. Then $f(\X) = \sum_{i=1}^k g_i(x) h_i(x) = 0$, and thus $\X \in \V_L(\langle Z \rangle)$.
+\item By theorem 3.19, $K[\X]$ is noetherian and thus $\langle Z \rangle$ is finitely generated. By the remark after Definition 2.3, there is a finite $E \sse Z$ with $\langle E \rangle = \langle Z \rangle$. Then
+\[
+\V_L(Z) = \V_L(\langle Z \rangle) = \V_L(\langle E \rangle) = \V_L(E).
+\]
+\end{enumerate}
+\end{proof}
+\end{theorem}
+
+\begin{defn}
+Let $K \sse L$ be fields and $V \sse L^n$. Then
+\[
+\J(V) = \{ f \in K[\X] \mid f(\mathbf{a}) = 0 \text{ for all } \mathbf{a} \in V \} \lhd K[\X]
+\]
+is called \emph{vanishing ideal of $V$}.
+\end{defn}
+
+\begin{theorem}[Field-theoretic version of Hilbert's Nullstellensatz]
+Let $K$ be a field and $A=K[x_1,...,x_n]$ a finitely generated $K$-algebra. Then the embedding $K \hookrightarrow \ol{K}$ ($\ol{K}$ is the algebraic closure of $K$) can be lifted to a $K$-homomorphism $A \to \ol{K}$. If $A$ is a field, then $A/K$ is algebraic.
+\begin{proof}
+Bosch (Algebra II, Paragraph 39).
+\end{proof}
+\end{theorem}
+
+\begin{lemma}
+Let $K$ be a field and $a_1,...,a_n \in K$. Then:
+\begin{enumerate}
+\item $\m = \langle X_1-a_1, ..., X_n-a_n \rangle \sse K[\X]$ is a maximal ideal such that $\V_K(\m) = \{\mathbf{a}\} \sse K^n$ and $\J(\{a\})=\m$.
+\item If $K$ is algebraically closed and $\m \lhd K[\X]$ is maximal, then there are $b_1,...,b_n \in K$ such that $\m = \langle X_1-b_1, ..., X_n-b_n \rangle$.
+\end{enumerate}
+\begin{proof}
+We consider the valuation homomorphism
+\begin{align*}
+\phi:= \Phi_{a_1,\ldots,a_n}^{X_1,...,X_n} \colon K[X_1,\ldots,X_n] & \to K \\
+X_i & \mapsto a_i.
+\end{align*}
+Then $K[\X]/\ker(\phi) \simeq K$, thus $\ker(\phi) \in \max(K[\X])$ and $\langle X_1-a_1,...,X_n-a_n \rangle \sse \ker(\phi)$. We want to show that equality holds.\\
+Every $f \in K[\X]$ has a unique representation of the form
+\[
+f = \sum_{\mathbf{m}=(m_1,\ldots,m_n) \in \N_0^n} b_\mathbf{m} \prod_{i=1}^n (X_i-a_i)^{m_i}. \tag{Taylor series}
+\]
+Hence, if $f \in \ker(\phi)$, then $f(\mathbf{a}) = \mathbf{0} - b_\mathbf{0}$ (???), and thus $f \in \langle X_1-a_1,...,X_n-a_n \rangle$.\\
+Obviously $\V_K(\m) = \{\mathbf{a}\}$. Furthermore, $\m \sse \J(\{\mathbf{a}\}) \neq K[\X]$ and thus $\m=\J(\{\mathbf{a}\})$.
+\item Let $K$ be algebraically closed and $\m \lhd K[\X]$ maximal. By Theorem 3.27, there is a $K$-homomorphism $K[\X]/\m \to K$ (???), which then is an isomorphism (???). Thus there is a $K$-epimorphism $\phi: K[\X] \to K$ with $\ker(\phi) = \m$. Hence
+\[
+\langle X_1 - \phi(X_1), \ldots, X_n - \phi(X_n) \rangle \sse \ker(\phi),
+\]
+and since $\langle X_1 - \phi(X_1), \ldots , X_n - \phi(X_n) \rangle$ is maximal by (1), the statement follows.
+\end{proof}
+\end{lemma}
+
+\begin{teo_custom-title}[Hilbert's Nullstellensatz.]
+Let $L/K$ be a field extension, $L$ algebraically closed, $n \in \N$ and $R = K[\X]$. The following statements hold:
+\begin{enumerate}
+\item If $I \lhd R$ with $I \neq R$, then $\V_L(I) \neq \emptyset$.
+\item If $I \lhd R$, then $\J(\V(I)) = \sqrt{I}$. The maps
+\begin{align*}
+\{ K-\text{variety, } V \sse L^n \} & \to \{ \text{radical ideals of } R \} \\
+V & \mapsto \J(V) \\
+\V_L(I) & \mapsfrom I
+\end{align*}
+are bijective and are each other's inverse.
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item \underline{Special case:} $L=K$. Since $I \neq R$ there is a maximal ideal $\m = \langle X_1-a_1, \ldots, X_n-a_n \rangle$ with $I \sse \m$, and thus $\{\mathbf{a}\} = \V_L(\m) \sse \V_L(I)$.\\
+\underline{General case:} Let $\m \in \max(K[\X])$ with $I \sse \m$. Then $A := K[\X]/\m$ is a field. The function 
+\begin{align*}
+\Phi: K[\X] & \to K[\X]/\m \\
+X_i & \mapsto \xi_i := X_i + \m
+\end{align*}
+is a ring epimorphism, and thus $A=K[\xi_1,...,\xi_n]$ is a finitely generated $K$-algebra. By 3.27, $A/K$ is algebraic, and thus there is a $K$-homomorphism $\phi: A \to L$. Then
+\[
+\Big( \phi(\xi_1), \ldots, \phi(\xi_n) \Big) \in L^n
+\]
+is a root of $\m$, and thus of $I$. (If $f \in \m$, then $f \Big( \phi(\xi_1), \ldots, \phi(\xi_n) \Big) = \phi \Big(f(x_1, \ldots, x_n) \Big) = ??? = 0$.)
+\item 
+\begin{claim}{ 1}
+$\J(V)$ is a radical ideal.
+\begin{claimproof}
+If $f \in K[\X]$ with $f^n \in \J(V)$, then $f^n(\mathbf{a})=0$ for all $\mathbf{a} \in V$, and thus $f(\mathbf{a})=0$ for all $\mathbf{a} \in V$, i.e. $f \in \J(V)$.
+\end{claimproof}
+\end{claim}
+\begin{claim}{ 2}
+$\V_L(\J(\U))=\U$ for all $K$-varieties $\U \in L^n$.
+\begin{claimproof}
+Let $\U \in \V_L(\g)$ with $\g \lhd K[\X]$. We need to show $\V_L(\J(\V_L(\g))) = \V_L(\g)$.\\
+The inclusion ``$\supseteq$'' is immediate, since the polynomials in $\J(\V_L(\g))$ are zero on $\V_L(\g)$.\\
+For the inclusion ``$\sse$'', observe that all the polynomials of $\g$ are zero on $\V_L(\g)$, i.e. $\g \sse \J(\V_L(\g))$, and thus $\V_L(\g) \supseteq \V_L(\J(\V_L(\g)))$.
+\end{claimproof}
+\end{claim}
+\begin{claim}{ 3}
+$\J(\V_L(I))=\sqrt{I}$.
+\begin{claimproof}
+``$\supseteq$'' The polynomials of $I$ are zero on $\V_L(I)$, i.e. $I \sse \J(\V_L(I))$, and thus $\sqrt{I} \sse \sqrt{\J(\V_L(I))} = \J(\V_L(I))$ by Claim 1.\\
+``$\sse$'' Conversely, let $0 \neq f \in \J(\V_L(I))$. Consider
+\[
+\g = \langle I, fT-1 \rangle \lhd K[X_1,\ldots,X_n,T] = K[\X,T].
+\]
+We claim that $\V_L(\g))=\emptyset$. Suppose to the contrary $(x_1,...,x_n,t) \in L^{n+1}$ is in $\V_L(\g)$. Then $(x_1,...,x_n) \in \V_L(I)$, and thus $f(x_1,...,x_n)t-1 = -1 \neq 0$. But $(x_1,...,x_n,t)$ must be a root of $fT-1 \in K[\X,T]$, contradiction.\\
+So $\V_L(\g)=\emptyset$, and by point (1) follows that $\g=K[\X,T]$. Hence there exist $f_1,...,f_s \in I$ and $p_1,...,p_{s+1} \in K[\X,I]$ such that
+\[
+1 = \sum_{i=1}^s f_i p_i + p_{s+1}(fT-1).
+\]
+We consider the homomorphism
+\begin{align*}
+\phi := \Phi_{(X_1,\ldots,X_n, \frac{1}{f})}^{(X_1,\ldots,X_n,T)} : K[\X,T] & \to K(X_1,\ldots,X_n) \\
+X_i & \mapsto X_i \\
+T & \mapsto \frac{1}{f}.
+\end{align*}
+Then
+\[
+1 = \sum_{i=1}^s \phi(p_i)f_i,
+\]
+and we have $\phi(p_i) = \sfrac{q_i}{f^{m_i}}$, where $q_i \in K[\X]$, $m_i \in \N$. For $m = \max\{m_1,...,m_s\}$ we obviously get
+\[
+f^m \in \langle f_1, \ldots, f_s \rangle \sse I,
+\]
+i.e. $f \in \sqrt{I}$.
+\end{claimproof}
+\end{claim}\\
+We showed everything we set out to prove.
+\end{enumerate}
+\end{proof}
+\end{teo_custom-title}
+
+\chapter{Ring extensions}
+
+\section{Algebras}
+
+\begin{defn}
+Let $R$ be a commutative ring. An (associative, unitary) $R$\emph{-algebra} is an $R$-module $A$ together with a multiplication $\cdot : A \times A \to A$ such that:
+\begin{itemize}
+\item[(A1)] $(A,+,\cdot)$ is a (not necessarily commutative) ring;
+\item[(A2)] For all $\lambda \in R$ and all $a,b \in A$, $\lambda (ab) = a (\lambda b)$.
+\end{itemize}
+If $(A,+,\cdot)$ is a commutative ring, then $A$ is called a commutative $R$-algebra.
+\end{defn}
+
+\noindent\textbf{Remarks and examples.}
+\begin{enumerate}
+\item For every $n \in \N$, $M_n(R)$ is an $R$-algebra and $R[X_1,...,X_n]$ is a commutative $R$-algebra.
+\item If $A$ is an $R$-algebra, then $\epsilon : R \to A$, $\lambda \mapsto \lambda 1_A$ is a ring homomorphism, and for all $\lambda \in R$ and $a \in A$, $\epsilon(\lambda) a = \epsilon(\lambda a)$.
+\begin{proof}
+For all $\lambda, \mu \in R$ and $a \in A$, we have:
+\[
+\epsilon(\lambda\mu) = (\lambda\mu) 1_A = \lambda(\mu 1_A) = \lambda [1_A (\mu 1_A)] = (\lambda 1_A)(\mu 1_A) = \epsilon(\lambda) \epsilon(\mu)
+\]
+and
+\[
+\epsilon(\lambda) a = (\lambda 1_A) a = \lambda (1_A a) = \lambda (a 1_A) = a (\lambda 1_A) = a \epsilon(\lambda).
+\]
+\end{proof}
+\item Conversely, let $A$ be a ring and $\epsilon : R \to A$ a ring homomorphism such that $\epsilon(\lambda)a = a \epsilon(\lambda)$ for all $\lambda \in R$ and all $a \in A$. Then (check details) $A$ is an $R$-module and an $R$-algebra. Then $\epsilon$ is called the \emph{structural homomorphism} of the $R$-algebra $A$, and also $\epsilon : R \to A$ is called an $R$-algebra.\\
+In particular, every commutative overring $S \supseteq R$ and every epimorphic image of $R$ is an $R$-algebra.
+\item Let $\epsilon_1 : R \to A_1$ and $\epsilon_2 : R \to A_2$. A ring homomorphism $f: A_1 \to A_2$ is an $R$\emph{-algebra homomorphism} if $f \circ \epsilon_1 = \epsilon_2$ (or, equivalently, if $f$ is a module homomorphism).\\
+Suppose $A_1 \supseteq R$ and $A_2 \supseteq R$ are commutative overring and $f : A_1 \to A_2$ is a ring homomorphism. Then $f$ is an $R$-algebra homomorphism if and only if $f_{|_R}=\id_R$.
+\begin{proof}
+\begin{itemize}
+\item[($\imp$)] If $\lambda \in R$, then $f(\lambda) = f(\lambda 1) = \lambda f(1) = \lambda 1 = \lambda$.
+\item[($\pmi$)] If $\lambda \in R$ and $a \in A$, then $f(\lambda a) = f(\lambda) f(a) = \lambda f(a)$.
+\end{itemize}
+\end{proof}
+\item If $R$ is a ring, then there is exactly one ring homomorphism $\epsilon : \Z \to R$ (namely, $\epsilon(m)=m 1_R$). Thus $R$ is a $\Z$-algebra.
+\end{enumerate}
+
+\textbf{More notations and conventions.}
+\begin{enumerate}
+\item Let $0 \neq R \supseteq S$ commutative rings with $S$ an overring. Then $R \supseteq S$, indicated also $S/R$, is called a \emph{ring extension}.\\
+For all $\p \in \Spec(S)$ we have $\p \cap R \in \Spec(R)$.\\
+For any $C \sse S$, let $[C] = \{ c_1 \cdot \ldots \cdot c_n \mid n \in \N _0, c_1,...,c_n \in C \}$ be the semigroup of $S$ generated by $C$, and $R[C] = _R \langle [C] \rangle \sse S$. Then $R[C]$ is the smallest subring of $S$ containing $R \cup C$.\\
+If $S'=R[C]$ and if $\phi_1,\phi_2 : S \to S'$ are ring homomorphism with $\phi_{1|_{R \cup C}} = \phi_{2|_{R \cup C}}$, then $\phi_1 = \phi_2$.
+\item Let $R$ a commutative ring, $A$ a commutative $R$-algebra and $\epsilon : R \to A$ the structural homomorphism. Then $A$ is called a \emph{finitely generated} $R$-algebra (or an $R$-algebra \emph{of finite type}, or an \emph{affine} $R$-algebra) if one of the following equivalent conditions is satisfied:
+\begin{itemize}
+\item There exist and $n \in \N$ and an epimorphism $R[X_1,...,X_n] \to A$.
+\item There exist $n \in \N$, $x_1,...,x_n \in A$ with $A= \epsilon[R] [x_1,...,x_n]$, i.e. $A$ is the smallest subring of $A$ which contains $\epsilon[R] \cup \{x_1,...,x_n\}$.
+\end{itemize}
+\end{enumerate}
+
+\section{Integral ring extensions and the Theorem of Cohen-Seidenberg.}
+
+\begin{defn}
+Let $R \sse S$ be a ring extension.
+\begin{enumerate}
+\item An element $x \in S$ is called \emph{integral over} $R$ (\emph{integral}$/R$) if there is a monic polynomial $0 \neq f \in R[X]$ with $f(x)=0$, i.e. there are $n \in \N$ and $a_0,...,a_{n-1} \in R$  such that $x^n+a_{n_1}x^{n-1} + \ldots + a_0 = 0$. The latter is called an \emph{integral equation} of $x/R$.
+\item The \emph{integral closure of $R$ in $S$} is $\cl_S(R)=\{x \in S \mid x$ is integral$/R\}$.
+\item A subset $S' \sse S$ is called \emph{integral}$/R$ if $S' \sse \cl_S(R)$.
+\item $R$ is called \emph{integrally closed in $S$} if $\cl_S(R)=R$.
+\item If $R$ is a domain with $\q(R)=K$, then $R$ is called \emph{integrally closed} if $\cl_K(R)=R$.
+\end{enumerate}
+\end{defn}
+
+\noindent\textbf{Remarks and examples.}
+\begin{enumerate}
+\item Let $R \sse S$ be fields and $x \in S$. Then $x$ is integral$/R$ iff $x$ is algebraic$/R$.
+\item Let $\ol{\Q} \sse \C$ be the algebraic closure of $\Q$. This is called the \emph{field of algebraic numbers}. $\ol{\Z}= \cl_{\ol{\Q}}(\Z)  = \cl_{\C}(\Z)$ is the \emph{ring of all algebraic integers}.
+\item Every field is integrally closed.
+\end{enumerate}
+
+\begin{theorem}
+Let $R \sse S$ be a ring extension and $x \in S$. The following are equivalent:
+\begin{itemize}
+\item[(a)] $x$ is integral$/R$.
+\item[(b)] $R[x]$ is a finitely generated $R$-module.
+\item[(c)] There is a subring $S'$ with $R[x] \sse S' \sse S$ such that $S'$ is a finitely generated $R$-module.
+\item[(d)] There is an $R[x]$-module $M$ such that $\Ann_{R[x]}(M)=0$ and $M$ is a finitely generated $R$-module.
+\end{itemize}
+\begin{proof}\ 
+\begin{itemize}
+\item[(a)$\imp$(b)] Let $n \in \N$, $a_{n-1},...,a_0 \in R$ such that $x^n+a_{n-1}x^n + \ldots + a_0 = 0$. By definition we have
+\[
+R[x] = \left\{ \sum_{j=0}^k c_j x^j \ \Bigg| \ k \in \N, c_0,...,c_k \in R \right\}
+\]
+and hence $R[x] = _R \langle \{x^j \mid j \in \N_0 \} \rangle$.
+\begin{claim}{} $R[x] = _R \langle \{x^j \mid j \in [0,n-1] \} \rangle$.
+\begin{claimproof} The inclusion ``$\supseteq$'' is trivial. We want to prove ``$\sse$''. It is sufficient to show that $x^k \in _R \langle \{x^j \mid j \in [0,n-1] \} \rangle$ for every $k \in \N$. We proceed by induction. If $k \leq n-1$ the assertion is clearly true. Let $k \geq n$ and suppose $\{x^0,...,x^{k-1}\} \in _R \langle \{x^j \mid j \in [0,n-1] \} \rangle$. Then
+\begin{multline*}
+x^k = x^{k-n}x^n = x^{k-n} \left( -a_{n-1}x^n - \ldots - a_0 \right) =\\
+-a_{n-1}x^{k-1} - \ldots - a_0 x^{k-n} \in _R \langle \{x^j \mid j \in [0,n-1] \} \rangle.
+\end{multline*}
+\end{claimproof}
+\item[(b)$\imp$(c)] $S'=R[x]$ has the required property.
+\item[(c)$\imp$(d)] $M=S'$ has the required property, because if $a \in R[x]$ with $aS'=\{0_{S'}\}$, then $a 1_{S'} = 0_{S'}$, and hence $a=0$.
+\item[(d)$\imp$(a)] Let $M= _R \langle m_1,...,m_n \rangle$ which is also an $R[x]$-module. Thus $x M \sse M$. Therefore, for all $i \in [1,n]$ there are $r_{i,1},...,r_{i,n} \in R$ such that
+\[
+x m_i = \sum_{j=1}^n r_{i,j} m_j
+\]
+and hence
+\[
+\sum_{j=1}^n (r_{i,j} - \delta_{i,j} x) m_j = 0.
+\]
+Now define $A=(a_{i,j})_{i,j} \in M_n(R)$ with $a_{i,j} = r_{i,j} - \delta_{i,j} x$. Then
+\[
+A
+\begin{pmatrix}
+m_1 \\ \vdots \\ m_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 \\ \vdots \\ 0
+\end{pmatrix}
+\]
+and hence
+\[
+A^\# A
+\begin{pmatrix}
+m_1 \\ \vdots \\ m_n
+\end{pmatrix}
+= \underbrace{\det(A)}_{\in R}
+\begin{pmatrix}
+m_1 \\ \vdots \\ m_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 \\ \vdots \\ 0
+\end{pmatrix}
+\]
+where $A^\#$ is the adjugate matrix\footnote{If $B$ is a matrix, the \emph{adjugate matrix} $B^\#$ of $B$ is defined in such a way that $B B^\# = \det(B) I$, and thanks to Laplace's formula for the determinant of a square matrix, we have $B B^\# = B^\# B$. See \url{http://en.wikipedia.org/wiki/Adjugate_matrix}.} of $A$. Since $\Ann_{R[x]}(M)=0$ by hypothesis, we get $\det(A)=0$. Thus there are $w_0,...,w_{n-1} \in R$ such that
+\[
+0 = \det(A) \stackrel{\footnotemark}{=} (-1)^n x^n + w_{n-1} x^{n-1} + \ldots + w_0,
+\]
+which is an integral equation for $x$.
+\footnotetext{Observe that the $x$'s appear only on the diagonal, and all of them with coefficient $1$.}
+\end{claim}
+\end{itemize}
+\end{proof}
+\end{theorem}
+
+\begin{lemma}
+Let $R \sse S$ be a ring extension with $S$ a finitely generated $R$-module. If $M$ is a finitely generated $S$-module, then $M$ is a finitely generated $R$-module.
+\begin{proof}
+Let $M= _S \langle x_1,...,x_n \rangle$ and $S = _R \langle a_1,...,a_m \rangle$. We claim that 
+\[
+M = _R \langle a_j x_j \mid j \in [1,m], i \in [1,n] \rangle.
+\]
+Let $x \in M$. Then there are $s_1,...,s_n \in S$ such that $x = \sum_{i=1}^n s_i x_i$. For all $i \in [1,n]$ there are $\lambda_{i,1},...,\lambda_{i,m} \in R$ such that $s_i = \sum_{j=1}^m \lambda_{i,j} a_j$. Thus
+\[
+x = \sum_{i=1}^n s_i x_i = \sum_{i=1}^n \left( \sum_{j=1}^m \lambda_{i,j} a_j \right) x_i = \sum_{i=1}^n \sum_{j=1}^m \lambda_{i,j} (a_j x_i).
+\]
+\end{proof}
+\end{lemma}
+
+\noindent\textbf{Examples.}
+\begin{enumerate}
+\item $M=\C$, $R = \R \sse \C = S$.
+\item Field extension: $K \sse L \sse M$.
+\end{enumerate}
+
+\begin{corollary}
+Let $R \sse S$ be a ring extension and $x_1,...,x_n \in S$ with $S=R[x_1,...,x_n]$. The following are equivalent:
+\begin{itemize}
+\item[(a)] $\{x_1,...,x_n\} \sse \cl_S(R)$.
+\item[(b)] $S$ is a finitely generated $R$-module.
+\item[(c)] $S$ is integral over $R$.
+\end{itemize}
+\begin{proof}
+\item[(a)$\imp$(b)] We proceed by induction on $n$. For $n=1$, this is the statement of Theorem 4.3. Let $n \geq 2$. By induction hypothesis, $S'=R[x_1,...,x_{n-1}]$ is a finitely generated $R$-module. Since $x_n$ is integral$/R$, $x_n$ is integral$/S'$. Again by induction hypothesis, $S'[x_n]=R[x_1,...,x_n]$ is a finitely generated $S'$-module, and thus it is a finitely generated $R$-module by Lemma 4.4.
+\item[(b)$\imp$(c)] By Theorem 4.3(c), every $x \in S$ is integral$/R$.
+\item[(c)$\imp$(a)] By definition.
+\end{proof}
+\end{corollary}
+
+\begin{corollary}
+Let $R \sse S$ be a ring extension.
+\begin{enumerate}
+\item Let $S \sse T$ be a ring extension, and suppose that $S$ is integral$/R$. Then
+\begin{itemize}
+\item[(a)] If $x \in T$ is integral$/S$, then $x$ is integral$/R$.
+\item[(b)] If $T$ is integral$/S$, then $T$ is integral$/R$.
+\end{itemize}
+\item We have $R \sse \cl_S(R) \sse S$, and $\cl_S(R)$ is a ring which is integrally closed in $S$.
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item It suffices to prove (a). Let $x \in T$ be integral$/S$. Then there exist $n \in \N_0$, $b_0,...,b_{n-1}$ such that $x^n+b_{n-1}x^{n-1} + \ldots + b_0$. Thus $x$ is integral over $S'=R[b_0,...,b_{n-1}]$, and therefore $S'[x]$ is a finitely generated $S'$-module by Theorem 4.3. Since $b_0,...,b_{n-1}$ are integral$/R$, by Corollary 4.5 we obtain that $S'$ is a finitely generated $R$-module. Hence $S'[x]$ is a finitely generated $R$-module, and finally $x$ is integral$/R$ by Theorem 4.3(c).
+\item
+\begin{itemize}
+\item[(i)] We assert that $\cl_S(R) \sse S$ is a subring.\\
+Let $x,y \in \cl_S(R)$. We have to show that $x-y$ and $xy$ are integral$/R$. This follows by considering $R[x,y]$ (which of course contains $x-y$ and $xy$) and applying Corollary 4.5 twice.
+\item[(ii)] We want to prove that $\cl_S(R)$ is integrally closed in $S$. Let $x \in S$ be integral$/\cl_S(R)$. Since $\cl_S(R)$ is integral$/R$, by point 1(a) we have that $x$ is integral$/R$, i.e. $x \in \cl_S(R)$.
+\end{itemize}
+\end{enumerate}
+\end{proof}
+\end{corollary}
+
+\begin{theorem}
+Let $R$ be an integrally closed domain with $\q(R)=K$, $L/K$ a field extension, $x \in L$ algebraic$/K$ and $f \in K[X]$ the minimal polynomial of $x$ over $K$. Then $x$ is integral$/R$ if and only if $f \in R[X]$.
+\begin{proof}
+The implication ``$\pmi$'' is obvious. We want to show ``$\imp$''. Let $N/L$ be a splitting field of $f$ over $L$. So
+\[
+f = \prod_{i=1}^n (X-x_i) \quad \text{with } x_1,...,x_n \in N.
+\]
+We can assume $x=x_1$. Then, for all $i \in [1,n]$, there is a $K$-isomorphism
+\[
+\phi_i : K[x] \to K[x_i] \sse N, \quad \phi_i(x) = x_i.
+\]
+By hypothesis, there exist $a_0,...,a_{d-1} \in R$ such that $x^d+a_{d-1}x^{d-1} + \ldots + a_1 x + a_0 = 0$. Therefore
+\[
+\phi_i(x^d+a_{d-1}x^{d-1} + \ldots + a_1 x + a_0) = x_i^d+a_{d-1}x_i^{d-1} + \ldots + a_1 x_i + a_0 = 0,
+\]
+i.e. $x_i$ is integral$/R$. Thus the coefficients of $f$ are in $K$ (why??? I just know that every $x_i$ is in $N$ and is integral$/R$, nothing more!) and they are integral$/R$, which means that they are in $R$ since $R$ is integrally closed. That is, $f \in R[X]$.
+\end{proof}
+\end{theorem}
+
+\begin{corollary}
+Let $R$ be an integrally closed domain, $K = \q(R)$, $f \in R[X] \sm R$ monic and $g,h \in K[X] \sm K$ with $f=gh$. Then $g,h \in R[X]$.\\
+In particular, if $f$ is irreducible$/R$, then $f$ is irreducible$/K$.
+\begin{proof}
+\begin{claim}{}
+If $p \in K[X]$ is monic and irriducible with $p|f$ in $K[X]$, then $p \in R[X]$.
+\begin{claimproof}
+Let $L/K$ be a field extension with $\alpha \in L$ and $p(\alpha)=0$. Then $p$ is the minimal polynomial of $\alpha$ over $K$, and since $p|f$ we have obtain $f(\alpha)=0$. Therefore $\alpha$ is integral$/R$, and hence $p \in R[X]$ by Theorem 4.7.
+\end{claimproof}\\
+Since $K[X]$ is a UFD, the main statement follows.
+\end{claim}
+\end{proof}
+\end{corollary}
+
+\begin{defn}
+Let $0 \neq R$ be a commutative ring and $\g \in \Spec(R)$. Then
+\[
+\h(\g) := \sup\{l \in \N_0 \mid \text{ there are prime ideals } \g = \g_0 \supsetneq \ldots \supsetneq \g_l \}
+\]
+is called the \emph{height of} $\g$, and
+\[
+\dim(R) := \sup\{ \h(\g) \mid \g \in \Spec(R)\}
+\]
+is called the (Krull) \emph{dimension of} $R$.
+\end{defn}
+
+\noindent\textbf{Remarks.}
+\begin{enumerate}
+\item $R$ is a domain if and only if $0 \in \Spec(R)$. $R$ is a field if and only if $\dim(R)=0$.
+\item (Krull's Principal Ideal Theorem). Let $R$ be noetherian, $x \in R^\circ$ and $g \in P(xR)$, where $P(xR)$ is the family of minimal prime ideals lying in $xR$. Then $\h(g) \leq 1$. In particular, if $R$ is a PID, then $\dim(R)=1$.
+\end{enumerate}
+
+\begin{theorem}[Cohen-Seidenberg]
+Let $R \sse S$ be an integral ring extension. The following hold:
+\begin{enumerate}
+\item (Incomparability) Let $\p \in \Spec(S)$ and $\mathfrak{a} \lhd S$ with $\p \sse \mathfrak{a}$ and $\p \cap R = \mathfrak{a} \cap R$. Then $\p = \mathfrak{a}$.
+\item (Lying over) For every $\g \in \Spec(R)$ and $\mathfrak{a} \lhd S$ with $\mathfrak{a} \cap R \sse \g$ there is a $\p \in \Spec(S)$ such that $\mathfrak{a} \sse \p$ and $\p \cap R = \g$. In particular, the map $\Spec(S) \to \Spec(R)$, $\p \mapsto \p \cap R$, is surjective.
+\item (Going up) Let $\g_0, \g \in \Spec(R)$ and $\p_0 \in \Spec(S)$ such that $\p_0 \cap R = \g_0 \sse \g$. Then there is a $\p \in \Spec(S)$ such that $\p_0 \sse \p$ and $\p \cap R = \g$.
+\item $\max(S) = \{ \p \in \Spec(S) \mid \p \cap R \in \max(R) \}$. In particular, for every $\m \in \max(R)$ there is a $\p \in \max(S)$ such that $\p \cap R = \m$.
+\item $S^\times \cap R = R^\times$. In particular, if $S$ is a field, then $R$ is a field.
+\item $\dim(R) = \dim(S)$. Hence, if $S$ is a domain, then $S$ is a field if and only if $R$ is a field.
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item Let $x \in \mathfrak{a}$. We pick a minimal $n \in \N$ with the following property: there exist $a_0,...,a_{n-1} \in R$ with
+\[
+x^n + a_{n-1}x^{n-1} + \ldots + a_0 \in \p.
+\]
+Observe that such an $n$ must exist since $x$ is integral$/R$, thus the property is satisfied at least by an integral equation for $x$ over $R$.\\
+Then there is a $p \in \p$ such that
+\[
+a_0 = p - x(x^{n-1} + \ldots + a_1) \in \mathfrak{a} \cap R = \p \cap R \sse \p,
+\]
+hence $x(x^{n-1} + \ldots + a_1) \in \p$. By minimality $x^{n-1} + \ldots + a_1 \not\in \p$, whereby $x \in \p$.
+\item Let $\g \in \Spec(R)$ and $\mathfrak{a} \lhd S$ with $\mathfrak{a} \cap R \sse \g$. Then $R \sm \g \sse S$ is a multiplicatively closed subset with $\mathfrak{a} \cap (R \sm \g) = \emptyset$. By Theorem 3.1, the set $\{ \mathfrak{c} \lhd S \mid \mathfrak{a} \sse \mathfrak{c}, \mathfrak{c} \cap (R \sm \g) = \emptyset \}$ has a maximal element $\p$. Then $\p \in \Spec(S)$ with $\mathfrak{a} \sse \p$ and $\p \cap R \sse \g$. If we can prove the following claim, we are done.
+\begin{claim}{}
+$\p \cap R = \g$.
+\begin{claimproof}
+Assume to the contrary that $\p \cap R \subsetneq \g$. Let $u \in \g \sm \p$. By the maximality of $\p$, it follows that $(\p + uS) \cap (R \sm \g) \neq \emptyset$, so we pick $p \in \p$ and $s \in S$ such that $x = p+us \in R \sm \g$. Take now
+\[
+s^n+a_{n-1}s^{n-1} + \ldots + a_0 = 0
+\]
+an integral equation of $s$ over $R$. Then
+\[
+u^n (s^n+a_{n-1}s^{n-1} + \ldots + a_0) = (us)^n + a_{n-1} u (us)^{n-1} + \ldots + a_1 u^{n-1} (us) + a_0 u^n = 0,
+\]
+and since $us \equiv x \mod \p$ we get
+\[
+x^n + a_{n-1} u x^{n-1} + \ldots + a_1 u^{n-1} x + a_0 u^n \in \p \cap R \sse \g.
+\]
+Since $u \in \g$ we get $x^n \in \g$, and thus $x \in \g$, contradiction.
+\end{claimproof}
+\end{claim}
+\item This follows immediately from (2) by defining $\mathfrak{a} = \p_0$.
+\item 
+\begin{itemize}
+\item[$\supseteq$] Let $\p \in \Spec(S)$. If $\p \not\in \max(S)$, then by Corollary 3.2 there is an $\m \in \max(S)$ with $\p \subsetneq \m$. Then point (1) implies that $\p \cap R \subsetneq \m \cap R$, and hence $\p \cap R \not\in \max(R)$.
+\item[$\sse$] If $\p \cap R \not\in \max(R)$, then there is an $\mathfrak{n} \in \max(R)$ with $\p \cap R \subsetneq \mathfrak{n}$. By point (3), there is an $\m \in \Spec(S)$ with $\p \sse \m$ and $\m \cap R = \mathfrak{n}$. Thus $\p \subsetneq \m$ and $\p \not\in \max(S)$.
+\end{itemize}
+\item Obviously, we have $R^\times \sse R \cap S^\times$. If $x \in R \sm R^\times$, then there is an $\m \in \max(R)$ with $x \in \m$. By point (2), there is a $\p \in \Spec(S)$ such that $\m \sse \p$. Thus $x \in \p$ and $x \not\in S^\times$.\\
+If $S$ is a field, then $R^\times = S^\times \cap R = S^\circ \cap R = R^\circ$, and hence $R$ is a field.
+\item Let $\g_0 \subsetneq \g_1 \subsetneq \ldots \subsetneq \g_n$ be a sequence in $\Spec(R)$. By point (2), there is a $\p_0 \in \Spec(S)$ such that $\p_0 \cap R = \g_0$. Applying point (3) repeatedly, we obtain a sequence $\p_0 \subsetneq \ldots \subsetneq \p_n$ in $\Spec(S)$ with $\p_i \cap R = \g_i$ for all $i \in [1,n]$. Thus $\dim(S) \geq \dim(R)$. Conversely, if $\p_0 \subsetneq \ldots \subsetneq \p_n$ is a sequence in $\Spec(S)$, then $\p_0 \cap R \subsetneq \ldots \subsetneq \p_n \cap R$ by point (1), and hence $\dim(S) \leq \dim(R)$.\\
+In particular, if $S$ is a domain, then $R$ is a domain, and thus $\dim(R)=\dim(S)$ implies that $S$ is a field iff $R$ is a field.
+\end{enumerate}
+\end{proof}
+\end{theorem}
+
+
+\section{Rings of integers in algebraic number fields.}
+
+\begin{defn}
+An \emph{algebraic number field} is a finite field extension of $\Q$. If $L/\Q$ is an algebraic number field, then
+\[
+\O_L = \cl_L(\Z)
+\]
+is called the \emph{ring of integers of} $L$ (or \emph{principal order of} $L$).
+\end{defn}
+
+\begin{lemma}
+$\O_L$ is an integrally closed, one-dimensional domain.
+\begin{proof}
+Since $\O_L \sse L$, $\O_L$ is a domain. By Theorem 4.10, $\dim(\O_L)=\dim(\Z)=1$. By Corollary 4.6, $\O_L$ is integrally closed in $L$. It remains to show that $\q(\O_L)=L$. \\
+Let $x \in L$. Then there exist $a_n,...,a_0 \in \Z$ with
+\[
+a_n x^n + \ldots + a_0 = 0.
+\]
+Multiplying by $a_n^{n-1}$ we obtain that
+\[
+(a_n x)^n + a_{n-1} (a_n x)^{n-1} + \ldots + a_0 a_n^{n-1} = 0.
+\]
+Thus $a_n x$ is integral$/\Z$, which means $a_n x \in \O_L$. Hence $x \in \q(\O_L)$.
+\end{proof}
+\end{lemma}
+\ \\
+Our goal is now to show that $\O_L$ is noetherian.\\
+
+\paragraph{Norm and trace.}\ \\
+Let $K$ be a field, $A$ a commutative $K$-algebra, and $\dim_K(A)=n$. For $\lambda \in A$, let $\mu_\lambda : A \to A$ be defined by
+\[
+\mu_\lambda(a) = \lambda a.
+\]
+Then $\mu_\lambda \in \End_K(A)$, and we define
+\begin{align*}
+N_{A/K} \colon A &\to K \quad \quad \quad \quad \quad \quad \quad \quad \quad \text{and}  &\Tr_{A/K} \colon A &\to K \\
+\lambda &\mapsto N_{A/K}(\lambda) := \det(\mu_\lambda)    &\lambda &\mapsto \Tr_{A/K}(\lambda) := \Tr(\mu_\lambda)
+\end{align*}
+
+\noindent\textbf{Remark.} Let $\u = (u_1,...,u_n)$ be a $K$-basis of $A$ and let $\M_{\u,\u}(\mu_\lambda)$ be such that
+\[
+(\lambda u_1, ..., \lambda u_n) = (u_1,..,u_n) \M_{\u,\u}(\mu_\lambda).
+\]
+Then $\det(\mu_\lambda) := \det(\M_{\u,\u}(\mu_\lambda))$ does not depend on $\u$, because if $\u'=\u S$, then for $\phi \in \End_K(A)$ we have
+\[
+\M_{\u',\u'}(\phi) = S^{-1} \M_{\u,\u}(\phi) S.
+\]
+
+\begin{lemma}
+Let $K$ be a field, $A$ a commutative $K$-algebra with $\dim_K(A)=n$, $\alpha,\beta \in A$ and $\lambda \in K$. The following hold:
+\begin{enumerate}
+\item $N_{A/K}(\alpha\beta)=N_{A/K}(\alpha)N_{A/K}(\beta)$.
+\item $N_{A/K}(\lambda)=\lambda^n$.
+\item $\Tr_{A/K}(\alpha + \beta) = \Tr_{A/K}(\alpha) + \Tr_{A/K}(\beta)$.
+\item $\Tr_{A/K}(\lambda \alpha) = \lambda \Tr_{A/K}(\alpha)$.
+\item $\Tr_{A/K}(\lambda) = n\lambda$.
+\end{enumerate}
+\begin{proof}\ 
+\begin{itemize}
+\item[1.] Since $\mu_{\alpha\beta}=\mu_\alpha \circ \mu_\beta$, we get
+\[
+N_{A/K}(\alpha\beta) = \det(\mu_{\alpha\beta}) = \det(\mu_\alpha \circ \mu_\beta) = \det(\mu_\alpha) \det(\mu_\beta) = N_{A/K}(\alpha) N_{A/K}(\beta).
+\]
+\item[2., 5.] If $\u=(u_1,...,u_n)$ is a $K$-basis of $A$, then $\mu_\lambda (u_i) = \lambda u_i$ for all $i \in [1,n]$, and $\M_{\u,\u}(\mu_\lambda) = \lambda I$.
+\item[3., 4.] Observe that
+\begin{align*}
+\M_{\u,\u} \colon \End_K(A) &\to M_n(K) \\
+\phi &\mapsto \M_{\u,\u}(\phi)
+\end{align*}
+is a $K$-algebra isomorphism, i.e. $\Tr(A+B) = \Tr(A) + \Tr(B)$ and $\Tr(\lambda A) = \lambda \Tr(A)$.
+\end{itemize}
+\end{proof}
+\end{lemma}\ 
+\\
+\noindent For the rest of this Section, let $L/K$ be a finite separable field extension of degree $[L:K]=n$, and let $\ol{K}$ be an algebraically closed field with $K \sse L \sse \ol{K}$.\\
+We will use the following result, which should be known from previous courses:\\
+\textbf{Theorem.} For every $K$-homomorphism $K \to K \hookrightarrow \ol{K}$ there exist precisely $n$ distinct lifts $\sigma: L \to \ol{K}$.\\ This means $|\Hom_K(L,\ol{K})| = [L:K]$. We set $\Hom_K(L,\ol{K}) = \{\sigma_1,...,\sigma_n\}$.
+
+\begin{lemma}
+Let $\alpha \in L$, $f= X^r + a_{r-1} X^{r-1} + \ldots + a_0 \in K[X]$ the minimal polynomial of $\alpha$ over $K$ and $[L:K(\alpha)]=s$. Then
+\begin{enumerate}
+\item $N_{L/K}(\alpha) = \big( (-1)^r a_0 \big)^s$.
+\item $\Tr_{L/K}(\alpha) = -s \, a_{r-1}$.
+\end{enumerate}
+\begin{proof}
+We have $n=[L:K]=[L:K(\alpha)][K(\alpha):K]=s \, r$ and $(1,\alpha,...,\alpha^{r-1})$ is a $K$-basis of $K(\alpha)/K$. If $\mathbf{v}=(v_1,...,v_s)$ is a basis of $L/K(\alpha)$, then 
+\[
+\u = (v_1,v_1 \alpha, \ldots , v_1 \alpha^{r-1}; \ldots ; v_s, v_s \alpha, \ldots ,v_s \alpha^{r-1})
+\]
+is a $K$-basis of $L/K$. We have
+\[
+\mu_\alpha (v_i \alpha^j) = v_i \alpha^{j+1} \text{ for } j \in [0,r-2] \quad \text{and} \quad \mu_\alpha (v_i \alpha^{r-1}) = v_i (-a_0 - \ldots - a_{r-1} \alpha^{r-1}).
+\]
+Since (by abuse of notation), $\mu_\alpha (\u) = \M_{\u,\u}(\mu_\alpha)$, we obtain
+\[
+A := \M_{\u,\u}(\mu_\alpha) =
+\begin{tikzpicture}[
+style1/.style={
+  matrix of math nodes,
+  every node/.append style={text width=#1,align=center,minimum height=3ex},
+  nodes in empty cells,
+  left delimiter=(,
+  right delimiter=),
+  }
+]
+\matrix[style1=0.85cm] (1mat)
+{
+  & & & & &  \\
+  & & & & & \\
+  & & & & & \\
+  & & & & & \\
+  & & & & & \\
+  & & & & & \\
+  & & & & & \\
+  & & & & & \\
+  & & & & & \\
+};
+\draw[dashed]
+  (1mat-3-1.south west) -- (1mat-3-6.south east);
+\draw[dashed]
+  (1mat-6-1.south west) -- (1mat-6-6.south east);
+\draw[dashed]
+  (1mat-1-4.north east) -- (1mat-9-4.south east);
+\draw[dashed]
+  (1mat-1-2.north east) -- (1mat-9-2.south east);
+\node[font=\Large] 
+  at (1mat-2-1.east) {$A_1$};
+\node[font=\Large] 
+  at (1mat-2-5.east) {$0$};
+  \node[font=\Large] 
+  at (1mat-5-3.east) {$\ddots$};
+\node[font=\Large] 
+  at (1mat-5-5.east) {$0$};
+\node[font=\Large] 
+  at (1mat-8-5.east) {$A_1$};
+\node[font=\Large] 
+  at (1mat-8-1.east) {$0$};
+\node[font=\Large] 
+  at (1mat-8-3.east) {$0$};
+\node[font=\Large] 
+  at (1mat-2-3.east) {$0$};
+\node[font=\Large] 
+  at (1mat-5-1.east) {$0$};
+\end{tikzpicture}
+\]
+where
+\[
+A_1 =
+\begin{pmatrix}
+0 & 0 & \ldots & 0 & -a_0 \\
+1 & 0 & \ldots & 0 & -a_1 \\
+0 & 1 & \ldots & 0 & -a_2 \\
+0 & 0 & \ldots & 0 & \vdots \\
+0 & 0 & \ldots & 1 & -a_{r-1}
+\end{pmatrix}.
+\]
+Therefore
+\[
+\Tr_{L/K}(\alpha) = \Tr(A) = s\Tr(A_1) = s(-a_{r-1})
+\]
+and
+\[
+N_{L/K}(\alpha) = \det(A) = (\det(A_1))^s = ((-1)^{r+1} (-a_0) \cdot 1)^s = ((-1)^r a_0)^s.
+\]
+\end{proof}
+\end{lemma}
+
+\begin{lemma}
+For every $\alpha \in L$ we have 
+\[
+N_{L/K}(\alpha) = \prod_{i=1}^n \sigma_i(\alpha) \quad \text{and} \quad \Tr_{L/K}(\alpha) = \sum_{i=1}^n \sigma_i(\alpha).
+\]
+\begin{proof}
+We have $K \sse L \sse \ol{K}$, $\Hom_K(L,\ol{K}) = \{\sigma_1,...,\sigma_n\}$. Let $\alpha \in L$, $f = X^r + a_{r-1} X^{r-1} + \ldots + a_0 \in K[X]$ the minimal polynomial of $\alpha$ over $K$, so that $[L:K(\alpha)] = s = n/r$. Furthermore, $f = \prod_{\nu=1}^r (X-\alpha_\nu) \in \ol{K}[X]$.\\
+Suppose WLOG $\alpha=\alpha_1$. Since $\alpha$ is separable, $\alpha, \alpha_2,...,\alpha_r$ are pairwise distinct. Thus there are $r$ distinct 	$K$-monomorphism
+\[
+\tau_\nu : K(\alpha) \to \ol{K} \ \text{ s.t. } \ \tau_\nu(\alpha)=\alpha_\nu, \quad \text{with } \nu \in [1,r].
+\]
+By the theorem discussed above, since $L/K(\alpha)$ is separable, we have
+\[
+|\{ \psi : L \to \ol{K} \mid \psi \text{ is a } K\text{-homomorphism}, \ \psi_{|_{K(\alpha)}} = \tau_\nu \}| = [L:K(\alpha)] = s.
+\]
+If $\tau_{\nu,1},...,\tau_{\nu,s}$ are the lifts of $\tau_\nu$, then
+\[
+\{\sigma_1,...,\sigma_n\} = \{ \tau_{\nu,j} \mid \nu \in [1,r], j \in [1,s] \}.
+\]
+Therefore we obtain
+\[
+\prod_{i=1}^n \sigma_i(\alpha) = \prod_{\nu=1}^r \prod_{j=1}^s \tau_{\nu,j}(\alpha) = \prod_{\nu=1}^r \alpha_\nu^s = \left( \prod_{\nu=1}^r \alpha_{\nu} \right)^s = ((-1)^r a_0)^s = N_{L/K}(\alpha)
+\]
+and
+\[
+\sum_{i=1}^n \sigma_i(\alpha) = \sum_{\nu=1}^r \sum_{j=1}^s \tau_{\nu,j}(\alpha) = s \sum_{\nu=1}^r \alpha_\nu = s(-a_{r-1}) = \Tr_{L/K}(\alpha),
+\]
+where the two last equalities hold by Lemma 4.14.
+\end{proof}
+\end{lemma}
+
+\begin{defn}
+If $\u = (u_1,...,u_n)$ is a basis of $L/K$, then
+\[
+\Delta(\u) = \det \Big( \Tr_{L/K}(u_i u_j) \Big)_{1 \leq i,j \leq n}
+\]
+is called the \emph{discriminant of} $\u$.
+\end{defn}
+
+\begin{theorem}
+Let $\u = (u_1,...,u_n)$ be a basis of $L/K$. The following hold:
+\begin{enumerate}
+\item If $\Hom_K(L,\ol{K}) = \{\sigma_1,...,\sigma_n\}$, then $\Delta(\u) = \det \Big( \sigma_i(u_j) \Big)_{1 \leq i,j \leq n}^2$.
+\item If $\mathbf{v}=\u S$ is a basis of $L/K$, then $\Delta(\mathbf{v}) = \det(S)^2 \Delta(\u)$.
+\item If $L=K(\alpha)$, $\u=(1,\alpha,...,\alpha^{n-1})$, and $\alpha,\alpha_2,...,\alpha_n$ are the $K$-conjugates of $\alpha$, then $\Delta(\u) = \prod_{i<j}(\alpha_i - \alpha_j)^2$.
+\item We have $\Delta(\u) \neq 0$ and $\Tr_{L/K} : L \to K$ is not the zero map.
+\item There is a basis $\u^* = (u_1^*,...,u_n^*)$ of $L/K$ with $\Tr_{L/K}(u_i u_j^*) = \delta_{i,j}$ for all $i,j \in [1,n]$. The basis $\u^*$ is unique and it's called the \emph{dual basis of} $\u$.
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item For all $i,j \in [1,n]$, we have
+\[
+\Tr_{L/K}(u_i u_j) = \sum_{\nu=1}^n \sigma_\nu(u_i) \sigma_\nu(u_j) = \Big( \sigma_1(u_i), \ldots ,\sigma_n(u_i) \Big)
+\begin{pmatrix}
+\sigma_1(u_j) \\
+\vdots \\
+\sigma_n(u_j)
+\end{pmatrix}.
+\]
+Thus
+\[
+\Big( \Tr_{L/K} (u_i u_j) \Big)_{1 \leq i,j \leq n} = A^T A,
+\]
+where $A = \Big( \sigma_i(u_j) \Big)_{1 \leq i,j \leq n}$, whereby follows the assertion.
+\end{enumerate}
+\end{proof}
+\end{theorem}
+
+\begin{defn}
+
+\end{defn}
+
+\begin{defn}
+
+\end{defn}
+
+\begin{defn}
+
+\end{defn}
+
+\begin{defn}
+
+\end{defn}
+
+\begin{defn}
+
+\end{defn}
+
+\begin{defn}
+
+\end{defn}
+
+
+\begin{Remark}
+\emph{Main Results of basic Algebraic Number Theory.}
+\begin{enumerate}
+\item \textbf{Ideal Theory of $\O_L$.}\\
+For a domain $R$, the following statements are equivalent:
+\begin{itemize}
+\item[a)] $R$ is noetherian, integrally closed, and every non-zero prime ideal is maximal.
+\item[b)] Every non-zero ideal is a product of prime ideals.
+\item[c)] Every non-zero ideal is invertible.
+\end{itemize}
+A domain satisfying one of the equivalent conditions is called a \emph{Dedekind domain}. By Corollary 4.21, $\O_L$ is a Dedekind domain.\\
+The following facts are easy to get:
+\begin{itemize}
+\item[a)] $N(IJ)=N(I)N(J)$; in particular, $N(\prod_{i=1}^g P_i^{e_i})=\prod_{i=1}^g N(P_i^{e_i})$.
+\item[a)] If $N(I) \in \P$, then $I$ is a prime ideal.
+\item[c)] For a $p \in \P$ and a prime ideal $0 \neq P \lhd \O_L$ there are equivalent:
+\begin{itemize}
+\item[i)] $P | p \O_L$.
+\item[ii)] $p \in \P$.
+\item[iii)] $P \cap \Z = p\Z$.
+\item[iv)] $N(P)$ is a power of $p$.
+\end{itemize}
+\item[d)] Let $p \in \P$ and $p \O_L = \prod_{i=1}^g P_i^{e_i}$ where $P_1,...,P_g \in \Spec(\O_L)$. For $i \in [1,g]$, let $f_i=[\O_L/P_i \ : \ \Z/p\Z]$. Then $[L:\Q] = \sum_{i=1}^g e_i f_i$.
+\end{itemize}
+A prime $p$ is called unramified (in $L$) if $e_1=...=e_j=1$, and ramified otherwise.\\
+\textbf{Theorem.} $p$ is ramified (in $L$) iff $p | \Delta_L$.
+\item \textbf{Dirichlet's Unit Theorem.}\\
+Let $\mu(L)=\{ \xi \in L \mid $ there is an $m \in \N$ s.t. $\xi^m=1\}$ be the roots of unity of $L$. If $\sigma \in \Hom_\Q(L,\C)$, then $\ol{\sigma} \in \Hom_\Q(L,\C)$; $\sigma$ is called real if $\sigma(L) \sse \R$ and complex otherwise. Let $\sigma_1,...,\sigma_r : L \to \C$ be the real embeddings, and \[
+\sigma_{r+1},...,\sigma_{r+s}, \ol{\sigma_{r+1}},...,\ol{\sigma_{r+s}} : L \to \C
+\]
+be the complete embeddings. Then $r+2s = [L:\Q]$.\\
+\textbf{Theorem.} $\O_L^\times \simeq \mu(L) \times \Z^{r+s-1}$.
+\item \textbf{Classgroups.}\\
+Let $R$ be a domain, $(\I^*(R),\cdot)$ be the monoid of invertible ideals and $(\H(R), \cdot)$ the monoid of nonzero principal ideals (recall, an ideal $0 \neq I \lhd R$ is invertible if there is $J \lhd R$ s.t. $IJ \in \H(R)$).\\
+We have a monoid isomorphism $R^\circ/R^\times \to \H(R)$, $aR^\times \mapsto aR$, and 
+\[
+K^\times/R^\times = \q(R^\circ/R^\times) \simeq \q(\H(R)) = \{aR \mid a \in K^\times\}.
+\]
+Then $\F(R)^\times := \q(\I^\times(R))$ is called the group of invertible fractional ideals, 
+\[
+\Pic(R) = \F(R)^\times / \q(\H(R))
+\]
+is the Picard group of $R$ and we have an exact sequence
+\[
+1 \to R^\times \hookrightarrow K^\times \stackrel{f}{\to} \F(R)^\times \to \Pic(R) \to 1
+\]
+where $f(x)=xR$. If $R$ is Dedekind, then $\F^\circ(R)=\F^*(R)$, and $\Pic(R)=\cl(R)$ is called the ideal class group of $R$.\\
+\textbf{Theorem.} $\Pic(\O_L)$ is finite.
+\end{enumerate}
+\end{Remark}
+
+\section{Quadratic Number Fields.}
+A field extension $L/K$ is called \emph{quadratic} if $[L:K]=2$. Let $L/K$ be a quadratic field extension with $\text{char}(K) \neq 2$. Then there are $a \in L$ and $d \in K^\times \sm {K^\times}^2$ s.t. $L=K(\alpha)$ and $\alpha^2=d$ (we write $L(K(\sqrt{d}))$. where ${K^\times}^2 = \{x^2 \mid x \in K^\times\} < (K^\times,\cdot)$. The coset $d {K^\times}^2 \in K^\times / {K^\times}^2$ is uniquely determined by $L$.
+\begin{proof}
+Let $\beta \in L \sm K$. Then $L=K(\beta)$ and $\deg_K(\beta)=2$. Let $f=X^2+pX+q \in K[X]$ be the minimal polynomial of $\beta / K$. Then $\beta = -p/2+\alpha$ with $d:=\alpha^2=(p/2)^2-q \in K$, whence $L=K(\alpha)$ and $(1,\alpha)$ is a $K$-basis of $L$. If $d=c^2$ with $c \in K$, then $f=(x+p/2+c)(x+p/2-c)$, which is a contradiction to the assumption $f$ irriducible. Thus $d \in K^\times \sm {K^\times}^2$ and it remains to show: 
+\begin{claim}{}
+For $i \in [1,2]$, let $L_i/K$ be a quadratic extension with $L_i=K(\alpha_i)$ and $\alpha_i^2 = d_i \in K$. Then $L_1=L_2$ iff $d_1 {K^\times}^2 = d_2 {K^\times}^2$.
+\begin{claimproof}
+($\imp$) Since $L_1=L_2$, there are $a,b \in K$ with $\alpha_1=a+b\alpha_2$, and hence $d_1=a^2+2ab\alpha_2+b^2\alpha_2^2 \in K$. Since $(1,\alpha_2)$ is a $K$-basis, it follows that $ab=0$ and sice $\alpha_1 \not\in K$ we get $b \neq 0$. Thus $a=0$ and we have $d_1=b^2 d_2$, and therefore $d_1 {K^\times}^2 = d_2 {K^\times}^2$.\\
+($\pmi$) Since $d_1 {K^\times}^2 = d_2 {K^\times}^2$, we obtain $d_1 = b^2 d_2$ with $b \in K^\times$, whence $\alpha_1 = \pm b \alpha_2$ and thus $L_2 = K(\alpha_2) = K(\alpha_1) = L_1$.
+\end{claimproof}\ \\
+\end{claim}
+\end{proof}
+
+\begin{defn}
+An algebraic number field $K/\Q$ is called \emph{quadratic} if $[K:\Q]=2$. For $d \in \Z$ we set
+\[
+\sqrt{d} =
+\begin{cases}
+\text{positive real root in } \R_{\geq 0} &\text{ if } d>0\\
+i\sqrt{|d|} \in i \R_{>0} & \text{ if } d<0
+\end{cases}
+\]
+\end{defn}
+
+\begin{theorem}
+Let $K$ be a quadratic number field.
+\begin{enumerate}
+\item
+\begin{itemize}
+\item[(i)] There is precisely one squarefree $d \in \Z \sm \{0,1\}$ with $K=\Q(\sqrt{d})$, $X^2-d \in \Q[X]$ is the minimal polynomial of $\sqrt{d}$, and $(1,\sqrt{d})$ is a $\Q$-basis of $K$.
+\item[(ii)] $K/\Q$ is Galois and $\Hom_\Q(K,\C)=\{\sigma_1,\sigma_2\}$, with $\sigma_1,\sigma,2 : K \to \C$, $\sigma_1(a+b\sqrt{d})=a+b\sqrt{d}$, $\sigma_2(a+b\sqrt{d})=a-b\sqrt{d}$.
+\item[(iii)] For all $a,b \in \Q$, we have $N_{K/\Q}(a+b\sqrt{d}) = a^2-b^2 d$ and $Tr_{K/\Q}(a+b\sqrt{d})=2a$.
+\end{itemize}
+\item
+\begin{itemize}
+\item[(i)] If $d \equiv 2,3 \mod 4$, then $(1,\sqrt{d})$ is an integral basis of $K$, $\O_K = \Z[\sqrt{d}]$, and $\Delta_K=4d$.
+\item[(ii)] If $d \equiv 1 \mod 4$, then $(1,\frac{1+\sqrt{d}}{2})$ is an integral basis of $K$, $\O_K=\Z[\frac{1+\sqrt{d}}{2}]$, and $\Delta_K=d$.
+\end{itemize}
+\end{enumerate}
+\begin{proof}\ 
+\begin{enumerate}
+\item Suppose $a= \epsilon \prod_{p \in \P} p^{V_p(a)} \in \Q^\times \sm {\Q^\times}^2$ with $\epsilon \in \{-1,1\}$. Since $K$ is uniquely determined by
+\[
+\quad a{\Q^\times}^2 = \epsilon \prod_{V_p(a) \equiv 1 \mod 2} p {\Q^\times}^2 \in \Q^\times / {\Q^\times}^2 \tag{$*$}
+\]
+and since $\prod\limits_{V_p(a) \equiv 1 \mod 2} p$ is the only squarefree $d \in \Z \sm \{0,1\}$ satisfying relation ($*$), the uniqueness of $d$ in 1.(ii) follows, and 1.(iii) follows from Lemma 4.15.
+\item $\sqrt{d}$ is a zero of $X^2-d$, and hence $\sqrt{d} \in \O_K$. If $d \equiv 1 \mod 4$, then $f=X^2-X+\frac{1-d}{4} \in \Z[X]$ monic, $f(\frac{1+\sqrt{d}}{2})=0$, and hence $\frac{1+\sqrt{d}}{2} \in \O_K$. The tuples $(1,\sqrt{d}), (1,\frac{1+\sqrt{d}}{2})$ are $\Q$-linear independent, and hence $\Z$-linear independent. Thus it remains to show that $\O_K \sse \Z \langle 1,\sqrt{d} \rangle$ resp. $\O_K \sse \Z \langle 1,(1+\sqrt{d})/2 \rangle$. Let $\alpha \in \O_K$. Then there are $a,b \in \Q$ s.t. $\alpha= a+b\sqrt{d}$ and Cor.4.18 implies $N_{K/\Q}(\alpha)=a^2-b^2d$ and $\Tr_{K/\Q}(\alpha)=2a \in \Z$.\\
+Then
+\[
+4(a^2-b^2d)-(2a)^2 = (2b)^2 d \in \Z
+\]
+and since $d$ is squarefree, we obtain $2b \in \Z$. We set $a'=2a,b'=2b$, whence $\alpha= \frac{a'}{2} + \frac{b'}{2}\sqrt{d}$ and $a'^2-b'^2d \equiv 0 \mod 4$.\\
+\underline{Case 1.} $d \equiv 2,3 \mod 4$. Then $a'^2 \equiv 2b'^2 \mod 4$ or $a'^2 \equiv 3b'^2 \mod 4$. This implies that $a' \equiv b' \equiv 0 \mod 2$ and hence $\alpha \in \Z \langle 1, \sqrt{d'} \rangle$.\\
+\underline{Case 2.} $d \equiv 1 \mod 4$. Then $a'^2 \equiv b'^2 \mod 4$ and hence $a' \equiv b' \mod 2$. Therefore
+\[
+\alpha = \frac{a'}{2}+\frac{b'}{2} \sqrt{d} = \frac{a'-b'}{2} + b' \frac{1+\sqrt{d}}{2} \in \Z \left\langle 1, \frac{1+\sqrt{d}}{2} \right\rangle.
+\]
+\textbf{On the discriminant}.\\
+\underline{Case 1.} $d \equiv 2,3 \mod 4$.
+\[
+\Delta_K = \Delta \Big( (1,\sqrt{d}) \Big) \stackrel{4.17.1}{=} \det 
+\begin{pmatrix}
+1 & \sqrt{d} \\
+1 & -\sqrt{d}
+\end{pmatrix}^2
+= (-\sqrt{d} -\sqrt{d})^2 = 4d.
+\]
+\underline{Case 2.} $d \equiv 1 \mod 4$.
+\[
+\Delta_K = \Delta \left( \left( 1,\frac{1+\sqrt{d}}{2} \right) \right) = \det 
+\begin{pmatrix}
+1 & \frac{1+\sqrt{d}}{2} \\
+1 & \frac{1-\sqrt{d}}{2}
+\end{pmatrix}^2
+= \left( \frac{1+\sqrt{d}}{2} - \frac{1+\sqrt{d}}{2} \right)^2 = d.
+\]
+\end{enumerate}
+\end{proof}
+\end{theorem}
+
+
+
+
+
+\begin{thebibliography}{9}
+
+\bibitem{Bre2006}
+James W. Brewer, Sarah Glaz, William Heinzer, Bruce Olberding, \emph{Multiplicative Ideal Theory in Commutative Algebra: A Tribute to the Work of Robert Gilmer}. Springer Science \& Business Media, Dec 15, 2006.
+
+\end{thebibliography}
+
+
+
+
+
+
+\end{document}
