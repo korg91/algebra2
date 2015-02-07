@@ -1090,7 +1090,7 @@ We now have two possible cases:\\
 Then $0 \neq \mathfrak{a} \lhd R$, and so by hypothesis we have $\mathfrak{a} = aR$ for some $a \in R^\circ$. Choose $x \in \langle C \rangle$ s.t. $x + au \in N$. Now define $D' := C' \cup \{u\}$ and
 \begin{align*}
 g \colon D' &\to \langle D \rangle \cap N \\
-g_{|_{C'}} &= f \\
+g_{|_{C'}} &:= f \\
 u &\mapsto x + au.
 \end{align*}
 \begin{claim}{}
@@ -1103,7 +1103,11 @@ We proceed in two steps:
 \end{enumerate}
 In order to show (i), suppose that $\lambda(x+au) + \sum_{y \in f[C']} \lambda_y y =0$, where $\lambda,\lambda_y \in R$. If $\lambda = 0$, then all $\lambda_y = 0$. If $\lambda \neq 0$, then $(\lambda a) u = -\lambda x - \sum \lambda_y y \in \langle C \rangle$. Since $R$ is a domain, we obtain $\lambda a \neq 0$, which is contradicts the assumption $u \in B \sm C$.
 
-As for (ii), observe that we only have to show the ``$\supseteq$'' inclusion. Let $z \in \langle D \rangle \cap N$. Since $z \in \langle D \rangle$, then $z = y+cu$ for some $y \in \langle C \rangle$ and $c \in R$. But $z \in N$ too, so $c \in \mathfrak{a} = aR$, i.e. $c=ab$ for some $b \in R$. Then $z-b(x+au) = y-bx \in \langle C \rangle \cap N = \langle f[C'] \rangle$. Hence $z \in \langle f[C'] \rangle + R g(u) = \langle g[D'] \rangle$.
+As for (ii), observe that we only have to show the ``$\supseteq$'' inclusion. Let $z \in \langle D \rangle \cap N$. Since $z \in \langle D \rangle$, then $z = y+cu$ for some $y \in \langle C \rangle$ and $c \in R$. But $z \in N$ too, so $c \in \mathfrak{a} = aR$, i.e. $c=ab$ for some $b \in R$. Then 
+\[
+\underbrace{z-b(x+au)}_{\in \langle D \rangle \cap N} = \underbrace{y-bx}_{\in \langle C \rangle} \in \langle C \rangle \cap N = \langle f[C'] \rangle.
+\]
+Hence $z \in \langle f[C'] \rangle + R g(u) = \langle g[D'] \rangle$.
 \end{claimproof}
 \end{claim}
 
