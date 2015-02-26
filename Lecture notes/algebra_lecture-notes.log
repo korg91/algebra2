@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.10.2)  7 FEB 2015 03:02
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.10.2)  26 FEB 2015 14:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1325,35 +1325,35 @@ ations.code.tex
 (/usr/share/texmf/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.p
 athreplacing.code.tex))
 \c@theorem=\count187
-LaTeX Info: Redefining \a01 on input line 91.
+LaTeX Info: Redefining \a01 on input line 92.
 \mybox=\box64
  (./algebra_lecture-notes.aux)
 \openout1 = `algebra_lecture-notes.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 173.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 173.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 182.
+LaTeX Font Info:    ... okay on input line 182.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 182.
+LaTeX Font Info:    ... okay on input line 182.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 182.
+LaTeX Font Info:    ... okay on input line 182.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 182.
+LaTeX Font Info:    ... okay on input line 182.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 182.
+LaTeX Font Info:    ... okay on input line 182.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 182.
+LaTeX Font Info:    ... okay on input line 182.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 182.
+LaTeX Font Info:    ... okay on input line 182.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 182.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 182.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 173.
+LaTeX Font Info:    ... okay on input line 182.
 \AtBeginShipoutBox=\box65
-Package hyperref Info: Link coloring OFF on input line 173.
+Package hyperref Info: Link coloring OFF on input line 182.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -1363,9 +1363,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count188
 )
-LaTeX Info: Redefining \ref on input line 173.
-LaTeX Info: Redefining \pageref on input line 173.
-LaTeX Info: Redefining \nameref on input line 173.
+LaTeX Info: Redefining \ref on input line 182.
+LaTeX Info: Redefining \pageref on input line 182.
+LaTeX Info: Redefining \nameref on input line 182.
 
 (./algebra_lecture-notes.out) (./algebra_lecture-notes.out)
 \@outlinefile=\write5
@@ -1406,20 +1406,20 @@ LaTeX Info: Redefining \nameref on input line 173.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 173.
+LaTeX Font Info:    Try loading font information for U+msa on input line 182.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 173.
+LaTeX Font Info:    Try loading font information for U+msb on input line 182.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+stmry on input line 173.
+LaTeX Font Info:    Try loading font information for U+stmry on input line 182.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/stmaryrd/Ustmry.fd)
-Package xypdf Info: Line width: 0.47998pt on input line 173.
+Package xypdf Info: Line width: 0.47998pt on input line 182.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -1452,22 +1452,22 @@ e
 ABD: EveryShipout initializing macros
 Chapter 1.
 
-Underfull \hbox (badness 10000) in paragraph at lines 177--195
+Underfull \hbox (badness 10000) in paragraph at lines 186--204
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 177--195
+Underfull \hbox (badness 10000) in paragraph at lines 186--204
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 177--195
+Underfull \hbox (badness 10000) in paragraph at lines 186--204
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 199--209
+Underfull \hbox (badness 10000) in paragraph at lines 208--218
 
  []
 
@@ -1475,18 +1475,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 199--209
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5]
-Underfull \hbox (badness 10000) in paragraph at lines 379--383
+Underfull \hbox (badness 10000) in paragraph at lines 387--391
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 401--401
+Underfull \hbox (badness 10000) in paragraph at lines 409--409
 [][]\OT1/cmr/m/n/10 See []$\OT1/cmtt/m/n/10 https : / / proofwiki . org / wiki 
 / Prime _ Ideal _ iff _ Quotient _ Ring _ is _ Integral _
  []
 
 [7]
-Overfull \hbox (8.2056pt too wide) in paragraph at lines 449--450
+Overfull \hbox (8.2056pt too wide) in paragraph at lines 457--458
 []\OT1/cmr/m/n/12 Let $\OML/cmm/m/it/12 K$ \OT1/cmr/m/n/12 be a field. Then $\O
 ML/cmm/m/it/12 K\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 X; Y\OT1/cmr/m/n/12 ]$ is a f
 ac-to-rial do-main. Since $\OML/cmm/m/it/12 K\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 
@@ -1499,7 +1499,7 @@ Chapter 2.
 [10
 
 ]
-Overfull \hbox (0.86194pt too wide) in paragraph at lines 498--500
+Overfull \hbox (0.86194pt too wide) in paragraph at lines 506--508
 [][]\OT1/cmr/bx/n/12 Definition 2.2. []\OT1/cmr/m/n/12 Let $\OML/cmm/m/it/12 M$
  \OT1/cmr/m/n/12 be an $\OML/cmm/m/it/12 R$\OT1/cmr/m/n/12 -module. A sub-set $
 \OML/cmm/m/it/12 N [] M$ \OT1/cmr/m/n/12 is called an \OT1/cmr/m/it/12 ($\OML/c
@@ -1507,7 +1507,7 @@ mm/m/it/12 R$\OT1/cmr/m/it/12 -)submodule
  []
 
 [11]
-Overfull \hbox (2.87642pt too wide) in paragraph at lines 557--558
+Overfull \hbox (2.87642pt too wide) in paragraph at lines 565--566
 \OT1/cmr/m/n/12 We de-fine $[][](\OML/cmm/m/it/12 M; N\OT1/cmr/m/n/12 )$ as the
  set of all $\OML/cmm/m/it/12 R$\OT1/cmr/m/n/12 -homomorphisms $\OML/cmm/m/it/1
 2 M \OMS/cmsy/m/n/12 ! \OML/cmm/m/it/12 N$ \OT1/cmr/m/n/12 and $[][](\OML/cmm/m
@@ -1515,7 +1515,7 @@ Overfull \hbox (2.87642pt too wide) in paragraph at lines 557--558
  []
 
 [12]
-Overfull \hbox (3.94507pt too wide) in paragraph at lines 583--584
+Overfull \hbox (3.94507pt too wide) in paragraph at lines 591--592
 []\OT1/cmr/m/n/12 Observe that $([][](\OML/cmm/m/it/12 M\OT1/cmr/m/n/12 )\OML/c
 mm/m/it/12 ; \OT1/cmr/m/n/12 +\OML/cmm/m/it/12 ; \OMS/cmsy/m/n/12 ^^N\OT1/cmr/m
 /n/12 ) []([][](\OML/cmm/m/it/12 M\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 ; \OT1/cmr/
@@ -1524,14 +1524,14 @@ m/n/12 +\OML/cmm/m/it/12 ; \OMS/cmsy/m/n/12 ^^N\OT1/cmr/m/n/12 )$ is a sub-ring
  []
 
 [13] [14]
-Overfull \hbox (5.87462pt too wide) in paragraph at lines 679--680
+Overfull \hbox (5.87462pt too wide) in paragraph at lines 689--690
 \OT1/cmr/m/n/12 semi-group ho-mo-mor-phism. Then $\OMS/cmsy/m/n/12 ^^X[]$ \OT1/
 cmr/m/n/12 is a con-gru-ence re-la-tion on $\OML/cmm/m/it/12 M$\OT1/cmr/m/n/12 
 , and $\OML/cmm/m/it/12 f[] [] [] M=[] \OMS/cmsy/m/n/12 !
  []
 
 [15]
-Overfull \hbox (16.61185pt too wide) detected at line 701
+Overfull \hbox (16.61185pt too wide) detected at line 714
 \OML/cmm/m/it/12 f[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^U\OT1/cmr/m/n/12 (\OML/
 cmm/m/it/12 x \OT1/cmr/m/n/12 + \OML/cmm/m/it/12 M[]\OT1/cmr/m/n/12 )) [] \OML/
 cmm/m/it/12 f[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^Ux \OT1/cmr/m/n/12 + \OML/cm
@@ -1544,100 +1544,83 @@ mm/m/it/12 N[]\OT1/cmr/m/n/12 ) [] \OML/cmm/m/it/12 ^^Uf[]\OT1/cmr/m/n/12 (\OML
 m/it/12 ;
  []
 
-[16]
-LaTeX Font Info:    Try loading font information for U+euf on input line 769.
+[16] [17]
+LaTeX Font Info:    Try loading font information for U+euf on input line 784.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
-) [17] [18]
-[19] [20]pdfTeX warning (ext4): destination with the same identifier (name{theo
-rem.2.22}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.923 L
-       et $M$ be a module. [21] [22] [23] [24] [25] [26]
-Chapter 3.
-[27
+) [18]
+[19] [20] [21pdfTeX warning (ext4): destination with the same identifier (name{
+theorem.2.22}) has been already used, duplicate ignored
 
-] [28]
-Overfull \hbox (7.95886pt too wide) in paragraph at lines 1207--1208
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.953 \item $
+             M=M_1+M_2$ and $M_1 \cap M_2 = 0$.] [22] [23] [24] [25] [26]
+[27] [28]
+Overfull \hbox (5.4278pt too wide) in paragraph at lines 1210--1214
+\OT1/cmr/m/n/12 (c)$[]$(a): Let $(\OML/cmm/m/it/12 N[]\OT1/cmr/m/n/12 )[]$ be a
+n as-cend-ing chain of sub-mod-ules. Then $\OML/cmm/m/it/12 N \OT1/cmr/m/n/12 :
+= [][] \OML/cmm/m/it/12 N[] [] M$
+ []
+
+[29] [30] [31] [32] [33] [34] [35]
+Overfull \hbox (20.93597pt too wide) detected at line 1511
+\OMS/cmsy/m/n/12 f\OT1/cmr/m/n/12 0\OML/cmm/m/it/12 ; R= [][]\OT1/cmr/m/n/12 (\
+OML/cmm/m/it/12 x\OT1/cmr/m/n/12 )\OMS/cmsy/m/n/12 g \OT1/cmr/m/n/12 = \OMS/cms
+y/m/n/12 f\OML/cmm/m/it/12 R[]R= [][]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x\OT1/cm
+r/m/n/12 )\OMS/cmsy/m/n/12 g \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 f\U/euf/m/n/12 
+g\OML/cmm/m/it/12 = [][]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x\OT1/cmr/m/n/12 ) \O
+MS/cmsy/m/n/12 j [][]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x\OT1/cmr/m/n/12 ) [] \U
+/euf/m/n/12 g \U/msa/m/n/12 C \OML/cmm/m/it/12 R\OMS/cmsy/m/n/12 g\OML/cmm/m/it
+/12 ;
+ []
+
+[36]
+Underfull \hbox (badness 10000) in paragraph at lines 1540--1544
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1550--1554
+
+ []
+
+[37] [38] [39] [40] [41] [42] [43] [44] [45] [46] [47] [48] [49] [50] [51]
+[52] [53]
+Chapter 3.
+[54
+
+] [55]
+Overfull \hbox (7.95886pt too wide) in paragraph at lines 2257--2258
 \OT1/cmtt/m/n/12 stackexchange . com / questions / 73213 / equivalence -[] of -
 [] definitions -[] of -[] prime -[]
  []
 
-[29] [30] [31]
-Overfull \hbox (7.70428pt too wide) in paragraph at lines 1344--1345
-[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 M[]\OT1/cmr/m/n/12 )$ is the in-ter-sec-tio
-n of all such $[](\OML/cmm/m/it/12  \OT1/cmr/m/n/12 )$'s, it fol-lows that $\OM
-L/cmm/m/it/12 '\OT1/cmr/m/n/12 ([](\OML/cmm/m/it/12 M[]\OT1/cmr/m/n/12 )) [] []
-(\OML/cmm/m/it/12 M[]\OT1/cmr/m/n/12 )$. 
+[56] [57] [58] [59] [60]
+Overfull \hbox (2.44191pt too wide) in paragraph at lines 2434--2435
+\OT1/cmr/m/n/12 Thus Lemma 3.11(1) im-plies that $[](\OML/cmm/m/it/12 R\OT1/cmr
+/m/n/12 )\OML/cmm/m/it/12 x [] []\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 M\OT1/cmr/m/
+n/12 )$, and hence $[](\OML/cmm/m/it/12 R\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 M []
+ []\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 M\OT1/cmr/m/n/12 )$. 
  []
 
-[32] [33] [34] [35] [36] [37] [38] [39]
-Overfull \hbox (8.06117pt too wide) in paragraph at lines 1635--1638
+[61] [62] [63] [64] [65] [66] [67]
+Overfull \hbox (0.11449pt too wide) in paragraph at lines 2691--2694
 \OT1/cmr/m/n/12 Then $\OML/cmm/m/it/12 K\OT1/cmr/m/n/12 [\OT1/cmr/bx/n/12 X\OT1
 /cmr/m/n/12 ]\OML/cmm/m/it/12 = []\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 '\OT1/cmr/m
 /n/12 ) \OMS/cmsy/m/n/12 ' \OML/cmm/m/it/12 K$\OT1/cmr/m/n/12 , thus $[](\OML/c
 mm/m/it/12 '\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 2 []\OT1/cmr/m/n/12 (\OML/cmm/m/
-it/12 K\OT1/cmr/m/n/12 [\OT1/cmr/bx/n/12 X\OT1/cmr/m/n/12 ])$ and $\OMS/cmsy/m/
-n/12 h\OML/cmm/m/it/12 X[] \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 a[]; :::; X[] 
-\OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 a[]\OMS/cmsy/m/n/12 i [] []\OT1/cmr/m/n/1
-2 (\OML/cmm/m/it/12 '\OT1/cmr/m/n/12 )$.
+it/12 K\OT1/cmr/m/n/12 [\OT1/cmr/bx/n/12 X\OT1/cmr/m/n/12 ])$ and $\U/euf/m/n/1
+2 m \OT1/cmr/m/n/12 := \OMS/cmsy/m/n/12 h\OML/cmm/m/it/12 X[] \OMS/cmsy/m/n/12 
+^^@ \OML/cmm/m/it/12 a[]; :::; X[] \OMS/cmsy/m/n/12 ^^@
  []
 
-[40]
-Overfull \hbox (41.36993pt too wide) in paragraph at lines 1674--1677
-\OT1/cmr/m/n/12 is a root of $\U/euf/m/n/12 m$\OT1/cmr/m/n/12 , and thus of $\O
-ML/cmm/m/it/12 I$\OT1/cmr/m/n/12 . (If $\OML/cmm/m/it/12 f \OMS/cmsy/m/n/12 2 \
-U/euf/m/n/12 m$\OT1/cmr/m/n/12 , then $\OML/cmm/m/it/12 f[]'\OT1/cmr/m/n/12 (\O
-ML/cmm/m/it/12 ^^X[]\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 ; [] ; '\OT1/cmr/m/n/12 (
-\OML/cmm/m/it/12 ^^X[]\OT1/cmr/m/n/12 )[] = \OML/cmm/m/it/12 '[]f\OT1/cmr/m/n/1
-2 (\OML/cmm/m/it/12 x[]; [] ; x[]\OT1/cmr/m/n/12 )[] =
- []
-
-[41]
-LaTeX Font Info:    Calculating math sizes for size <8.39996> on input line 171
-4.
-
-
-LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <4.19998> not available
-(Font)              size <5> substituted on input line 1714.
-
-
-LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <4.19998> not available
-(Font)              size <5> substituted on input line 1714.
-
-
-LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <4.19998> not available
-(Font)              size <5> substituted on input line 1714.
-
-
-LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <4.19998> not available
-(Font)              size <5> substituted on input line 1714.
-
-
-LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <4.19998> not available
-(Font)              size <5> substituted on input line 1714.
-
-
-LaTeX Font Warning: Font shape `U/stmry/m/n' in size <4.19998> not available
-(Font)              size <5> substituted on input line 1714.
-
-
-Overfull \hbox (4.44101pt too wide) in paragraph at lines 1713--1715
-\OT1/cmr/m/n/12 and we have $\OML/cmm/m/it/12 '\OT1/cmr/m/n/12 (\OML/cmm/m/it/1
-2 p[]\OT1/cmr/m/n/12 ) = []$, where $\OML/cmm/m/it/12 q[] \OMS/cmsy/m/n/12 2 \O
-ML/cmm/m/it/12 K\OT1/cmr/m/n/12 [\OT1/cmr/bx/n/12 X\OT1/cmr/m/n/12 ]$, $\OML/cm
-m/m/it/12 m[] \OMS/cmsy/m/n/12 2 []$\OT1/cmr/m/n/12 . For $\OML/cmm/m/it/12 m \
-OT1/cmr/m/n/12 = []\OMS/cmsy/m/n/12 f\OML/cmm/m/it/12 m[]; :::; m[]\OMS/cmsy/m/
-n/12 g$
- []
-
-[42] [43]
+[68] [69] [70]
 Chapter 4.
-[44
+[71
 
-] [45] [46] [47]
-Overfull \hbox (9.12056pt too wide) in paragraph at lines 1889--1891
+] [72] [73] [74]
+Overfull \hbox (9.12056pt too wide) in paragraph at lines 2950--2952
 [][]\OT1/cmr/bx/n/12 Corollary 4.5. []\OT1/cmr/m/n/12 Let $\OML/cmm/m/it/12 R [
 ] S$ \OT1/cmr/m/n/12 be a ring ex-ten-sion and $\OML/cmm/m/it/12 x[]; :::; x[] 
 \OMS/cmsy/m/n/12 2 \OML/cmm/m/it/12 S$ \OT1/cmr/m/n/12 with $\OML/cmm/m/it/12 S
@@ -1645,40 +1628,81 @@ Overfull \hbox (9.12056pt too wide) in paragraph at lines 1889--1891
 ; x[]\OT1/cmr/m/n/12 ]$.
  []
 
-[48] [49] [50] [51] [52]
-Underfull \hbox (badness 10000) in paragraph at lines 2057--2059
+[75] [76] [77] [78] [79]
+Underfull \hbox (badness 10000) in paragraph at lines 3118--3120
 
  []
 
-[53] [54] [55] [56] [57] [58] [59] [60]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2439.
- [61
+[80] [81] [82] [83] [84] [85] [86] [87] [88] [89] [90] [91] [92]
+Overfull \hbox (5.60135pt too wide) in paragraph at lines 3663--3665
+\OT1/cmr/m/sc/12 Case 2: \OT1/cmr/m/n/12 The con-gru-ence $\OML/cmm/m/it/12 x[]
+ \OMS/cmsy/m/n/12 ^^Q \OML/cmm/m/it/12 d[]  p$ \OT1/cmr/m/n/12 has no so-lu-tio
+ns. By Cohen-Seidenberg
+ []
+
+[93] [94]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3732.
+ [95
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2439.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3732.
  (./algebra_lecture-notes.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2439.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2439.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3732.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3732.
 
 Package rerunfilecheck Info: File `algebra_lecture-notes.out' has not changed.
-(rerunfilecheck)             Checksum: 812A4C7A34D3C407A13B65ED6F77AAA4;1283.
-
-
-LaTeX Font Warning: Size substitutions with differences
-(Font)              up to 2.90001pt have occurred.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2439.
+(rerunfilecheck)             Checksum: EF100721F86DEF7B9ECD1EFA8F225C7A;1980.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 3732.
  ) 
 Here is how much of TeX's memory you used:
- 27636 strings out of 494976
- 495166 string characters out of 6180006
- 638052 words of memory out of 5000000
- 29861 multiletter control sequences out of 15000+600000
- 30252 words of font info for 125 fonts, out of 8000000 for 9000
+ 28001 strings out of 494976
+ 500869 string characters out of 6180006
+ 642315 words of memory out of 5000000
+ 30011 multiletter control sequences out of 15000+600000
+ 23218 words of font info for 93 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 62i,15n,79p,10477b,1044s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{Hfootnote.13} has been referenced but does not ex
+ 62i,16n,79p,10477b,1046s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{Hfootnote.26} has been referenced but does not ex
 ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.25} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.24} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.23} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.22} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.21} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.20} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.19} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.18} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.17} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.16} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.15} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.14} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.13} has been referenced but does not exis
+t, replaced by a fixed one
 
 pdfTeX warning (dest): name{Hfootnote.12} has been referenced but does not exis
 t, replaced by a fixed one
@@ -1717,38 +1741,41 @@ pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
 , replaced by a fixed one
 
  </home/andrea/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/stmaryrd/stmary10.pfb>
-Output written on algebra_lecture-notes.pdf (61 pages, 523337 bytes).
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cmextra/cmex8.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/symbols/msbm7.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/stmaryrd/stmary10.pfb>
+Output written on algebra_lecture-notes.pdf (95 pages, 676682 bytes).
 PDF statistics:
- 975 PDF objects out of 1000 (max. 8388607)
- 871 compressed objects within 9 object streams
- 451 named destinations out of 1000 (max. 500000)
- 149 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1444 PDF objects out of 1728 (max. 8388607)
+ 1299 compressed objects within 13 object streams
+ 666 named destinations out of 1000 (max. 500000)
+ 221 words of extra memory for PDF output out of 10000 (max. 10000000)
 

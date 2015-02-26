@@ -5,13 +5,22 @@
 \BOOKMARK [1][-]{section.2.1}{Submodules, factor modules and homomorphisms.}{chapter.2}% 5
 \BOOKMARK [2][-]{subsection.2.1.1}{Submodules.}{section.2.1}% 6
 \BOOKMARK [2][-]{subsection.2.1.2}{Congruence relation and factor modules.}{section.2.1}% 7
-\BOOKMARK [2][-]{subsection.2.1.3}{Direct sums, products and free modules.}{section.2.1}% 8
-\BOOKMARK [0][-]{chapter.3}{Ideal Theory}{}% 9
-\BOOKMARK [1][-]{section.3.1}{Prime ideals and maximal ideals}{chapter.3}% 10
-\BOOKMARK [1][-]{section.3.2}{Nakayama's Lemma and Krull's Intersection Theorem}{chapter.3}% 11
-\BOOKMARK [1][-]{section.3.3}{Hilbert's Basis Theorem and Hilbert's Nullstellensatz.}{chapter.3}% 12
-\BOOKMARK [0][-]{chapter.4}{Ring extensions}{}% 13
-\BOOKMARK [1][-]{section.4.1}{Algebras}{chapter.4}% 14
-\BOOKMARK [1][-]{section.4.2}{Integral ring extensions and the Theorem of Cohen-Seidenberg.}{chapter.4}% 15
-\BOOKMARK [1][-]{section.4.3}{Rings of integers in algebraic number fields.}{chapter.4}% 16
-\BOOKMARK [1][-]{section.4.4}{Quadratic Number Fields.}{chapter.4}% 17
+\BOOKMARK [2][-]{subsection.2.1.3}{Isomorphism Theorems for Modules.}{section.2.1}% 8
+\BOOKMARK [2][-]{subsection.2.1.4}{Between ring and modules.}{section.2.1}% 9
+\BOOKMARK [1][-]{section.2.2}{Direct sums, products and free modules.}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.3}{Noetherian and Artinian Modules.}{chapter.2}% 11
+\BOOKMARK [1][-]{section.2.4}{Modules of finite length. }{chapter.2}% 12
+\BOOKMARK [2][-]{subsection.2.4.1}{A parenthesis on lattices.}{section.2.4}% 13
+\BOOKMARK [2][-]{subsection.2.4.2}{The Jordan-H\366lder Theorem.}{section.2.4}% 14
+\BOOKMARK [2][-]{subsection.2.4.3}{Preparation for the Theorem of Krull-Schmidt.}{section.2.4}% 15
+\BOOKMARK [1][-]{section.2.5}{Modules on Principal Ideal Domains}{chapter.2}% 16
+\BOOKMARK [0][-]{chapter.3}{Ideal Theory}{}% 17
+\BOOKMARK [1][-]{section.3.1}{Prime ideals and maximal ideals}{chapter.3}% 18
+\BOOKMARK [1][-]{section.3.2}{Nakayama's Lemma and Krull's Intersection Theorem}{chapter.3}% 19
+\BOOKMARK [1][-]{section.3.3}{Hilbert's Basis Theorem.}{chapter.3}% 20
+\BOOKMARK [1][-]{section.3.4}{Hilbert's Nullstellensatz.}{chapter.3}% 21
+\BOOKMARK [0][-]{chapter.4}{Ring extensions}{}% 22
+\BOOKMARK [1][-]{section.4.1}{Algebras}{chapter.4}% 23
+\BOOKMARK [1][-]{section.4.2}{Integral ring extensions and the Theorem of Cohen-Seidenberg.}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.3}{Rings of integers in algebraic number fields.}{chapter.4}% 25
+\BOOKMARK [1][-]{section.4.4}{Quadratic Number Fields.}{chapter.4}% 26
