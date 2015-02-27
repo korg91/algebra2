@@ -354,7 +354,7 @@ For any $p \in M$ prime, the map $v_p : \q(M) \to \Z$ given by $p^n c^{-1} b \ma
 Let $M$ be a monoid and $P$ a set of representatives of prime elements of $M$. The following are equivalent:
 \begin{enumerate}
 \item[(a)] $M$ is factorial.
-\item[(b)] Every $a \in M \sm M^\times$ is a product of primes, and the representation is unique up to associate and up to the order. In particular
+\item[(b)] Every $a \in M \sm M^\times$ is a product of primes, and the representation is unique up to associates and up to the order. In particular
 \[
 a = \epsilon \prod_{p \in P} p^{v_p(a)}
 \]
@@ -583,7 +583,7 @@ If $R=\Z$, then the $\Z$-module homomorphisms are precisely the group homomorphi
 Notation: we write $M \simeq_R N$ to state that there is an $R$-isomorphism between $M$ and $N$.
 \item If $f,g \in \Hom_R(M,N)$, then $f+g$ and $-f$ are $R$-homomorphisms $M \to N$, where the functions are defined as pointwise sum and inverse. Now observe that
 \begin{align*}
-\alpha f : M &\to N \\
+\alpha f \colon M &\to N \\
 x &\mapsto \alpha f(x)
 \end{align*}
 is a group homomorphism, for any $\alpha \in R$. Finally, $\lambda (\alpha f) = (\lambda \alpha) f$.\\
@@ -592,17 +592,17 @@ We have just proved the following: $\Hom_R(M,N)$ is an $R$-module w.r.t. pointwi
 \end{enumerate}
 \end{remex}
 
-\subsection{Congruence relation and factor modules.}
+\subsection{Congruence relations and factor modules.}
 
 \begin{defn}
 Let $M$ be a non-empty set and $\sim$ an equivalence relation on $M$.
 \begin{enumerate}
 \item For $a \in M$, let $[a]_\sim := [a] := \{x \in M \mid x \sim a\}$ denote the \emph{equivalence class of $a$}. We can define the \emph{quotient set} $M/{\sim} := \{[a] \mid a \in M\}$ and the \emph{canonical projection map}
 \begin{align*}
-\pi_\sim = \pi : M &\to M/{\sim} \\
+\pi_\sim = \pi \colon M &\to M/{\sim} \\
 a &\mapsto [a].
 \end{align*}
-\item Suppose that $*: M$ is a binary operation on $M$, i.e. $*: M \times M \to M$. Then $\sim$ is called a \emph{congruence relation (w.r.t. $*$)} if, for all $a,a',b,b' \in M$,
+\item Suppose that $*$ is a binary operation on $M$, i.e. $*: M \times M \to M$. Then $\sim$ is called a \emph{congruence relation (w.r.t. $*$)} if, for all $a,a',b,b' \in M$,
 \[
 a \sim a', \ b \sim b' \imp a*b \sim a'*b'.
 \]
@@ -661,7 +661,7 @@ Let $M$ be an $R$-module, $N \sse M$ a submodule and $\pi : M \to M/N$. Then the
 N' & \mapsto N'/N = \pi[N'] \\
 \pi^{-1}[P] &\mapsfrom P
 \end{align*}
-are bijections which are inverse to each other. (??? perché è un corollario?)
+are bijections which are inverse to each other.
 \end{corollary}
 
 \subsection{Isomorphism Theorems for Modules.}
@@ -681,12 +681,12 @@ M \arrow{r}{f} \arrow[swap]{d}{\pi_{\sim_f}} & \ol{M} \\
 M/{\sim_f} \arrow{ur}{\ol{f}} \arrow{r}{f^*} & f[M] \arrow[hookrightarrow]{u}{}
 \end{tikzcd}
 \]
-i.e. $\ol{f}([a]_{\sim_f}) = f(a)$ and $f^*([a]_{\sim_f})=f(a)$. (??? chiedere se così il diagramma è giusto).
+i.e. $\ol{f}([a]_{\sim_f}) = f(a)$ and $f^*([a]_{\sim_f})=f(a)$.
 \end{enumerate}
 \end{lemma}
 
 \begin{lemma}[Abstract homomorphism theorem]
-Let $f: (M,*) \to (M,\cdot)$ be a semigroup homomorphism. Then $\sim_f$ is a congruence relation on $M$, and $f^* \colon M/{\sim_f} \to f[M]$ is a $(\tilde{*}, \cdot)$-homomorphism which is bijective, where $\tilde{*}$ is the operation induced by $*$ on $M/{\sim_f}$ (see Lemma \ref{lemma_operation_on_factor}). (??? chiedere se era effettivamente questo che si intendeva)
+Let $f: (M,*) \to (\ol{M},\ol{*})$ be a semigroup homomorphism. Then $\sim_f$ is a congruence relation on $M$, and $f^* \colon M/{\sim_f} \to f[M]$ is a $(\tilde{*}, \ol{*})$-homomorphism which is bijective, where $\tilde{*}$ is the operation induced by $*$ on $M/{\sim_f}$ (see Lemma \ref{lemma_operation_on_factor}).
 \end{lemma}
 
 \begin{theorem}[Homomorphism Theorem for Modules]\label{mod-hom-thm}
@@ -832,7 +832,7 @@ Let $M$ be an $R$-module and $I \lhd R$ with $I \sse \Ann_R(M)$. Then
 \item The function
 \begin{align*}
 R/I \times M &\to M \\
-(\lambda + I, m) &\mapsto \lambda m
+(\lambda + I, x) &\mapsto \lambda x
 \end{align*}
 is an $R/I$-module structure on $M$.
 \item If $N$ is an $R$-module and $I \sse \Ann_R(N)$, then
@@ -857,7 +857,7 @@ f(\lambda x) = f((\lambda + I)x) = (\lambda + I) f(x) = \lambda f(x).
 \end{theorem}
 
 \begin{examples}
-Observe that for $R=\Z$, $I=p\Z$, $N=\Z/p\Z$, Theorem \ref{thm-equiv-hom} implies that, if $G$ where every element has order $\leq p$,\footnote{This condition is necessary to assure that $p\Z \sse \Ann_R(G)$.} then the group homomorphisms (cfr. first remark at page \pageref{Z-hom=goup_hom}) $G \to M$ are the precisely the $\Z/p\Z$-vector space homomorphisms. (??? chiedere se le mie precisazioni su $G$ sono necessarie).
+Observe that for $R=\Z$, $I=p\Z$, $M=N=(\Z/p\Z)^n$, where $n \in \N$, Theorem \ref{thm-equiv-hom} implies that the group homomorphisms (i.e. the $\Z$-homomorphisms, cfr. first remark at page \pageref{Z-hom=goup_hom}) are the precisely the $\Z/p\Z$-vector space homomorphisms.
 \end{examples}
 
 \begin{defn}
@@ -899,7 +899,7 @@ which is an $R$-submodule of $\prod_{i \in I} M_i$.
 \begin{defn}
 For every $j \in I$, we define 
 \begin{align*}
-p_j \colon \prod_{i \in I} M_i &\to M_j  \quad \quad \quad \quad \quad \text{and}  &\epsilon_j \colon M_j &\to \prod_{i \in I} M_i \\
+p_j \colon \prod_{i \in I} M_i &\to M_j  \quad \quad \quad \quad \text{and}  &\epsilon_j \colon M_j &\to \prod_{i \in I} M_i \\
 (x_i)_{i \in I} &\mapsto x_j    &x_j &\mapsto (\ldots,0,x_j,0,\ldots)
 \end{align*}
 Then $p_j$ is an $R$-epimorphism (called the \emph{canonical projection}) and $\epsilon_j$ is an $R$-monomorphism (called the \emph{canonical embedding}).\\
@@ -1101,7 +1101,7 @@ We claim that $C=B$ (then $f[C']$ is a basis of $N$, and we are done). Assume to
 $\langle D \rangle = \langle C \rangle + Ru$, where the sum is direct (because $B$ is l.i.), and $\langle C \rangle \subsetneq \langle D \rangle$.
 \end{center}
 We now have two possible cases:\\
-\textsc{Case 1:} $\langle D \rangle \cap N = \langle C \rangle \cap N$. Then obviously $f[C']$ is a base of $\langle D \rangle \cap N$ too, and so $(D,C',f) \in \Omega$. But $(D,C',f) \gneq (C,C',f)$, which contradicts the maximality of $(C,C',f)$.\\
+\textsc{Case 1:} $\langle D \rangle \cap N = \langle C \rangle \cap N$. Then obviously $f[C']$ is a base of $\langle D \rangle \cap N$ too, and so $(D,C',f) \in \Omega$. But $(D,C',f) > (C,C',f)$, which contradicts the maximality of $(C,C',f)$.\\
 \textsc{Case 2:} $\langle D \rangle \cap N \supsetneq \langle C \rangle \cap N$. In particular, this means that there exists $y+\lambda u \in \langle D \rangle \cap N \sm \langle C \rangle \cap N$, where $y \in \langle C \rangle$ and $\lambda \in R$, i.e. there exists $\lambda \in R$ s.t. $y+\lambda u \in \langle D \rangle \cap N \sm \langle C \rangle$. We define:
 \[
 \mathfrak{a} := \{\lambda \in R \mid \exists y \in \langle C \rangle \text{ s.t. } y + \lambda u \in N\} \sse R.
@@ -1130,20 +1130,20 @@ Hence $z \in \langle f[C'] \rangle + R g(u) = \langle g[D'] \rangle$.
 \end{claimproof}
 \end{claim}
 
-The claim implies that $(D,D',g) \in \Omega$ and $(D,D',g) \gneq (C,C',f)$, which contradicts the maximality of $(C,C',f)$.
+The claim implies that $(D,D',g) \in \Omega$ and $(D,D',g) > (C,C',f)$, which contradicts the maximality of $(C,C',f)$.
 \end{enumerate}
 \end{proof}
 \end{theorem}
 
 \begin{theorem}
-Let $R \neq \{0\}$. Let $M$ be a free $R$-module. Suppose that there exists a basis of $M$ which is finite. Then every basis is finite and has the same cardinality. We call this cardinality \emph{rank of} $M$ and we denote it by $\rk(M)$. (??? in realtà a me pare che la dimostrazione la facciamo in generale, non solo per il caso finito...)
+Let $R \neq \{0\}$. Let $M$ be a free $R$-module. Suppose that there exists a basis of $M$ which is finite. Then every basis is finite and has the same cardinality. We call this cardinality \emph{rank of} $M$ and we denote it by $\rk(M)$.\footnote{Actually the statement we will prove is more general: all the bases of a free $R$-module have the same cardinality.}
 \begin{proof}
 We will use the following two facts:
 \begin{enumerate}
 \item[F1.] $R$ has a maximal ideal $\m$.
 \item[F2.] The statement holds for vector spaces (basic Linear Algebra result).
 \end{enumerate}
-The statement trivially holds if $M=0$. Suppose that $M \neq 0$. By point (4) of the Remark at page \pageref{fac-mod_fac-ring}, $M/\m M$ is an $R/\m$-module (i.e. an $R/\m$-vector space, since $R/\m$ is a field). Let $(e_i)_{i \in I}$ with $|I| \geq 1$ be a basis of $M$ over $R$. Then $\{e_i + \m M \mid i \in I\}$ is an $R/\m$-generating set of $M/\m M$. \footnote{(??? chiedere se è giusto) I think that the whole argument is: $\{e_i + \m M\ \mid i \in I\}$ is trivially an $R$-generating set of $M/\m M$ (just consider the projection). Therefore it is clearly also an $R/\m$-generating set for $M/IM$ (see Definition \ref{thm-equiv-hom}).} It is sufficient to prove that it is also linearly independent over $R/\m$ (then the assertion follows from F2 \footnote{because ``$\{e_i + \m M \mid i \in I\}$ linearly independent'' implies also $|\{e_i + \m M \mid i \in I\}|=|I|=|(e_i)_{i \in I}|$.}).\\
+The statement trivially holds if $M=0$. Suppose that $M \neq 0$. By point (4) of the Remark at page \pageref{fac-mod_fac-ring}, $M/\m M$ is an $R/\m$-module (i.e. an $R/\m$-vector space, since $R/\m$ is a field). Let $(e_i)_{i \in I}$ with $|I| \geq 1$ be a basis of $M$ over $R$. Then $\{e_i + \m M \mid i \in I\}$ is an $R/\m$-generating set of $M/\m M$. \footnote{The whole argument is the following: $\{e_i + \m M\ \mid i \in I\}$ is trivially an $R$-generating set of $M/\m M$ (just consider the projection). Therefore it is clearly also an $R/\m$-generating set of $M/\m M$ (see Definition \ref{thm-equiv-hom}).} It is sufficient to prove that it is also linearly independent over $R/\m$ (then the assertion follows from F2 \footnote{because ``$\{e_i + \m M \mid i \in I\}$ linearly independent'' implies also $|\{e_i + \m M \mid i \in I\}|=|I|=|(e_i)_{i \in I}|$.}).\\
 Let $(\lambda_i)_{i \in I}$ be a family of elements of $R/\m$, almost all equal to $0$, such that
 \[
 \sum_{i \in I} \lambda_i (e_i + \m M) = 0.
@@ -1170,7 +1170,7 @@ Now, because $(e_i)_{i \in I}$ is a basis of $M$, we get $r_i = b_i$ for all $i 
 \end{theorem}
 
 \begin{theorem}\label{fg-mod_is_epi-image}
-Every (finitely generated) $R$-module is epimorphic image of a (finitely generated) free $R$-module.
+Every (finitely generated) $R$-module is epimorphic image of a (resp. finitely generated) free $R$-module.
 \begin{proof}
 Let $M$ be an $R$-module and $E = \{x_i \mid i \in I\} \sse M$ a generating set of $M$. Then $M=\sum_{i \in I} R x_i$, and so
 \begin{align*}
@@ -1458,7 +1458,8 @@ is exact, $M$ is noetherian by Theorem \ref{ex-seq-mod}.
 \begin{corollary}
 Let $R$ and $S$ be commutative rings, and let $f: R \to S$ be a ring epimorphism. If $R$ is a noetherian (artinian) ring, then so is $S$.
 \begin{proof}
-Since $S \simeq R/\ker f$ (as rings), it is sufficient to consider the factor ring $R/I$, where $I=\ker f$. By hypothesis, $R$ is a noetherian (artinian) $R$-module, and hence $R/I = {}_R \langle 1+I \rangle$ is a noetherian (artinian) $R$-module by Corollary \ref{char_fg-subm_noeth}. Now recall that every $R$-module is an $R/I$-module (cfr. Theorem \ref{thm-equiv-hom}) (??? secondo me non ci serve questa direzione...ci basta il converso, che tra l'altro è banale...vedi proseguimento dimostrazione), and of course also the converse holds. Therefore we can see any ascending (descending) chain of $R/I$-submodules of $R/I$ as an ascending (descending) chain of $R$-submodules of $R/I$. Since $R/I$ is a noetherian (artinian) $R$-module, such chain must stabilize. So $R/I$ is a noetherian (artinian) $R/I$-module.
+Since $S \simeq R/\ker f$ (as rings), it is sufficient to consider the factor ring $R/I$, where $I=\ker f$. By hypothesis, $R$ is a noetherian (artinian) $R$-module, and hence $R/I = {}_R \langle 1+I \rangle$ is a noetherian (artinian) $R$-module by Corollary \ref{char_fg-subm_noeth}.\\
+Now consider an ascending (descending) chain of $R/I$-submodules of $R/I$. Observe that any $R/I$-module is trivially also an $R$-module\footnote{Just consider the $R$-module structure given by $(\lambda,x) \mapsto [\lambda]x$.}. So we can see the chain as an ascending (descending) chain of $R$-submodules of $R/I$. Since $R/I$ is a noetherian (artinian) $R$-module, such chain must stabilize. So $R/I$ is a noetherian (artinian) $R/I$-module.
 \end{proof}
 \end{corollary}
 
@@ -1654,7 +1655,7 @@ be a composition series of $M$. By Theorem \ref{thm-schreier}, both sequences ($
 \end{theorem}
 
 \begin{addendum}
-Observe that in Theorem \ref{thm-jo-ho} we have also proved that if $M$ has a composition series of length $l$, then $l(M)=l$. (??? chiedere se è giusto)
+Observe that in Theorem \ref{thm-jo-ho} we have also proved that if $M$ has a composition series of length $l$, then $l(M)=l$.
 \end{addendum}
 
 \begin{theorem}\label{char_exists_comp-series}
@@ -1711,7 +1712,7 @@ Since $\tilde{M}_{i-1}/\tilde{M}_i = (M_{i-1}/L)/(M_i/L) \simeq M_{i-1}/M_i$ for
 \subsection{Preparation for the Theorem of Krull-Schmidt.}
 
 \begin{defn}
-An $R$-module $M$ is called indecomposable if $M \neq 0$ and for all submodules $M_1,M_2 \sse M$ s.t. $M = M_1 \oplus M_2$, we have $M_1=0$ or $M_2=0$.
+An $R$-module $M$ is called \emph{indecomposable} if $M \neq 0$ and for all submodules $M_1,M_2 \sse M$ s.t. $M = M_1 \oplus M_2$, we have $M_1=0$ or $M_2=0$.
 \end{defn}
 
 \begin{remark}\ 
@@ -1775,7 +1776,7 @@ The last statement follows immediately, since $\ker(\phi) \sse \ker(\phi^m)$, an
 \end{proof}
 \end{theorem}
 
-\begin{defn}
+\begin{defn}\label{def-local_ring}
 A (not necessarily commutative) ring is called \emph{local} if $R \neq 0$ and one of the following equivalent conditions hold:
 \begin{enumerate}
 \item The sum of non-units is a non-unit.
@@ -1800,7 +1801,7 @@ Let $M$ be an indecomposable $R$-module of finite length. Then the following hol
 \begin{proof}\ 
 \begin{enumerate}
 \item Let $\phi \in \End_R(M)$ be non-invertible (i.e. not bijective). By Theorem \ref{fitt-lemma}.(3) there is an $n \in \N$ with $M=\Im(\phi^n) \oplus \ker(\phi^n)$. Since $M$ is indecomposable, one summand is $0$ and the other is $M$. If $M=\Im(\phi^n)$, then $\phi$ is surjective and thus bijective, contradiction. Thus $M=\ker(\phi^n)$, i.e. $\phi^n=0$, so $\phi$ is nilpotent.
-\item We will show that the sum of two non-invertible $\phi,\psi \in \End_R(M)^\times$ is non-invertible. Suppose to the contrary that there is $\alpha \in \End_R(M)$ such that $\alpha \circ (\phi+\psi)=\id_M$. Since $\alpha \circ \phi$ and $\alpha \circ \psi$ are not invertible, they are nilpotent by first point, i.e. there is an $n \in \N$ such that
+\item We will show that the sum of two non-invertible $\phi,\psi \in \End_R(M)$ is non-invertible. Suppose to the contrary that there is $\alpha \in \End_R(M)$ such that $\alpha \circ (\phi+\psi)=\id_M$. Since $\alpha \circ \phi$ and $\alpha \circ \psi$ are not invertible, they are nilpotent by first point, i.e. there is an $n \in \N$ such that
 \[
 (\alpha \circ \phi)^n = 0 = (\alpha \circ \psi)^n.
 \]
@@ -1834,9 +1835,9 @@ This notation is compatible with composition of maps (from and to further direct
 \end{remark}
 
 \begin{lemma}\label{lemma_maps_entries}
-If $\phi$ and $\phi_{1,1}$ are bijective (??? sono praticamente certo che bisogna aggiungere anche l'ipotesi ``$\phi_{2,1}$ and $\phi_{1,2}$ bijective'', altrimenti la dimostrazione non ha senso), then $M_2 \simeq N_2$.
+If $\phi$ and $\phi_{1,1}$ are bijective, then $M_2 \simeq N_2$.
 \begin{proof}
-Clearly the maps
+It is immediate to check that the maps
 \[
 \alpha =
 \begin{pmatrix}
@@ -1854,7 +1855,7 @@ and
 \end{pmatrix}
 \colon M_1 \oplus M_2 \to M_1 \oplus M_2
 \]
-are bijective (??? perché?), and thus $\alpha \circ \phi \circ \beta : M_1 \oplus M_2 \to N_1 \oplus N_2$ is an isomorphism. We have
+are bijective, and thus $\alpha \circ \phi \circ \beta : M_1 \oplus M_2 \to N_1 \oplus N_2$ is an isomorphism. We have
 \begin{align*}
 \alpha \circ \phi \circ \beta 
 &=
@@ -1898,7 +1899,7 @@ and thus $\phi'_{2,2} : M_2 \to N_2$ is an $R$-isomorphism.
 \[
 M_1 \simeq N_i \quad \text{and} \quad M_2 \simeq \bigoplus_{\substack{j=1 \\ j \neq i}}^s N_j.
 \]
-\item Let $M_1,...,M_r,N_1,...,N_s$ be $R$-modules with $\End_R(M_1),...,\End_R(M_r)$ local and $M_1,...,M_r,N_1,...,N_s$ indecomposable (??? perché anche gli $M_i$ devono essere indecomposable? nella dimostrazione non sembra serva questa ipotesi...). If 
+\item Let $M_1,...,M_r,N_1,...,N_s$ be $R$-modules with $\End_R(M_1),...,\End_R(M_r)$ local and $N_1,...,N_s$ indecomposable\footnote{Observe that by Definition \ref{def-local_ring}(2), a local ring trivially has no non-trivial idempotent elements. By Exercise 27, this means that if $\End_R(M)$ is local, then $M$ is indecomposable. The converse doesn't necessarily hold, and ideed an $R$-module s.t. $\End_R(M)$ is local is sometimes called \emph{strongly indecomposable}. It can be shown that the statement doesn't necessarily hold if we just assume $M_1,...,M_r$ indecomposable instead of strongly indecomposable.}. If 
 \[
 M_1 \oplus \ldots \oplus M_r \simeq N_1 \oplus \ldots \oplus N_s,
 \]
@@ -1924,7 +1925,7 @@ Before presenting the proof, we show the main consequence of this theorem. Let $
 We now proceed with
 \begin{proof}[Proof of Proposition \ref{prop_unique_decomp}.]\ 
 \begin{enumerate}
-\item Let $M = M_1 \oplus M_2$ and suppose $M = N_1 \oplus \ldots \oplus N_s$. For $i \in [1,r]$, let $\epsilon_i : N_i \to M$ be the embedding and $p_i : M \to N_i$ the projection. Let $\alpha : M_1 \to M$ be the embedding and $\beta : M \to N_1$ the projection. Then
+\item Let $M := M_1 \oplus M_2$ and suppose $M = N_1 \oplus \ldots \oplus N_s$. For $i \in [1,r]$, let $\epsilon_i : N_i \to M$ be the embedding and $p_i : M \to N_i$ the projection. Let $\alpha : M_1 \to M$ be the embedding and $\beta : M \to N_1$ the projection. Then
 \[
 \beta \circ \alpha = \id_{M_1} \quad \text{and} \quad \sum_{i=1}^s \epsilon_i \circ p_i = \id_M,
 \]
