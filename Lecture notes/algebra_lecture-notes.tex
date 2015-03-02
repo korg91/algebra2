@@ -1947,7 +1947,6 @@ p_i \circ \alpha & \bullet \\
 \end{pmatrix}
 \colon M_1 \oplus M_2 \to N_i \oplus \left( \sum_{\substack{j=1 \\ j \neq i}}^s N_j \right),
 \]
-(??? qui c'è qualcosa che non va...in realtà quella matrice non è veramente l'identità, se non altro per il fatto che dominio e codominio non sono veramente uguali, ma solo isomorfi (per ipotesi)[in realtà a inizio dimostrazione supponiamo, penso wlog, che siano uguali...comunque il discorso vale lo stesso]. Il concetto formalmente credo dovrebbe essere questo: prendo l'isomorfismo tra dominio e codominio che esiste per ipotesi, e lo scrivo come matrice (mettendo per semplicità notazionale $N_i$ al primo posto). Poi devo dire (e dimostrare) una cosa del tipo: siccome $M_1$ e $N_i$ sono isomorfi (e $p_i \circ \alpha$ è un isomorfismo), posso rimpiazzare $\phi_{1,1}$ con il mio isomorfismo $p_i \circ \alpha$. Quello che ottengo è di nuovo un isomorfismo (*). Lo chiamo $\phi$ e applico 2.48. Praticamente stiamo giocando con gli ``automorfismi''... Notare però che (*) è un passaggio delicato, perché se fosse immediato allora sarebbe immediato tutto il teorema, e pure il teorema 2.48.)\\
 it follows that
 \[
 M_2 \simeq \bigoplus_{\substack{j=1 \\ j \neq i}}^s N_j.
@@ -1998,6 +1997,7 @@ Since $p^r$ and $p_1^{r_1} \cdot \ldots \cdot p_n^{r_n}$ are relatively prime, t
 \[
 x = \alpha p^r x + \beta p_1^{r_1} \cdot \ldots \cdot p_n^{r_n} \underbrace{(x_1+\ldots+x_n)}_{x} = 0.
 \]
+The last part of the statement is easy.
 \end{proof}
 \end{theorem}
 
@@ -2035,7 +2035,7 @@ and choose $f_1 \in F^*$ and $d_1 \in R$ such that $f_1[M] = d_1 R$ is maximal i
 \begin{claim}{ 1}
 $0 \neq x_1 \in d_1 F$.
 \begin{claimproof}
-Let $(e_1,...,r_n)$ be a basis of $F$ and $(e_1^*,...,e_n^*)$ be the dual basis of $F^*$ (i.e. $e_i^*(e_j)=\delta_{i,j}$, for all $i,j \in [1,n]$)\footnote{Cfr. Exercise 34.}. If $0 \neq x \in M$, then there are $\lambda_1,...,\lambda_n \in R$ with $x=\lambda_1 e_1 + \ldots \lambda_n e_n$ and there is a $j \in [1,n]$ s.t. $\lambda_j \neq 0$. Then $0 \neq \lambda_j = e_j^*(x) \in e_j^*[M]$. This implies $d_1 R \neq 0$, and thus $x_1 \neq 0$.\\
+Let $(e_1,...,e_n)$ be a basis of $F$ and $(e_1^*,...,e_n^*)$ be the dual basis of $F^*$ (i.e. $e_i^*(e_j)=\delta_{i,j}$, for all $i,j \in [1,n]$)\footnote{Cfr. Exercise 34.}. If $0 \neq x \in M$, then there are $\lambda_1,...,\lambda_n \in R$ with $x=\lambda_1 e_1 + \ldots \lambda_n e_n$ and there is a $j \in [1,n]$ s.t. $\lambda_j \neq 0$. Then $0 \neq \lambda_j = e_j^*(x) \in e_j^*[M]$. This implies $d_1 R \neq 0$, and thus $x_1 \neq 0$.\\
 It is left to show that $x_1 \in d_1 F$. We write
 \[
 x_1 = \alpha_1 e_1 + \ldots + \alpha_n e_n,
@@ -2148,11 +2148,13 @@ B\x = 0 \iff U^{-1} B \x = 0 \iff A V \x = 0 \iff A \x = 0.
 \[
 A \sim
 \begin{pmatrix}
-d_1 & 0 & 0 & \ldots & 0 \\
-0 & d_2 & 0 & \ldots & 0 \\
-0 & 0 & \ddots & \ldots & 0 \\
-0 & 0 & 0 & d_r & 0 \\
-0 & 0 & \ldots & 0 & 0
+d_1 & 0 & \ldots & \ldots & \ldots & \ldots & 0 \\
+0 & d_2 & \ldots & \ldots & \ldots & \ldots & 0 \\
+\vdots & 0 & \ddots & \vdots & \vdots & \vdots & 0 \\
+\vdots & \vdots & \ldots & d_r & 0 & \ldots & 0 \\
+\vdots & \vdots & \ldots & 0 & 0 & \ldots & 0 \\
+\vdots & \vdots & \ldots & \vdots & \vdots & \ddots & 0 \\
+0 & 0 & \ldots & 0 & 0 & \ldots & 0
 \end{pmatrix}
 =: D.
 \]
@@ -2163,7 +2165,7 @@ Let $\mathbf{e}^n := (e_1,...,e_n)$ and $\mathbf{e}^m := (e_1,...,e_n)$ be homog
 (\theta_A(e_1),\ldots,\theta_A(e_n)) = (e_1,\ldots,e_n) \M_{\mathbf{e}^n,\mathbf{e}^m}(\theta_A) = (e_1,\ldots,e_n)A.
 \]
 $D$ is called \emph{Smith Normal Form} of $A$.\\
-\textbf{Uniqueness.} If $A \sim D$, then there are $R$-bases $\mathbf{u} \in R^n$ and $\mathbf{v} \in R^m$ with $\M_{\mathbf{u},\mathbf{v}}(\theta_A) = D$, and $(d_1 v_1,...,d_r v_r)$ is an $R$-basis of $\Im(\theta_A)$. By Theorem \ref{thm_modules_over_PID}, the $d_1 R,...,d_r R$ are uniquely determined.\\
+\textbf{Uniqueness.} If $A \sim D$, then there are $R$-bases $\mathbf{u}$ of $R^n$ and $\mathbf{v}$ of $R^m$ with $\M_{\mathbf{u},\mathbf{v}}(\theta_A) = D$, and $(d_1 v_1,...,d_r v_r)$ is an $R$-basis of $\Im(\theta_A)$. By Theorem \ref{thm_modules_over_PID}, the $d_1 R,...,d_r R$ are uniquely determined.\\
 \textbf{Existence.} By Theorem \ref{char_fields_and_pid}, $0 \neq \Im(\theta_A) \sse R^m$ is a free submodule with rank $r \in [1,n]$. By Theorem \ref{thm_modules_over_PID}, there is a basis $(v_1,...,v_m)$ of $R^m$ and $d_1,...,d_r \in R^\circ$ with $d_1 R \supseteq \ldots \supseteq d_r R$ such that $(d_1 v_1,...,d_r v_r)$ is an $R$-basis of $\Im(\theta_A)$. There is an $R$-monomorphism $\psi$ such that
 \[
 \begin{tikzcd}
@@ -2190,7 +2192,7 @@ with $D$ as in the claim, i.e. $D = \M_{\mathbf{u},\mathbf{v}}(\theta_A) \sim A$
 
 \chapter{Ideal Theory}
 
-In this section, let $R$ be a ring.
+Throughout this whole chapter, $R$ is a ring.
 
 \section{Prime ideals and maximal ideals}
 
@@ -2262,7 +2264,7 @@ For commutative rings, an ideal $P$ is prime if and only if $P\neq R$ and for al
 Let $k \geq 2$.
 \begin{enumerate}
 \item If $P \in \Spec(R)$, $I_1,...,I_k \lhd R$ and $\bigcap_{j=1}^k I_j \sse P$, then $I_j \sse P$ for some $j \in [1,k]$.
-\item Let $I,P_1,...,P_k \lhd R$ with $I \sse \bigcup_{j=1}^k P_j$. If $P_1,...,P_k$ are prime, then $I \sse P_j$ for some $j \in [1,k]$.
+\item If $P_1,...,P_k \in \Spec(R)$, $I \lhd R$ and $I \sse \bigcup_{j=1}^k P_j$, then $I \sse P_j$ for some $j \in [1,k]$.
 \end{enumerate}
 \begin{proof}\ 
 \begin{enumerate}
@@ -2337,14 +2339,14 @@ is a ring epimorphism with $\ker \phi = \prod_{i=1}^m Q_i$.
 \item Suppose $m \geq 3$ and define $Q=Q_1 \cap ... \cap Q_{m-1}$. Assume to the contrary that $Q$ and $Q_n$ are not comaximal. Then there is a maximal ideal $\m$ with $Q+Q_n \sse \m$. Then $Q \sse \m$, and thus by 3.4.(1) $Q_j \sse \m$ for some $j \in [1,k-1]$. This implies $Q_j+Q_m \sse \m$, but this is impossible, since $Q_j+Q_m=R$.
 \item It suffices to show ``$\sse$''. We proceed by induction on $m$. If $m=2$, then 
 \begin{multline*}
-Q_1 \cap Q_2 = (Q_1 \cap Q_2) R = (Q_1 \cap Q_2) (Q_1+Q_2) \\ = \underbrace{(Q_1 \cap Q_2)}_{\sse Q_2} Q_1 + \underbrace{(Q_1 \cap Q_2)}_{\sse Q_1} Q_2 \sse Q_1Q_2 \sse Q_1 \cap Q_2.
+Q_1 \cap Q_2 = (Q_1 \cap Q_2) R = (Q_1 \cap Q_2) (Q_1+Q_2) \\ = \underbrace{(Q_1 \cap Q_2)}_{\sse Q_2} Q_1 + \underbrace{(Q_1 \cap Q_2)}_{\sse Q_1} Q_2 \sse Q_1Q_2.
 \end{multline*}
 Let $m \geq 3$. By induction hypothesis we have $Q:= \bigcap_{j=1}^{m-1} Q_j = \prod_{j=1}^{m-1} Q_j$. Thanks to point (1), $Q$ and $Q_m$ are comaximal, and thus, again by induction hypothesis we obtain
 \[
 \bigcap_{j=1}^m Q_j = Q \cap Q_m = Q \cdot Q_m = \prod_{j=1}^m Q_j.
 \]
 \item Obviously, $\phi$ is a ring homomorphism with $\ker \phi = \bigcap_{i=1}^m Q_i = \prod_{i=1}^m Q_i$.\\
-In order to show that $\phi$ is surjective, let $x_1,...,x_m \in R$. For all $j \in [1,m]$, the ideals $Q_j$ and $\prod_{\substack{i=1\\ i \neq j}}^m Q_i$ are comaximal (by (1)), and hence there exist $u_j \in Q_j$ and $v_j \in \prod_{\substack{i=1\\ i \neq j}}^m Q_i$ such that $u_j+v_j=1$. Therefore $v_j \equiv \delta_{ij} \mod Q_i$, for $i \in [1,m]$, and hence 
+In order to show that $\phi$ is surjective, let $x_1,...,x_m \in R$. For all $j \in [1,m]$, the ideals $Q_j$ and $\prod_{\substack{i=1\\ i \neq j}}^m Q_i$ are comaximal (by (1) and (2)), and hence there exist $u_j \in Q_j$ and $v_j \in \prod_{\substack{i=1\\ i \neq j}}^m Q_i$ such that $u_j+v_j=1$. Therefore $v_j \equiv \delta_{ij} \mod Q_i$, for $i \in [1,m]$, and hence 
 \[
 x:= \sum_{k=1}^m v_k x_k \equiv x_i \mod Q_i
 \]
@@ -2371,7 +2373,7 @@ If $M=R$, then $\J(R)$ is the Jacobson radical of $R$.
 \item If $M$ is simple, then $\J(M)= \{0\}$.
 \item $\J(M) = \displaystyle\bigcap_{\substack{\phi : M \to E \\ E \text{ simple}}} \ker (\phi)$.
 \begin{proof}
-If $\phi \not\equiv 0$, then $\phi$ is surjective, so $M/\ker(\phi) \simeq E$, and hence $\ker(\phi) \sse M$ is maximal (this is immediate to see using \ref{submod_of_fac_mod}).\\
+If $\phi \neq 0$, then $\phi$ is surjective, so $M/\ker(\phi) \simeq E$, and hence $\ker(\phi) \sse M$ is maximal (this is immediate to see using \ref{submod_of_fac_mod}).\\
 Conversely, every maximal submodule $N \sse M$ is the kernel of the canonical epimorphism $M \to M/N$, and $M/N$ is simple.
 \end{proof}
 \item $\J(\Z) = \displaystyle\bigcap_{p \in \P} p\Z = \{0\}$.
@@ -2433,7 +2435,7 @@ M/\J(M) = \sum_{i=1}^n R(x_i + \J(M)).
 \]
 Then $M = (\sum_{i=1}^n R x_i) + \J(M)$, and since $\J(M)$ is superfluous we get $M = \sum_{i=1}^n R x_i$.
 \item For all $x \in M$, the map $R \to M$ given by $\lambda \mapsto \lambda x$ is an $R$-homomorphism. Thus Lemma 3.11(1) implies that $\J(R) x \sse \J(M)$, and hence $\J(R)M \sse \J(M)$.
-\item Since $M$ is finitely generated, point (1) implies that $\J(M)$ is superfluous, and by point (2) it follows that $\J(K)M \sse \J(M)$ is superfluous.
+\item Since $M$ is finitely generated, point (1) implies that $\J(M)$ is superfluous, and by point (2) it follows that $\J(R)M \sse \J(M)$ is superfluous.
 \end{enumerate}
 \end{proof}
 \end{proposition}
@@ -2611,14 +2613,14 @@ Let $I \lhd R$ be an ideal.
 \begin{enumerate}
 \item[(i)] If $x \in \sqrt{I}$ and $\p \in \V(I)$, then there is an $m \in \N$ with $x^m \in I \sse \p$, and thus $x \in \p$.
 \item[(ii)] Trivial.
-\item[(iii)] Let $a \in R \sm \sqrt{I}$. We claim that there is a $\p_0 \in \V(I)$ such that $a \not\in \p_0$. The set $S=\{a^n \mid n \in \N_0 \}$ is multiplicatively closed with $S \cap I = \emptyset$. Then it follows
+\item[(iii)] Let $a \in R \sm \sqrt{I}$. We claim that there is a $\p_0 \in \P(I)$ such that $a \not\in \p_0$. The set $S=\{a^n \mid n \in \N_0 \}$ is multiplicatively closed with $S \cap I = \emptyset$. Then it follows
 \[
 I \in \Omega = \{ J \lhd R \mid J \cap S = \emptyset, \ I \sse J \}.
 \]
 By Krull's Existence Theorem, $\Omega$ has a maximal element $\p \in \Spec(R)$. By Theorem 3.18(1), there is a $\p_0 \in \P(I)$ such that $I \sse \p_0 \sse \p$.
 \end{enumerate}
-\item Let $J = {}_R \langle x_1,...,x_k \rangle$. By hypothesis there is an $n \in \N$ with $x_i^n \in I$ for all $i \in [1,k]$. If $a \in J$, then $a = \sum_{i=1}^k \lambda_i x_i$ with $\lambda_1,...,\lambda_k \in R$, and it is easy to see that writing $a^{nk}$ explicitly, every addend contains at least one factor $x_i^h$ with $h \geq n$. Hence $a^{nk}$.
-\item This follows from (1), since $\V(\{0\}) = \Spec(R)$ contains zero and since every maximal ideal is prime.
+\item Let $J = {}_R \langle x_1,...,x_k \rangle$. By hypothesis there is an $n \in \N$ with $x_i^n \in I$ for all $i \in [1,k]$. If $a \in J$, then $a = \sum_{i=1}^k \lambda_i x_i$ with $\lambda_1,...,\lambda_k \in R$, and it is easy to see that writing $a^{nk}$ explicitly, every addend contains at least one factor $x_i^h$ with $h \geq n$. Hence $a^{nk} \in I$.
+\item This follows from (1), since $\V(\{0\}) = \Spec(R)$ and since every maximal ideal is prime.
 \end{enumerate}
 \end{proof}
 \end{proposition}
@@ -2709,7 +2711,7 @@ and since $\langle X_1 - \phi(X_1), \ldots , X_n - \phi(X_n) \rangle$ is maximal
 Let $L/K$ be a field extension, $L$ algebraically closed, $n \in \N$ and $R = K[\X]$. The following statements hold:
 \begin{enumerate}
 \item If $I \lhd R$ with $I \neq R$, then $\V_L(I) \neq \emptyset$.
-\item If $I \lhd R$, then $\J(\V(I)) = \sqrt{I}$. The maps
+\item If $I \lhd R$, then $\J(\V_L(I)) = \sqrt{I}$. The maps
 \begin{align*}
 \{ K\text{-variety, } V \sse L^n \} & \to \{ \text{radical ideals of } R \} \\
 V & \mapsto \J(V) \\
@@ -2725,7 +2727,7 @@ are bijective and are each other's inverse.
 \Phi: K[\X] & \to K[\X]/\m \\
 X_i & \mapsto \xi_i := X_i + \m
 \end{align*}
-is trivially a ring $K$-epimorphism, and thus $A=K[\xi_1,...,\xi_n]$ is a finitely generated $K$-algebra. By 3.27, $A/K$ is algebraic and there is a $K$-homomorphism $\phi: A \to \ol{K}$. Since $L/K$ is algebraic, $\ol{K} \sse L$, and so we can write $\phi : A \to L$. Thus
+is trivially a ring $K$-epimorphism, and thus $A=K[\xi_1,...,\xi_n]$ is a finitely generated $K$-algebra. By 3.27, $A/K$ is algebraic and there is a $K$-homomorphism $\phi: A \to \ol{K}$. Since $L$ is algebraically closed, $\ol{K} \sse L$ (??? siamo sicuri di sta implicazione?), and so we can write $\phi : A \to L$. Thus
 \[
 \Big( \phi(\xi_1), \ldots, \phi(\xi_n) \Big) \in L^n
 \]
@@ -2734,7 +2736,7 @@ is a root of $\m$, and thus of $I$. Indeed, if $f \in \m$ then
 f \Big( \phi(\xi_1), \ldots, \phi(\xi_n) \Big) = \phi \Big(f(\xi_1, \ldots, \xi_n) \Big) = \phi \Big(f(\Phi(X_1), \ldots, \Phi(X_n)) \Big) = \\
 \phi \Big( \Phi( f(X_1, \ldots, X_n)) \Big) = \phi(0) = 0,
 \end{multline*}
-where the third equality holds because $\Phi$ is a ring homomorphism and $f$ is a polynomial, and the fourth follows because $f \in \m$ and $\Phi$ is the projection on the quotient).
+where the first and the third equality hold because $\phi$ and $\Phi$ respectively are ring homomorphisms and $f$ is a polynomial, and the fourth follows because $f \in \m$ and $\Phi$ is the projection on the quotient).
 \item 
 \begin{claim}{ 1}
 Let $V \sse L^n$ be a subset. Then $\J(V)$ is a radical ideal.
@@ -2763,7 +2765,7 @@ So $\V_L(\g)=\emptyset$, and by point (1) follows that $\g=K[\X,T]$. Hence there
 \[
 1 = \sum_{i=1}^s f_i p_i + p_{s+1}(fT-1).
 \]
-We consider the ring $K[X]$-homomorphism
+We consider the ring $K[\X]$-homomorphism
 \begin{align*}
 \phi := \Phi_{(X_1,\ldots,X_n, \frac{1}{f})}^{(X_1,\ldots,X_n,T)} : K[\X,T] & \to K(X_1,\ldots,X_n) \\
 X_i & \mapsto X_i \\
@@ -2801,7 +2803,7 @@ If $(A,+,\cdot)$ is a commutative ring, then $A$ is called a commutative $R$-alg
 \noindent\textbf{Remarks and examples.}
 \begin{enumerate}
 \item For every $n \in \N$, $M_n(R)$ is an $R$-algebra and $R[X_1,...,X_n]$ is a commutative $R$-algebra.
-\item If $A$ is an $R$-algebra, then $\epsilon : R \to A$, $\lambda \mapsto \lambda 1_A$ is a ring homomorphism, and for all $\lambda \in R$ and $a \in A$, $\epsilon(\lambda) a = \epsilon(\lambda a)$.
+\item If $A$ is an $R$-algebra, then $\epsilon : R \to A$, $\lambda \mapsto \lambda 1_A$ is a ring homomorphism, and for all $\lambda \in R$ and $a \in A$, $\epsilon(\lambda) a = a \epsilon(\lambda)$.
 \begin{proof}
 For all $\lambda, \mu \in R$ and $a \in A$, we have:
 \[
@@ -2814,12 +2816,12 @@ and
 \end{proof}
 \item Conversely, let $A$ be a ring and $\epsilon : R \to A$ a ring homomorphism such that $\epsilon(\lambda)a = a \epsilon(\lambda)$ for all $\lambda \in R$ and all $a \in A$. Then (check details) $A$ is an $R$-module and an $R$-algebra. Then $\epsilon$ is called the \emph{structural homomorphism} of the $R$-algebra $A$, and also $\epsilon : R \to A$ is called an $R$-algebra.\\
 In particular, every commutative overring $S \supseteq R$ and every epimorphic image of $R$ is an $R$-algebra.
-\item Let $\epsilon_1 : R \to A_1$ and $\epsilon_2 : R \to A_2$. A ring homomorphism $f: A_1 \to A_2$ is an $R$\emph{-algebra homomorphism} if $f \circ \epsilon_1 = \epsilon_2$ (or, equivalently, if $f$ is a module homomorphism).\\
+\item Let $\epsilon_1 : R \to A_1$ and $\epsilon_2 : R \to A_2$ be the structural homomorphisms of $A_1$ and $A_2$ respectively. A ring homomorphism $f: A_1 \to A_2$ is an $R$\emph{-algebra homomorphism} if $f \circ \epsilon_1 = \epsilon_2$ (or, equivalently, if $f$ is a module homomorphism).\\
 Suppose $A_1 \supseteq R$ and $A_2 \supseteq R$ are commutative overring and $f : A_1 \to A_2$ is a ring homomorphism. Then $f$ is an $R$-algebra homomorphism if and only if $f_{|_R}=\id_R$.
-\begin{proof}
+\begin{proof}\ 
 \begin{itemize}
-\item[($\imp$)] If $\lambda \in R$, then $f(\lambda) = f(\lambda 1) = \lambda f(1) = \lambda 1 = \lambda$.
-\item[($\pmi$)] If $\lambda \in R$ and $a \in A$, then $f(\lambda a) = f(\lambda) f(a) = \lambda f(a)$.
+\item[``$\imp$'':] If $\lambda \in R$, then $f(\lambda) = f(\lambda 1) = \lambda f(1) = \lambda 1 = \lambda$.
+\item[``$\pmi$'':] If $\lambda \in R$ and $a \in A$, then $f(\lambda a) = f(\lambda) f(a) = \lambda f(a)$. \qedhere
 \end{itemize}
 \end{proof}
 \item If $R$ is a ring, then there is exactly one ring homomorphism $\epsilon : \Z \to R$ (namely, $\epsilon(m)=m 1_R$). Thus $R$ is a $\Z$-algebra.
@@ -2827,13 +2829,13 @@ Suppose $A_1 \supseteq R$ and $A_2 \supseteq R$ are commutative overring and $f 
 
 \textbf{More notations and conventions.}
 \begin{enumerate}
-\item Let $0 \neq R \supseteq S$ commutative rings with $S$ an overring. Then $R \supseteq S$, indicated also $S/R$, is called a \emph{ring extension}.\\
+\item Let $0 \neq R \sse S$ commutative rings with $S$ an overring. Then $S \supseteq R$, indicated also $S/R$, is called a \emph{ring extension}.\\
 For all $\p \in \Spec(S)$ we have $\p \cap R \in \Spec(R)$.\\
-For any $C \sse S$, let $[C] = \{ c_1 \cdot \ldots \cdot c_n \mid n \in \N _0, c_1,...,c_n \in C \}$ be the semigroup of $S$ generated by $C$, and $R[C] = _R \langle [C] \rangle \sse S$. Then $R[C]$ is the smallest subring of $S$ containing $R \cup C$.\\
+For any $C \sse S$, let $[C] = \{ c_1 \cdot \ldots \cdot c_n \mid n \in \N _0, c_1,...,c_n \in C \}$ be the semigroup of $S$ generated by $C$, and $R[C] = {}_R \langle [C] \rangle \sse S$. Then $R[C]$ is the smallest subring of $S$ containing $R \cup C$.\\
 If $S'=R[C]$ and if $\phi_1,\phi_2 : S \to S'$ are ring homomorphism with $\phi_{1|_{R \cup C}} = \phi_{2|_{R \cup C}}$, then $\phi_1 = \phi_2$.
-\item Let $R$ a commutative ring, $A$ a commutative $R$-algebra and $\epsilon : R \to A$ the structural homomorphism. Then $A$ is called a \emph{finitely generated} $R$-algebra (or an $R$-algebra \emph{of finite type}, or an \emph{affine} $R$-algebra) if one of the following equivalent conditions is satisfied:
+\item Let $R$ be a commutative ring, $A$ a commutative $R$-algebra and $\epsilon : R \to A$ the structural homomorphism. Then $A$ is called a \emph{finitely generated} $R$-algebra (or an $R$-algebra \emph{of finite type}, or an \emph{affine} $R$-algebra) if one of the following equivalent conditions is satisfied:
 \begin{itemize}
-\item There exist and $n \in \N$ and an epimorphism $R[X_1,...,X_n] \to A$.
+\item There exist an $n \in \N$ and an epimorphism $R[X_1,...,X_n] \to A$.
 \item There exist $n \in \N$, $x_1,...,x_n \in A$ with $A= \epsilon[R] [x_1,...,x_n]$, i.e. $A$ is the smallest subring of $A$ which contains $\epsilon[R] \cup \{x_1,...,x_n\}$.
 \end{itemize}
 \end{enumerate}
@@ -2843,8 +2845,8 @@ If $S'=R[C]$ and if $\phi_1,\phi_2 : S \to S'$ are ring homomorphism with $\phi_
 \begin{defn}
 Let $R \sse S$ be a ring extension.
 \begin{enumerate}
-\item An element $x \in S$ is called \emph{integral over} $R$ (\emph{integral}$/R$) if there is a monic polynomial $0 \neq f \in R[X]$ with $f(x)=0$, i.e. there are $n \in \N$ and $a_0,...,a_{n-1} \in R$  such that $x^n+a_{n_1}x^{n-1} + \ldots + a_0 = 0$. The latter is called an \emph{integral equation} of $x/R$.
-\item The \emph{integral closure of $R$ in $S$} is $\cl_S(R)=\{x \in S \mid x$ is integral$/R\}$.
+\item An element $x \in S$ is called \emph{integral over} $R$ (\emph{integral}$/R$) if there is a monic polynomial $0 \neq f \in R[X]$ with $f(x)=0$, i.e. there are $n \in \N$ and $a_0,...,a_{n-1} \in R$  such that $x^n+a_{n_1}x^{n-1} + \ldots + a_0 = 0$. The latter is called an \emph{integral equation of $x/R$}.
+\item The \emph{integral closure of $R$ in $S$} is $\cl_S(R) := \{x \in S \mid x$ is integral$/R\}$.
 \item A subset $S' \sse S$ is called \emph{integral}$/R$ if $S' \sse \cl_S(R)$.
 \item $R$ is called \emph{integrally closed in $S$} if $\cl_S(R)=R$.
 \item If $R$ is a domain with $\q(R)=K$, then $R$ is called \emph{integrally closed} if $\cl_K(R)=R$.
@@ -2855,7 +2857,7 @@ Let $R \sse S$ be a ring extension.
 \begin{enumerate}
 \item Let $R \sse S$ be fields and $x \in S$. Then $x$ is integral$/R$ iff $x$ is algebraic$/R$.
 \item Let $\ol{\Q} \sse \C$ be the algebraic closure of $\Q$. This is called the \emph{field of algebraic numbers}. $\ol{\Z}= \cl_{\ol{\Q}}(\Z)  = \cl_{\C}(\Z)$ is the \emph{ring of all algebraic integers}.
-\item Every field is integrally closed.
+\item Every field is trivially integrally closed by definition.
 \end{enumerate}
 
 \begin{theorem}
@@ -2868,21 +2870,21 @@ Let $R \sse S$ be a ring extension and $x \in S$. The following are equivalent:
 \end{itemize}
 \begin{proof}\ 
 \begin{itemize}
-\item[(a)$\imp$(b)] Let $n \in \N$, $a_{n-1},...,a_0 \in R$ such that $x^n+a_{n-1}x^n + \ldots + a_0 = 0$. By definition we have
+\item[(a)$\imp$(b)] Let $n \in \N$, $a_{n-1},...,a_0 \in R$ such that $x^n+a_{n-1}x^{n-1} + \ldots + a_0 = 0$. By definition we have
 \[
-R[x] = \left\{ \sum_{j=0}^k c_j x^j \ \Bigg| \ k \in \N, c_0,...,c_k \in R \right\}
+R[x] = \left\{ \sum_{j=0}^k c_j x^j \ \Bigg| \ k \in \N_0, c_0,...,c_k \in R \right\}
 \]
-and hence $R[x] = _R \langle \{x^j \mid j \in \N_0 \} \rangle$.
-\begin{claim}{} $R[x] = _R \langle \{x^j \mid j \in [0,n-1] \} \rangle$.
-\begin{claimproof} The inclusion ``$\supseteq$'' is trivial. We want to prove ``$\sse$''. It is sufficient to show that $x^k \in _R \langle \{x^j \mid j \in [0,n-1] \} \rangle$ for every $k \in \N$. We proceed by induction. If $k \leq n-1$ the assertion is clearly true. Let $k \geq n$ and suppose $\{x^0,...,x^{k-1}\} \in _R \langle \{x^j \mid j \in [0,n-1] \} \rangle$. Then
+and hence $R[x] = {}_R \langle \{x^j \mid j \in \N_0 \} \rangle$.
+\begin{claim}{} $R[x] = {}_R \langle \{x^j \mid j \in [0,n-1] \} \rangle$.
+\begin{claimproof} The inclusion ``$\supseteq$'' is trivial. We want to prove ``$\sse$''. It is sufficient to show that $x^k \in {}_R \langle \{x^j \mid j \in [0,n-1] \} \rangle$ for every $k \in \N_0$. We proceed by induction. If $k \leq n-1$ the assertion is clearly true. Let $k \geq n$ and suppose $\{x^0,...,x^{k-1}\} \sse {}_R \langle \{x^j \mid j \in [0,n-1] \} \rangle$. Then
 \begin{multline*}
-x^k = x^{k-n}x^n = x^{k-n} \left( -a_{n-1}x^n - \ldots - a_0 \right) =\\
--a_{n-1}x^{k-1} - \ldots - a_0 x^{k-n} \in _R \langle \{x^j \mid j \in [0,n-1] \} \rangle.
+x^k = x^{k-n}x^n = x^{k-n} \left( -a_{n-1}x^{n-1} - \ldots - a_0 \right) =\\
+-a_{n-1}x^{k-1} - \ldots - a_0 x^{k-n} \in {}_R \langle \{x^j \mid j \in [0,n-1] \} \rangle.
 \end{multline*}
 \end{claimproof}
-\item[(b)$\imp$(c)] $S'=R[x]$ has the required property.
-\item[(c)$\imp$(d)] $M=S'$ has the required property, because if $a \in R[x]$ with $aS'=\{0_{S'}\}$, then $a 1_{S'} = 0_{S'}$, and hence $a=0$.
-\item[(d)$\imp$(a)] Let $M= _R \langle m_1,...,m_n \rangle$ which is also an $R[x]$-module. Thus $x M \sse M$. Therefore, for all $i \in [1,n]$ there are $r_{i,1},...,r_{i,n} \in R$ such that
+\item[(b)$\imp$(c)] $S':=R[x]$ has the required property.
+\item[(c)$\imp$(d)] $M:=S'$ has the required property, because if $a \in R[x]$ with $aS'=\{0_{S'}\}$, then $a 1_{S'} = 0_{S'}$, and hence $a=0$.
+\item[(d)$\imp$(a)] By hypothesis $M = {}_R \langle m_1,...,m_n \rangle$, and $M$ is also an $R[x]$-module. Thus $x M \sse M$. Therefore, for all $i \in [1,n]$ there are $r_{i,1},...,r_{i,n} \in R$ such that
 \[
 x m_i = \sum_{j=1}^n r_{i,j} m_j
 \]
@@ -2890,7 +2892,7 @@ and hence
 \[
 \sum_{j=1}^n (r_{i,j} - \delta_{i,j} x) m_j = 0.
 \]
-Now define $A=(a_{i,j})_{i,j} \in M_n(R)$ with $a_{i,j} = r_{i,j} - \delta_{i,j} x$. Then
+Now define $A:=(a_{i,j})_{i,j} \in M_n(R)$ with $a_{i,j} := r_{i,j} - \delta_{i,j} x$. Then
 \[
 A
 \begin{pmatrix}
@@ -2903,20 +2905,24 @@ m_1 \\ \vdots \\ m_n
 \]
 and hence
 \[
+\begin{pmatrix}
+0 \\ \vdots \\ 0
+\end{pmatrix}
+=
 A^\# A
 \begin{pmatrix}
 m_1 \\ \vdots \\ m_n
 \end{pmatrix}
-= \underbrace{\det(A)}_{\in R}
+= \underbrace{\det(A)}_{\in R} I
 \begin{pmatrix}
 m_1 \\ \vdots \\ m_n
 \end{pmatrix}
 =
 \begin{pmatrix}
-0 \\ \vdots \\ 0
+\det(A) m_1 \\ \vdots \\ \det(A) m_n
 \end{pmatrix}
 \]
-where $A^\#$ is the adjugate matrix\footnote{If $B$ is a matrix, the \emph{adjugate matrix} $B^\#$ of $B$ is defined in such a way that $B B^\# = \det(B) I$, and thanks to Laplace's formula for the determinant of a square matrix, we have $B B^\# = B^\# B$. See \url{http://en.wikipedia.org/wiki/Adjugate_matrix}.} of $A$. Since $\Ann_{R[x]}(M)=0$ by hypothesis, we get $\det(A)=0$. Thus there are $w_0,...,w_{n-1} \in R$ such that
+where $A^\#$ is the adjugate matrix\footnote{If $B$ is a matrix, the \emph{adjugate matrix} $B^\#$ of $B$ is defined in such a way that $B B^\# = \det(B) I$, and thanks to Laplace's formula for the determinant of a square matrix, we have $B B^\# = B^\# B$. See \url{http://en.wikipedia.org/wiki/Adjugate_matrix}.} of $A$. So $\det(A) m_i = 0$ for all $i \in [1,n]$, i.e. $\det(A) \in \Ann_R(M)$. Since $\Ann_{R[x]}(M)=0$ by hypothesis, we get $\det(A)=0$. Thus there are $w_0,...,w_{n-1} \in R$ such that
 \[
 0 = \det(A) \stackrel{\footnotemark}{=} (-1)^n x^n + w_{n-1} x^{n-1} + \ldots + w_0,
 \]
@@ -2930,9 +2936,9 @@ which is an integral equation for $x$.
 \begin{lemma}
 Let $R \sse S$ be a ring extension with $S$ a finitely generated $R$-module. If $M$ is a finitely generated $S$-module, then $M$ is a finitely generated $R$-module.
 \begin{proof}
-Let $M= _S \langle x_1,...,x_n \rangle$ and $S = _R \langle a_1,...,a_m \rangle$. We claim that 
+Let $M= {}_S \langle x_1,...,x_n \rangle$ and $S = {}_R \langle a_1,...,a_m \rangle$. We claim that 
 \[
-M = _R \langle a_j x_j \mid j \in [1,m], i \in [1,n] \rangle.
+M = {}_R \langle a_j x_j \mid j \in [1,m], i \in [1,n] \rangle.
 \]
 Let $x \in M$. Then there are $s_1,...,s_n \in S$ such that $x = \sum_{i=1}^n s_i x_i$. For all $i \in [1,n]$ there are $\lambda_{i,1},...,\lambda_{i,m} \in R$ such that $s_i = \sum_{j=1}^m \lambda_{i,j} a_j$. Thus
 \[
@@ -2943,7 +2949,7 @@ x = \sum_{i=1}^n s_i x_i = \sum_{i=1}^n \left( \sum_{j=1}^m \lambda_{i,j} a_j \r
 
 \noindent\textbf{Examples.}
 \begin{enumerate}
-\item $M=\C$, $R = \R \sse \C = S$.
+\item $M:=\C^n$, $R := \R \sse \C =: S$.
 \item Field extension: $K \sse L \sse M$.
 \end{enumerate}
 
@@ -2956,7 +2962,7 @@ Let $R \sse S$ be a ring extension and $x_1,...,x_n \in S$ with $S=R[x_1,...,x_n
 \end{itemize}
 \begin{proof}
 \item[(a)$\imp$(b)] We proceed by induction on $n$. For $n=1$, this is the statement of Theorem 4.3. Let $n \geq 2$. By induction hypothesis, $S'=R[x_1,...,x_{n-1}]$ is a finitely generated $R$-module. Since $x_n$ is integral$/R$, $x_n$ is integral$/S'$. Again by induction hypothesis, $S'[x_n]=R[x_1,...,x_n]$ is a finitely generated $S'$-module, and thus it is a finitely generated $R$-module by Lemma 4.4.
-\item[(b)$\imp$(c)] By Theorem 4.3(c), every $x \in S$ is integral$/R$.
+\item[(b)$\imp$(c)] By Theorem 4.3 with $S' := R[x_1,...,xn]$, every $x \in S$ is integral$/R$.
 \item[(c)$\imp$(a)] By definition.
 \end{proof}
 \end{corollary}
@@ -2973,12 +2979,12 @@ Let $R \sse S$ be a ring extension.
 \end{enumerate}
 \begin{proof}\ 
 \begin{enumerate}
-\item It suffices to prove (a). Let $x \in T$ be integral$/S$. Then there exist $n \in \N_0$, $b_0,...,b_{n-1}$ such that $x^n+b_{n-1}x^{n-1} + \ldots + b_0$. Thus $x$ is integral over $S'=R[b_0,...,b_{n-1}]$, and therefore $S'[x]$ is a finitely generated $S'$-module by Theorem 4.3. Since $b_0,...,b_{n-1}$ are integral$/R$, by Corollary 4.5 we obtain that $S'$ is a finitely generated $R$-module. Hence $S'[x]$ is a finitely generated $R$-module, and finally $x$ is integral$/R$ by Theorem 4.3(c).
+\item It suffices to prove (a). Let $x \in T$ be integral$/S$. Then there exist $n \in \N_0$, $b_0,...,b_{n-1} \in S$ such that $x^n+b_{n-1}x^{n-1} + \ldots + b_0$. Thus $x$ is integral over $S':=R[b_0,...,b_{n-1}]$, and therefore $S'[x]$ is a finitely generated $S'$-module by Theorem 4.3. Since $b_0,...,b_{n-1}$ are integral$/R$, by Corollary 4.5 we obtain that $S'$ is a finitely generated $R$-module. Hence $S'[x]$ is a finitely generated $R$-module, and finally $x$ is integral$/R$ by Theorem 4.3(c).
 \item
 \begin{itemize}
 \item[(i)] We assert that $\cl_S(R) \sse S$ is a subring.\\
-Let $x,y \in \cl_S(R)$. We have to show that $x-y$ and $xy$ are integral$/R$. This follows by considering $R[x,y]$ (which of course contains $x-y$ and $xy$) and applying Corollary 4.5 twice.
-\item[(ii)] We want to prove that $\cl_S(R)$ is integrally closed in $S$. Let $x \in S$ be integral$/\cl_S(R)$. Since $\cl_S(R)$ is integral$/R$, by point 1(a) we have that $x$ is integral$/R$, i.e. $x \in \cl_S(R)$.
+Let $x,y \in \cl_S(R)$. We have to show that $x-y$ and $xy$ are integral$/R$. This follows by considering $R[x,y]$ (which of course contains $x-y$ and $xy$) and applying Corollary 4.5.
+\item[(ii)] We want to prove that $\cl_S(R)$ is integrally closed in $S$. Let $x \in S$ be integral$/\cl_S(R)$. Since $\cl_S(R)$ is integral$/R$, by point (1) we have that $x$ is integral$/R$, i.e. $x \in \cl_S(R)$.
 \end{itemize}
 \end{enumerate}
 \end{proof}
@@ -2991,7 +2997,7 @@ The implication ``$\pmi$'' is obvious. We want to show ``$\imp$''. Let $N/L$ be 
 \[
 f = \prod_{i=1}^n (X-x_i) \quad \text{with } x_1,...,x_n \in N.
 \]
-We can assume $x=x_1$. Then, for all $i \in [1,n]$, there is a $K$-isomorphism
+We assume w.l.o.g. $x=x_1$. Then, for all $i \in [1,n]$, there is a $K$-isomorphism of rings
 \[
 \phi_i : K[x] \to K[x_i] \sse N, \quad \phi_i(x) = x_i.
 \]
@@ -2999,7 +3005,7 @@ By hypothesis, there exist $a_0,...,a_{d-1} \in R$ such that $x^d+a_{d-1}x^{d-1}
 \[
 \phi_i(x^d+a_{d-1}x^{d-1} + \ldots + a_1 x + a_0) = x_i^d+a_{d-1}x_i^{d-1} + \ldots + a_1 x_i + a_0 = 0,
 \]
-i.e. $x_i$ is integral$/R$. Thus the coefficients of $f$ are in $K$ (why??? I just know that every $x_i$ is in $N$ and is integral$/R$, nothing more!) and they are integral$/R$, which means that they are in $R$ since $R$ is integrally closed. That is, $f \in R[X]$.
+i.e. $x_i$ is integral$/R$. So the coefficients of $f$ are integral$/R$, because we proved in 4.6 that sums and products of integral elements are integral. But the coefficients are clearly also in $K$, by definition of $f$. Since $R$ is integrally closed, this means that they are in $R$, i.e. $f \in R[X]$.
 \end{proof}
 \end{theorem}
 
@@ -3032,7 +3038,7 @@ is called the (Krull) \emph{dimension of} $R$.
 \noindent\textbf{Remarks.}
 \begin{enumerate}
 \item $R$ is a domain if and only if $0 \in \Spec(R)$. $R$ is a field if and only if $\dim(R)=0$.
-\item (Krull's Principal Ideal Theorem). Let $R$ be noetherian, $x \in R^\circ$ and $g \in P(xR)$, where $P(xR)$ is the family of minimal prime ideals lying in $xR$. Then $\h(g) \leq 1$. In particular, if $R$ is a PID, then $\dim(R)=1$.
+\item (Krull's Principal Ideal Theorem). Let $R$ be noetherian, $x \in R^\circ$ and $\g \in P(xR)$, where $P(xR)$ is the family of minimal prime ideals lying in $xR$. Then $\h(\g) \leq 1$. In particular, if $R$ is a PID, then $\dim(R)=1$.
 \end{enumerate}
 
 \begin{teo_custom-title}[Cohen-Seidenberg Theorem.]\label{thm_cohen-seid}
@@ -3057,7 +3063,7 @@ Then there is a $p \in \p$ such that
 a_0 = p - x(x^{n-1} + \ldots + a_1) \in \mathfrak{a} \cap R = \p \cap R \sse \p,
 \]
 hence $x(x^{n-1} + \ldots + a_1) \in \p$. By minimality $x^{n-1} + \ldots + a_1 \not\in \p$, whereby $x \in \p$.
-\item Let $\g \in \Spec(R)$ and $\mathfrak{a} \lhd S$ with $\mathfrak{a} \cap R \sse \g$. Then $R \sm \g \sse S$ is a multiplicatively closed subset with $\mathfrak{a} \cap (R \sm \g) = \emptyset$. By Theorem 3.1, the set $\{ \mathfrak{c} \lhd S \mid \mathfrak{a} \sse \mathfrak{c}, \mathfrak{c} \cap (R \sm \g) = \emptyset \}$ has a maximal element $\p$. Then $\p \in \Spec(S)$ with $\mathfrak{a} \sse \p$ and $\p \cap R \sse \g$. If we can prove the following claim, we are done.
+\item Let $\g \in \Spec(R)$ and $\mathfrak{a} \lhd S$ with $\mathfrak{a} \cap R \sse \g$. Then $R \sm \g \sse S$ is a multiplicatively closed subset with $\mathfrak{a} \cap (R \sm \g) = \emptyset$. By Theorem 3.1, the set $\{ \mathfrak{c} \lhd S \mid \mathfrak{a} \sse \mathfrak{c}, \mathfrak{c} \cap (R \sm \g) = \emptyset \}$ has a maximal element $\p \in \Spec(S)$. Then $\mathfrak{a} \sse \p$ and $\p \cap R \sse \g$. If we can prove the following claim, we are done.
 \begin{claim}{}
 $\p \cap R = \g$.
 \begin{claimproof}
@@ -3084,7 +3090,7 @@ Since $u \in \g$ we get $x^n \in \g$, and thus $x \in \g$, contradiction.
 \end{itemize}
 \item Obviously, we have $R^\times \sse R \cap S^\times$. If $x \in R \sm R^\times$, then there is an $\m \in \max(R)$ with $x \in \m$. By point (2), there is a $\p \in \Spec(S)$ such that $\m \sse \p$. Thus $x \in \p$ and $x \not\in S^\times$.\\
 If $S$ is a field, then $R^\times = S^\times \cap R = S^\circ \cap R = R^\circ$, and hence $R$ is a field.
-\item Let $\g_0 \subsetneq \g_1 \subsetneq \ldots \subsetneq \g_n$ be a sequence in $\Spec(R)$. By point (2), there is a $\p_0 \in \Spec(S)$ such that $\p_0 \cap R = \g_0$. Applying point (3) repeatedly, we obtain a sequence $\p_0 \subsetneq \ldots \subsetneq \p_n$ in $\Spec(S)$ with $\p_i \cap R = \g_i$ for all $i \in [1,n]$. Thus $\dim(S) \geq \dim(R)$. Conversely, if $\p_0 \subsetneq \ldots \subsetneq \p_n$ is a sequence in $\Spec(S)$, then $\p_0 \cap R \subsetneq \ldots \subsetneq \p_n \cap R$ by point (1), and hence $\dim(S) \leq \dim(R)$.\\
+\item Let $\g_0 \subsetneq \g_1 \subsetneq \ldots \subsetneq \g_n$ be a sequence in $\Spec(R)$. By point (2), there is a $\p_0 \in \Spec(S)$ such that $\p_0 \cap R = \g_0$. Applying point (2) repeatedly, we obtain a sequence $\p_0 \subsetneq \ldots \subsetneq \p_n$ in $\Spec(S)$ with $\p_i \cap R = \g_i$ for all $i \in [1,n]$. Thus $\dim(S) \geq \dim(R)$. Conversely, if $\p_0 \subsetneq \ldots \subsetneq \p_n$ is a sequence in $\Spec(S)$, then $\p_0 \cap R \subsetneq \ldots \subsetneq \p_n \cap R$ by point (1), and hence $\dim(S) \leq \dim(R)$.\\
 In particular, if $S$ is a domain, then $R$ is a domain, and thus $\dim(R)=\dim(S)$ implies that $S$ is a field iff $R$ is a field.
 \end{enumerate}
 \end{proof}
@@ -3096,7 +3102,7 @@ In particular, if $S$ is a domain, then $R$ is a domain, and thus $\dim(R)=\dim(
 \begin{defn}
 An \emph{algebraic number field} is a finite field extension of $\Q$. If $L/\Q$ is an algebraic number field, then
 \[
-\O_L = \cl_L(\Z)
+\O_L := \cl_L(\Z)
 \]
 is called the \emph{ring of integers of} $L$ (or \emph{principal order of} $L$).
 \end{defn}
@@ -3105,7 +3111,7 @@ is called the \emph{ring of integers of} $L$ (or \emph{principal order of} $L$).
 $\O_L$ is an integrally closed, one-dimensional domain.
 \begin{proof}
 Since $\O_L \sse L$, $\O_L$ is a domain. By Theorem 4.10, $\dim(\O_L)=\dim(\Z)=1$. By Corollary 4.6, $\O_L$ is integrally closed in $L$. It remains to show that $\q(\O_L)=L$. \\
-Let $x \in L$. Then there exist $a_n,...,a_0 \in \Z$ with
+Let $x \in L$. Since $L/\Q$ is algebraic, there exist $a_n,...,a_0 \in \Z$ with
 \[
 a_n x^n + \ldots + a_0 = 0.
 \]
@@ -3117,10 +3123,10 @@ Thus $a_n x$ is integral$/\Z$, which means $a_n x \in \O_L$. Hence $x \in \q(\O_
 \end{proof}
 \end{lemma}
 \ \\
-Our goal is now to show that $\O_L$ is noetherian.\\
+Our goal is now to show that $\O_L$ is noetherian.
 
 \paragraph{Norm and trace.}\ \\
-Let $K$ be a field, $A$ a commutative $K$-algebra, and $\dim_K(A)=n$. For $\lambda \in A$, let $\mu_\lambda : A \to A$ be defined by
+Let $K$ be a field, $A$ a commutative $K$-algebra, and $\dim_K(A)=n$ (??? si intende la dimensione come modulo? se sì, l'abbiamo sempre indicata con $\rk$...). For $\lambda \in A$, let $\mu_\lambda : A \to A$ be defined by
 \[
 \mu_\lambda(a) = \lambda a.
 \]
@@ -3130,7 +3136,7 @@ N_{A/K} \colon A &\to K \quad \quad \quad \quad \quad \quad \quad \quad \quad \t
 \lambda &\mapsto N_{A/K}(\lambda) := \det(\mu_\lambda)    &\lambda &\mapsto \Tr_{A/K}(\lambda) := \Tr(\mu_\lambda)
 \end{align*}
 
-\noindent\textbf{Remark.} Let $\u = (u_1,...,u_n)$ be a $K$-basis of $A$ and let $\M_{\u,\u}(\mu_\lambda)$ be such that
+\noindent\textbf{Remark.} Let $\u = (u_1,...,u_n)$ be a $K$-basis of $A$ and let $\M_{\u,\u}(\mu_\lambda) \in M_n(K)$ be such that
 \[
 (\lambda u_1, ..., \lambda u_n) = (u_1,..,u_n) \M_{\u,\u}(\mu_\lambda).
 \]
@@ -3154,20 +3160,20 @@ Let $K$ be a field, $A$ a commutative $K$-algebra with $\dim_K(A)=n$, $\alpha,\b
 \[
 N_{A/K}(\alpha\beta) = \det(\mu_{\alpha\beta}) = \det(\mu_\alpha \circ \mu_\beta) = \det(\mu_\alpha) \det(\mu_\beta) = N_{A/K}(\alpha) N_{A/K}(\beta).
 \]
-\item[2., 5.] If $\u=(u_1,...,u_n)$ is a $K$-basis of $A$, then $\mu_\lambda (u_i) = \lambda u_i$ for all $i \in [1,n]$, and $\M_{\u,\u}(\mu_\lambda) = \lambda I$.
+\item[2., 5.] If $\u=(u_1,...,u_n)$ is a $K$-basis of $A$, then $\mu_\lambda (u_i) = \lambda u_i$ for all $i \in [1,n]$, and so $\M_{\u,\u}(\mu_\lambda) = \lambda I$.
 \item[3., 4.] Observe that
 \begin{align*}
 \M_{\u,\u} \colon \End_K(A) &\to M_n(K) \\
 \phi &\mapsto \M_{\u,\u}(\phi)
 \end{align*}
-is a $K$-algebra isomorphism, i.e. $\Tr(A+B) = \Tr(A) + \Tr(B)$ and $\Tr(\lambda A) = \lambda \Tr(A)$.
+is a $K$-algebra isomorphism, i.e. $\M_{\u,\u}(\mu_{\alpha+\beta}) = \M_{\u,\u}(\mu_\alpha+\mu_\beta) = \M_{\u,\u}(\mu_\alpha)+\M_{\u,\u}(\mu_\beta)$ and $\M_{\u,\u}(\mu_{\lambda \alpha}) = \M_{\u,\u}(\lambda \mu_\alpha) = \lambda \M_{\u,\u}(\mu_\alpha)$, and we know that $\Tr(A+B) = \Tr(A) + \Tr(B)$ and $\Tr(\lambda A) = \lambda \Tr(A)$.
 \end{itemize}
 \end{proof}
 \end{lemma}\ 
 \\
 \noindent For the rest of this Section, let $L/K$ be a finite separable field extension of degree $[L:K]=n$, and let $\ol{K}$ be an algebraically closed field with $K \sse L \sse \ol{K}$.\\
 We will use the following result, which should be known from previous courses:\\
-\textbf{Theorem.} For every $K$-homomorphism $K \to K \hookrightarrow \ol{K}$ there exist precisely $n$ distinct lifts $\sigma: L \to \ol{K}$.\\ This means $|\Hom_K(L,\ol{K})| = [L:K]$. We set $\Hom_K(L,\ol{K}) = \{\sigma_1,...,\sigma_n\}$.
+\textbf{Theorem.} For every $K$-homomorphism $K \hookrightarrow \ol{K}$ there exist precisely $n$ distinct lifts $\sigma: L \to \ol{K}$.\\ This means $|\Hom_K(L,\ol{K})| = [L:K]$. We write $\Hom_K(L,\ol{K}) = \{\sigma_1,...,\sigma_n\}$.
 
 \begin{lemma}\label{lemma-norm-trace_min-poly}
 Let $\alpha \in L$, $f= X^r + a_{r-1} X^{r-1} + \ldots + a_0 \in K[X]$ the minimal polynomial of $\alpha$ over $K$ and $[L:K(\alpha)]=s$. Then
@@ -3184,7 +3190,7 @@ is a $K$-basis of $L/K$. We have
 \[
 \mu_\alpha (v_i \alpha^j) = v_i \alpha^{j+1} \text{ for } j \in [0,r-2] \quad \text{and} \quad \mu_\alpha (v_i \alpha^{r-1}) = v_i (-a_0 - \ldots - a_{r-1} \alpha^{r-1}).
 \]
-Since (by abuse of notation), $\mu_\alpha (\u) = \M_{\u,\u}(\mu_\alpha)$, we obtain
+So we obtain
 \[
 A := \M_{\u,\u}(\mu_\alpha) =
 \begin{tikzpicture}[
@@ -3264,8 +3270,8 @@ For every $\alpha \in L$ we have
 N_{L/K}(\alpha) = \prod_{i=1}^n \sigma_i(\alpha) \quad \text{and} \quad \Tr_{L/K}(\alpha) = \sum_{i=1}^n \sigma_i(\alpha).
 \]
 \begin{proof}
-We have $K \sse L \sse \ol{K}$, $\Hom_K(L,\ol{K}) = \{\sigma_1,...,\sigma_n\}$. Let $\alpha \in L$, $f = X^r + a_{r-1} X^{r-1} + \ldots + a_0 \in K[X]$ the minimal polynomial of $\alpha$ over $K$, so that $[L:K(\alpha)] = s = n/r$. Furthermore, $f = \prod_{\nu=1}^r (X-\alpha_\nu) \in \ol{K}[X]$.\\
-Suppose w.l.o.g. $\alpha=\alpha_1$. Since $\alpha$ is separable, $\alpha, \alpha_2,...,\alpha_r$ are pairwise distinct. Thus there are $r$ distinct 	$K$-monomorphism
+We have $K \sse L \sse \ol{K}$, $\Hom_K(L,\ol{K}) = \{\sigma_1,...,\sigma_n\}$. Let $\alpha \in L$, $f = X^r + a_{r-1} X^{r-1} + \ldots + a_0 \in K[X]$ be the minimal polynomial of $\alpha$ over $K$, so that $[L:K(\alpha)] = s = n/r$. Furthermore, $f = \prod_{\nu=1}^r (X-\alpha_\nu) \in \ol{K}[X]$.\\
+Suppose w.l.o.g. $\alpha=\alpha_1$. Since $L/K$ is separable, $\alpha, \alpha_2,...,\alpha_r$ are pairwise distinct. Thus there are $r$ distinct 	$K$-monomorphism
 \[
 \tau_\nu : K(\alpha) \to \ol{K} \ \text{ s.t. } \ \tau_\nu(\alpha)=\alpha_\nu, \quad \text{with } \nu \in [1,r].
 \]
@@ -3292,7 +3298,7 @@ where the two last equalities hold by Lemma 4.14.
 \begin{defn}
 If $\u = (u_1,...,u_n)$ is a basis of $L/K$, then
 \[
-\Delta(\u) = \det \Big( \Tr_{L/K}(u_i u_j) \Big)_{1 \leq i,j \leq n}
+\Delta(\u) := \det \Big( \Tr_{L/K}(u_i u_j) \Big)_{1 \leq i,j \leq n}
 \]
 is called the \emph{discriminant of} $\u$.
 \end{defn}
